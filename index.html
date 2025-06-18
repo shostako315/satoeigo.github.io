@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Eigo Sato Official Site</title>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP&display=swap" rel="stylesheet">
   <style>
@@ -13,6 +13,7 @@
       color: #333;
       background-color: #fff;
     }
+
     header {
       position: relative;
       text-align: center;
@@ -30,32 +31,41 @@
       transform: translate(-50%, -50%);
       color: white;
       text-shadow: 2px 2px 6px rgba(0,0,0,0.7);
+      padding: 0 1rem;
+      white-space: nowrap;
     }
     header .text h1 {
       font-size: 3rem;
     }
     header .text p {
       font-size: 1.2rem;
+      white-space: nowrap;
     }
+
     section {
-      padding: 2rem;
+      padding: 2rem 1rem;
       max-width: 1000px;
       margin: auto;
     }
+
     .profile {
       display: flex;
       flex-wrap: wrap;
       gap: 2rem;
       align-items: center;
+      justify-content: center;
     }
     .profile img {
       max-width: 300px;
+      width: 100%;
       border-radius: 8px;
     }
     .profile p {
       flex: 1;
       font-size: 1rem;
+      min-width: 280px;
     }
+
     .gallery {
       overflow-x: auto;
       white-space: nowrap;
@@ -67,23 +77,32 @@
       border-radius: 10px;
       display: inline-block;
     }
+
     .videos iframe {
       width: 100%;
       max-width: 800px;
       height: 450px;
       margin-bottom: 2rem;
       border-radius: 10px;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
     }
+
     .contact {
       text-align: center;
       margin-top: 2rem;
-      padding-top: 1rem;
+      padding: 2rem 1rem 1rem;
       border-top: 1px solid #ccc;
       font-size: 0.95rem;
     }
+
     @media (max-width: 768px) {
       header .text h1 {
         font-size: 2rem;
+      }
+      header .text p {
+        font-size: 1rem;
       }
       .profile {
         flex-direction: column;
@@ -93,6 +112,9 @@
       }
       .videos iframe {
         height: 250px;
+      }
+      header .text {
+        white-space: normal;
       }
     }
   </style>
@@ -109,16 +131,12 @@
   <section class="profile">
     <img src="img/profile.jpg" alt="Eigo Sato">
     <p>
-      東京外国語大学国際日本学部卒業。東京音楽大学指揮研修生修了。
-4歳でヴァイオリンを始め、ソロ・室内楽での演奏に加え、これまでにSeikei String Orchestra、東京外国語大学管弦楽団、VariOrchestraのコンサートマスターを務めた。中学生の頃から混声合唱や弦楽オーケストラなどを指揮し、東京外国語大学在学中に東京音楽大学指揮科研修生として本格的に指揮を学び始める。Bach International Music Competition UK2024で第1位、GYMC2024 CRit. Max Bruch International Competition2024 でPlatinum Prize. WBMC2024で第1位（いずれも指揮部門）。
-2020年、都内の音楽大学出身者を中心に呼びかけ、VariOrchestraを設立。演奏会の企画・運営、演奏を行う。定期演奏会においてコンサートマスターとして交響曲を弾き振りし、第3回定期演奏会では協奏曲のソリストを務めた。さらに特別公演ではベートーヴェンやブラームス、モーツァルト、シューベルト等の交響曲を指揮。HIP（Historically informed performance/歴史的知識に基づく演奏）の解釈を取り入れた新鮮な演奏が好評を博し、注目を集めている。
-その他中高生のオーケストラの指導や、アマチュアオーケストラを指揮、またカズオ・イシグロ原作「遠い山なみの光」では広瀬すず氏への演奏・所作指導を行う。ヴァイオリンでは東久留米市第15回みんなのクラシックコンサート等に出演。
-これまでに、ヴァイオリンを伊藤亮太郎、有働一美、大塚杏奈、白瀬ゆりの各氏に、指揮を増井信貴氏に師事。音楽以外の分野においても、総合コンサルティングファームでの大企業向けビジネス・業務改革支援を行いつつ、オンライン英語塾「TUFLINGUAL」の代表を務めるなど活動の範囲を広げている。
+      東京外国語大学国際日本学部卒業。東京音楽大学指揮研修生修了。 4歳でヴァイオリンを始め、ソロ・室内楽での演奏に加え、これまでにSeikei String Orchestra、東京外国語大学管弦楽団、VariOrchestraのコンサートマスターを務めた。中学生の頃から混声合唱や弦楽オーケストラなどを指揮し、東京外国語大学在学中に東京音楽大学指揮科研修生として本格的に指揮を学び始める。Bach International Music Competition UK2024で第1位、GYMC2024 CRit. Max Bruch International Competition2024 でPlatinum Prize. WBMC2024で第1位（いずれも指揮部門）。 2020年、都内の音楽大学出身者を中心に呼びかけ、VariOrchestraを設立。演奏会の企画・運営、演奏を行う。定期演奏会においてコンサートマスターとして交響曲を弾き振りし、第3回定期演奏会では協奏曲のソリストを務めた。さらに特別公演ではベートーヴェンやブラームス、モーツァルト、シューベルト等の交響曲を指揮。HIP（Historically informed performance/歴史的知識に基づく演奏）の解釈を取り入れた新鮮な演奏が好評を博し、注目を集めている。 その他中高生のオーケストラの指導や、アマチュアオーケストラを指揮、またカズオ・イシグロ原作「遠い山なみの光」では広瀬すず氏への演奏・所作指導を行う。ヴァイオリンでは東久留米市第15回みんなのクラシックコンサート等に出演。 これまでに、ヴァイオリンを伊藤亮太郎、有働一美、大塚杏奈、白瀬ゆりの各氏に、指揮を増井信貴氏に師事。音楽以外の分野においても、総合コンサルティングファームでの大企業向けビジネス・業務改革支援を行いつつ、オンライン英語塾「TUFLINGUAL」の代表を務めるなど活動の範囲を広げている。
     </p>
   </section>
 
   <section>
-    <h2>photos</h2>
+    <h2>Photos</h2>
     <div class="gallery">
       <img src="img/profile.jpg" alt="Profile">
       <img src="img/concert.jpg" alt="Concert">
@@ -129,13 +147,13 @@
   </section>
 
   <section class="videos">
-    <h2>Movies</h2>
-    <iframe src="https://www.youtube.com/embed/tssEzKuBm8w" title="Mozart"></iframe>
-    <iframe src="https://www.youtube.com/embed/7GpPmL6eCuM" title="Brahms"></iframe>
+    <h2>Videos</h2>
+    <iframe src="https://www.youtube.com/embed/tssEzKuBm8w" title="Mozart" allowfullscreen></iframe>
+    <iframe src="https://www.youtube.com/embed/7GpPmL6eCuM" title="Brahms" allowfullscreen></iframe>
   </section>
 
-  <footer class="contUct">
-    <p>Contuct: <a href="mailto:shostako315@gmail.com">shostako315@gmail.com</a></p>
+  <footer class="contact">
+    <p>Contact: <a href="mailto:shostako315@gmail.com">shostako315@gmail.com</a></p>
     <p>&copy; 2025 Eigo Sato. All Rights Reserved.</p>
   </footer>
 </body>
