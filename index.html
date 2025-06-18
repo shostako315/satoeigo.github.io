@@ -3,46 +3,95 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="佐藤瑛吾 公式サイト｜指揮者・ヴァイオリニスト・コンサルタント">
   <title>佐藤瑛吾 | 指揮者・ヴァイオリニスト</title>
-  <link rel="stylesheet" href="style.css" />
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Helvetica Neue', sans-serif;
+      margin: 0;
+      background: #fff;
+      color: #111;
+    }
+    header {
+      background: url('img/top_orchestra.jpg') center/cover no-repeat;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      text-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
+    }
+    header h1 {
+      font-size: 3rem;
+      margin: 0;
+    }
+    header p {
+      font-size: 1.5rem;
+    }
+    section {
+      max-width: 1000px;
+      margin: 5rem auto;
+      padding: 0 1rem;
+    }
+    .gallery {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .gallery img {
+      width: calc(33% - 10px);
+      border-radius: 8px;
+    }
+    iframe {
+      width: 100%;
+      height: 315px;
+      margin-bottom: 1rem;
+    }
+    footer {
+      background: #f2f2f2;
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.8rem;
+    }
+  </style>
 </head>
 <body>
   <header>
-    <h1>佐藤瑛吾</h1>
-    <p>指揮者 / ヴァイオリニスト / コンサルタント</p>
+    <h1 data-aos="fade-down">Eigo Sato</h1>
+    <p data-aos="fade-up">指揮者・ヴァイオリニスト・コンサルタント</p>
   </header>
 
-  <main>
-    <section>
-      <h2>プロフィール</h2>
-      <p>佐藤瑛吾（Eigo Sato）。東京都出身、現在25歳。Bach International Music Competition UK2024で第1位、Gabriel Fauré Music World Competition第1位、Global Young Musicians Competition2024銀賞、Max Bruch International Competition2024でPlatinum Prize、WBMC2024第1位など、国際的な指揮コンクールで数多くの受賞歴を持つ。2025年にはベルギーで開催された国際オペラ指揮者コンクール本選にも出場。</p>
+  <section data-aos="fade-up">
+    <h2>プロフィール</h2>
+    <p>佐藤瑛吾（Eigo Sato）。東京都出身、現在25歳。Bach International Music Competition UK2024第1位、Gabriel Fauré Music World Competition第1位、GYMC2024銀賞、Max Bruch International Competition2024でPlatinum Prize、WBMC2024第1位など、国際的な指揮コンクールで数多くの受賞歴を持つ。2025年にはベルギーで開催された国際オペラ指揮者コンクール本選にも出場。</p>
+    <p>4歳からヴァイオリンを、13歳から指揮を始める。東京外国語大学で言語学を学び、東京音楽大学で指揮研修生として指揮法を学ぶ。2020年にVariOrchestraを設立し、指揮者・コンマス・ソリストなど多面的に活動。</p>
+    <p>Mahler Project、学芸第九、埼玉大学管弦楽団、Seikei String Orchestra、Legame String Orchestra、ハルモニアオーケストラなどでの指揮に加え、映画『遠いやまなみの光』では演奏・所作指導も担当。</p>
+  </section>
 
-      <p>4歳からヴァイオリンを、13歳から指揮を始める。東京外国語大学で言語学を学ぶと同時に、東京音楽大学にて指揮研修生として指揮法を学ぶ。2020年に音楽大学在学生・卒業生に呼びかけ、VariOrchestraを設立。</p>
+  <section data-aos="fade-up">
+    <h2>写真</h2>
+    <div class="gallery">
+      <img src="img/profile.jpg" alt="プロフィール写真" data-aos="zoom-in">
+      <img src="img/concert.jpg" alt="コンサート写真" data-aos="fade-up">
+      <img src="img/opera.jpg" alt="劇場にて" data-aos="flip-left">
+      <img src="img/reading.jpg" alt="指揮者会議" data-aos="zoom-in">
+      <img src="img/event.jpg" alt="演奏会後" data-aos="fade-right">
+      <img src="img/stainedglass.jpg" alt="教会にて" data-aos="fade-left">
+    </div>
+  </section>
 
-      <p>これまでに、ベートーヴェンやシューベルトの交響曲をコンサートマスターとして弾き振りしたほか、第三回定期演奏会では協奏曲のソリストも務めた。特別公演vol.1, 2では、指揮者としてベートーヴェン、ブラームス、モーツァルト、シューベルトなどの作品を指揮。</p>
-
-      <p>Mahler Project、学芸第九特別オーケストラ、埼玉大学管弦楽団、東京外国語大学、Seikei String Orchestra、Legame String Orchestra、ハルモニアオーケストラなど、アマチュアオーケストラの指揮・指導も数多く担当。映画「遠いやまなみの光」では演奏・所作指導も行った。</p>
-
-      <p>ヴァイオリニストとしても、東久留米市「みんなのクラシックコンサート」、八王子いちょうホールロビーコンサート、VariOrchestra主催公演、自主企画公演など多岐にわたって活躍。アマチュアオーケストラのゲストコンサートマスターも務める。</p>
-
-      <p>これまでにヴァイオリンを伊藤亮太郎、有働一美、大塚杏奈、白瀬ゆりの各氏に、指揮を増井信貴氏に師事。</p>
-
-      <p>音楽以外の分野でも、大手総合ファームにてビジネスコンサルタントとして活動し、英語・語学教育事業『TUFLINGUAL』の代表も務める。</p>
-    </section>
-
-    <section>
-      <h2>リンク</h2>
-      <ul>
-        <li><a href="https://variorchestra.com" target="_blank">🎻 VariOrchestra</a></li>
-        <li><a href="https://tuflingual315.studio.site" target="_blank">🗣 TUFLINGUAL</a></li>
-        <li><a href="mailto:info@variorchestra.com">📧 お問い合わせ</a></li>
-      </ul>
-    </section>
-  </main>
+  <section data-aos="fade-up">
+    <h2>動画</h2>
+    <iframe src="https://www.youtube.com/embed/7GpPmL6eCuM" frameborder="0" allowfullscreen></iframe>
+    <iframe src="https://www.youtube.com/embed/tssEzKuBm8w" frameborder="0" allowfullscreen></iframe>
+  </section>
 
   <footer>
-    <p>&copy; 2025 Eigo Sato</p>
+    &copy; 2025 Eigo Sato | <a href="mailto:info@variorchestra.com">お問い合わせ</a>
   </footer>
+
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>AOS.init({ duration: 1000, once: true });</script>
 </body>
 </html>
