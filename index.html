@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Eigo Sato | Conductor & Violinist</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Eigo Sato Official Site</title>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP&display=swap" rel="stylesheet">
   <style>
     * {
@@ -11,52 +11,76 @@
       margin: 0;
       padding: 0;
     }
+    html {
+      scroll-behavior: smooth;
+    }
     body {
       font-family: 'Noto Serif JP', serif;
-      background: #fafafa;
-      color: #111;
-      line-height: 1.7;
+      line-height: 1.6;
+      color: #333;
+      background-color: #fff;
     }
     header {
       position: relative;
-      height: 100vh;
-      background: url('img/top_orchestra.jpg') center/cover no-repeat;
-      display: flex;
-      align-items: center;
-      justify-content: center;
       text-align: center;
-      color: #fff;
+      color: white;
+    }
+    header img {
+      width: 100%;
+      height: 100vh;
+      object-fit: cover;
     }
     header .text {
-      animation: fadeInUp 2s ease-out;
-      background-color: rgba(0,0,0,0.4);
-      padding: 2rem;
-      border-radius: 10px;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-shadow: 2px 2px 6px rgba(0,0,0,0.7);
+      animation: fadeIn 2s ease-in-out;
     }
-    header h1 {
+    header .text h1 {
       font-size: 3rem;
-      font-weight: bold;
     }
-    header p {
+    header .text p {
       font-size: 1.2rem;
-      margin-top: 1rem;
+      white-space: nowrap;
     }
-
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: rgba(255, 255, 255, 0.95);
+      padding: 0.5rem 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      z-index: 10;
+    }
+    nav .logo {
+      font-weight: bold;
+      font-size: 1.2rem;
+    }
+    nav ul {
+      display: flex;
+      gap: 1rem;
+      list-style: none;
+    }
+    nav ul li a {
+      text-decoration: none;
+      color: #333;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+    nav ul li a:hover {
+      color: #888;
+    }
     section {
-      padding: 3rem 1.5rem;
+      padding: 5rem 1rem 2rem;
       max-width: 1000px;
       margin: auto;
-      opacity: 0;
-      transform: translateY(50px);
-      animation: fadeInSection 1s ease forwards;
+      animation: fadeIn 1.5s ease-in-out;
     }
-    section:nth-of-type(2) {
-      animation-delay: 0.5s;
-    }
-    section:nth-of-type(3) {
-      animation-delay: 1s;
-    }
-
     .profile {
       display: flex;
       flex-wrap: wrap;
@@ -65,84 +89,99 @@
       justify-content: center;
     }
     .profile img {
-      width: 300px;
-      border-radius: 10px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      max-width: 300px;
+      width: 100%;
+      border-radius: 8px;
     }
     .profile p {
       flex: 1;
+      font-size: 1rem;
       min-width: 280px;
     }
-
     .gallery {
-      display: flex;
-      gap: 1rem;
       overflow-x: auto;
-      scroll-snap-type: x mandatory;
-      -webkit-overflow-scrolling: touch;
+      white-space: nowrap;
+      padding: 1rem 0;
     }
     .gallery img {
       height: 200px;
+      margin-right: 1rem;
       border-radius: 10px;
-      scroll-snap-align: start;
+      display: inline-block;
     }
-
     .videos {
-      display: flex;
       overflow-x: auto;
-      gap: 1rem;
-      scroll-snap-type: x mandatory;
-      padding-bottom: 1rem;
+      white-space: nowrap;
+      padding: 1rem 0;
     }
     .videos iframe {
-      flex: 0 0 90%;
-      max-width: 800px;
-      height: 450px;
+      height: 250px;
+      width: 400px;
+      margin-right: 1rem;
       border-radius: 10px;
-      scroll-snap-align: center;
+      display: inline-block;
     }
-
+    .schedule p {
+      margin: 0.5rem 0;
+    }
     .contact {
       text-align: center;
-      padding: 2rem 1rem;
+      margin-top: 2rem;
+      padding: 2rem 1rem 1rem;
       border-top: 1px solid #ccc;
       font-size: 0.95rem;
     }
-
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(30px); }
-      to   { opacity: 1; transform: translateY(0); }
+    .lang-switch {
+      font-size: 0.9rem;
+      color: #555;
     }
-
-    @keyframes fadeInSection {
-      to {
-        opacity: 1;
-        transform: translateY(0);
+    @media (max-width: 768px) {
+      header .text h1 {
+        font-size: 2rem;
+      }
+      .profile {
+        flex-direction: column;
+      }
+      .gallery img {
+        height: 150px;
+      }
+      .videos iframe {
+        height: 200px;
+        width: 300px;
       }
     }
-
-    @media (max-width: 768px) {
-      header h1 { font-size: 2rem; }
-      header p { font-size: 1rem; }
-      .profile { flex-direction: column; }
-      .videos iframe { height: 250px; }
+    @keyframes fadeIn {
+      0% { opacity: 0; transform: translateY(20px); }
+      100% { opacity: 1; transform: translateY(0); }
     }
   </style>
 </head>
 <body>
+  <nav>
+    <div class="logo">Eigo Sato</div>
+    <ul>
+      <li><a href="#profile">Biography</a></li>
+      <li><a href="#photos">Photos</a></li>
+      <li><a href="#videos">Videos</a></li>
+      <li><a href="#schedule">Schedule</a></li>
+      <li class="lang-switch"><a href="/en">English</a></li>
+    </ul>
+  </nav>
+
   <header>
+    <img src="img/top_orchestra.jpg" alt="Hero">
     <div class="text">
       <h1>Eigo Sato</h1>
-      <p>指揮者・ヴァイオリニスト・コンサルタント</p>
+      <p>指揮者・ヴァイオリニスト・ビジネスコンサルタント</p>
     </div>
   </header>
 
-  <section class="profile">
+  <section id="profile" class="profile">
     <img src="img/profile.jpg" alt="Eigo Sato">
-    <p>東京外国語大学国際日本学部卒業。東京音楽大学指揮研修生修了。 4歳でヴァイオリンを始め、ソロ・室内楽での演奏に加え、これまでにSeikei String Orchestra、東京外国語大学管弦楽団、VariOrchestraのコンサートマスターを務めた。中学生の頃から混声合唱や弦楽オーケストラなどを指揮し、東京外国語大学在学中に東京音楽大学指揮科研修生として本格的に指揮を学び始める。Bach International Music Competition UK2024で第1位、GYMC2024 CRit. Max Bruch International Competition2024 でPlatinum Prize. WBMC2024で第1位（いずれも指揮部門）。 2020年、都内の音楽大学出身者を中心に呼びかけ、VariOrchestraを設立。演奏会の企画・運営、演奏を行う。定期演奏会においてコンサートマスターとして交響曲を弾き振りし、第3回定期演奏会では協奏曲のソリストを務めた。さらに特別公演ではベートーヴェンやブラームス、モーツァルト、シューベルト等の交響曲を指揮。HIP（Historically informed performance/歴史的知識に基づく演奏）の解釈を取り入れた新鮮な演奏が好評を博し、注目を集めている。 その他中高生のオーケストラの指導や、アマチュアオーケストラを指揮、またカズオ・イシグロ原作「遠い山なみの光」では広瀬すず氏への演奏・所作指導を行う。ヴァイオリンでは東久留米市第15回みんなのクラシックコンサート等に出演。 これまでに、ヴァイオリンを伊藤亮太郎、有働一美、大塚杏奈、白瀬ゆりの各氏に、指揮を増井信貴氏に師事。音楽以外の分野においても、総合コンサルティングファームでの大企業向けビジネス・業務改革支援を行いつつ、オンライン英語塾「TUFLINGUAL」の代表を務めるなど活動の範囲を広げている。</p>
+    <p>（省略）東京外国語大学国際日本学部卒業。東京音楽大学指揮研修生修了。 4歳でヴァイオリンを始め、ソロ・室内楽での演奏に加え、これまでにSeikei String Orchestra、東京外国語大学管弦楽団、VariOrchestraのコンサートマスターを務めた。中学生の頃から混声合唱や弦楽オーケストラなどを指揮し、東京外国語大学在学中に東京音楽大学指揮科研修生として本格的に指揮を学び始める。Bach International Music Competition UK2024で第1位、GYMC2024 CRit. Max Bruch International Competition2024 でPlatinum Prize. WBMC2024で第1位（いずれも指揮部門）。 2020年、都内の音楽大学出身者を中心に呼びかけ、VariOrchestraを設立。演奏会の企画・運営、演奏を行う。定期演奏会においてコンサートマスターとして交響曲を弾き振りし、第3回定期演奏会では協奏曲のソリストを務めた。さらに特別公演ではベートーヴェンやブラームス、モーツァルト、シューベルト等の交響曲を指揮。HIP（Historically informed performance/歴史的知識に基づく演奏）の解釈を取り入れた新鮮な演奏が好評を博し、注目を集めている。 その他中高生のオーケストラの指導や、アマチュアオーケストラを指揮、またカズオ・イシグロ原作「遠い山なみの光」では広瀬すず氏への演奏・所作指導を行う。ヴァイオリンでは東久留米市第15回みんなのクラシックコンサート等に出演。 これまでに、ヴァイオリンを伊藤亮太郎、有働一美、大塚杏奈、白瀬ゆりの各氏に、指揮を増井信貴氏に師事。音楽以外の分野においても、総合コンサルティングファームでの大企業向けビジネス・業務改革支援を行いつつ、オンライン英語塾「TUFLINGUAL」の代表を務めるなど活動の範囲を広げている。</p>
   </section>
 
-  <section>
+  <section id="photos">
     <h2>Photos</h2>
     <div class="gallery">
       <img src="img/concert.jpg" alt="Concert">
@@ -152,13 +191,25 @@
     </div>
   </section>
 
-  <section>
+  <section id="videos">
     <h2>Videos</h2>
     <div class="videos">
       <iframe src="https://www.youtube.com/embed/tssEzKuBm8w" title="Mozart" allowfullscreen></iframe>
       <iframe src="https://www.youtube.com/embed/7GpPmL6eCuM" title="Brahms" allowfullscreen></iframe>
-      <iframe src="https://www.youtube.com/embed/1cV0FeP0r-I?si=cHy9-oMN2ScIT8Xk" title="Brahms" allowfullscreen></iframe>
+      <iframe src="https://www.youtube.com/embed/1cV0FeP0r-I" title="Encore" allowfullscreen></iframe>
+      <iframe src="https://www.youtube.com/embed/iFwB8kfx0XU" title="Rehearsal" allowfullscreen></iframe>
     </div>
+  </section>
+
+  <section id="schedule" class="schedule">
+    <h2>Schedule</h2>
+    <p><strong>2025/08/11</strong> — カーザクラシカ　室内楽コンサート</p>
+    <p><strong>2025/09/20</strong> — Legame String Orchestra（指揮）</p>
+    <p><strong>2025/09/21</strong> — 帝国ホテル（非公開イベント出演）</p>
+    <p><strong>2025/09/28</strong> — 弦楽トリオコンサート @紀尾井町コンサートサロン</p>
+    <p><strong>2025/11/01</strong> — VariOrchestra×東京外国語大学（共催）</p>
+    <p><strong>2025/12/20</strong> — coming soon</p>
+    <p><strong>2026/03/31</strong> — coming soon</p>
   </section>
 
   <footer class="contact">
