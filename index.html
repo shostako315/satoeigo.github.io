@@ -1,19 +1,12 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Eigo Sato Official Site</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>佐藤瑛吾オフィシャルサイト</title>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP&display=swap" rel="stylesheet">
   <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-    html {
-      scroll-behavior: smooth;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; scroll-behavior: smooth; }
     body {
       font-family: 'Noto Serif JP', serif;
       line-height: 1.6;
@@ -35,7 +28,9 @@
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
+      color: white;
       text-shadow: 2px 2px 6px rgba(0,0,0,0.7);
+      padding: 0 1rem;
       animation: fadeIn 2s ease-in-out;
     }
     header .text h1 {
@@ -45,26 +40,32 @@
       font-size: 1.2rem;
       white-space: nowrap;
     }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translate(-50%, -40%); }
+      to { opacity: 1; transform: translate(-50%, -50%); }
+    }
+
     nav {
       position: fixed;
       top: 0;
       width: 100%;
-      background: rgba(255, 255, 255, 0.95);
-      padding: 0.5rem 1rem;
+      background-color: rgba(255,255,255,0.95);
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      padding: 0.7rem 1.5rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-      z-index: 10;
+      z-index: 1000;
     }
     nav .logo {
       font-weight: bold;
       font-size: 1.2rem;
     }
     nav ul {
-      display: flex;
-      gap: 1rem;
       list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
     }
     nav ul li a {
       text-decoration: none;
@@ -73,14 +74,15 @@
       transition: color 0.3s;
     }
     nav ul li a:hover {
-      color: #888;
+      color: #555;
     }
+
     section {
-      padding: 5rem 1rem 2rem;
+      padding: 4rem 1rem 2rem;
       max-width: 1000px;
       margin: auto;
-      animation: fadeIn 1.5s ease-in-out;
     }
+
     .profile {
       display: flex;
       flex-wrap: wrap;
@@ -98,6 +100,7 @@
       font-size: 1rem;
       min-width: 280px;
     }
+
     .gallery {
       overflow-x: auto;
       white-space: nowrap;
@@ -109,21 +112,36 @@
       border-radius: 10px;
       display: inline-block;
     }
+
     .videos {
       overflow-x: auto;
-      white-space: nowrap;
-      padding: 1rem 0;
+      display: flex;
+      gap: 1rem;
     }
     .videos iframe {
-      height: 250px;
-      width: 400px;
-      margin-right: 1rem;
+      min-width: 300px;
+      height: 200px;
+      flex-shrink: 0;
       border-radius: 10px;
-      display: inline-block;
     }
-    .schedule p {
-      margin: 0.5rem 0;
+
+    .schedule-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 2rem;
     }
+    .schedule-table th, .schedule-table td {
+      border: 1px solid #ddd;
+      padding: 0.75rem;
+      text-align: left;
+    }
+    .schedule-table th {
+      background-color: #f4f4f4;
+    }
+    .schedule-table tr:nth-child(even) {
+      background-color: #fcfcfc;
+    }
+
     .contact {
       text-align: center;
       margin-top: 2rem;
@@ -131,40 +149,24 @@
       border-top: 1px solid #ccc;
       font-size: 0.95rem;
     }
-    .lang-switch {
-      font-size: 0.9rem;
-      color: #555;
-    }
+
     @media (max-width: 768px) {
-      header .text h1 {
-        font-size: 2rem;
-      }
-      .profile {
-        flex-direction: column;
-      }
-      .gallery img {
-        height: 150px;
-      }
-      .videos iframe {
-        height: 200px;
-        width: 300px;
-      }
-    }
-    @keyframes fadeIn {
-      0% { opacity: 0; transform: translateY(20px); }
-      100% { opacity: 1; transform: translateY(0); }
+      header .text h1 { font-size: 2rem; }
+      header .text p { font-size: 1rem; }
+      nav ul { flex-direction: column; align-items: flex-end; gap: 0.5rem; }
+      .videos iframe { height: 180px; }
     }
   </style>
 </head>
 <body>
   <nav>
-    <div class="logo">Eigo Sato</div>
+    <div class="logo">佐藤瑛吾オフィシャルサイト</div>
     <ul>
-      <li><a href="#profile">Biography</a></li>
+      <li><a href="#bio">Biography</a></li>
       <li><a href="#photos">Photos</a></li>
       <li><a href="#videos">Videos</a></li>
       <li><a href="#schedule">Schedule</a></li>
-      <li class="lang-switch"><a href="/en">English</a></li>
+      <li><a href="/en">English</a></li>
     </ul>
   </nav>
 
@@ -172,13 +174,13 @@
     <img src="img/top_orchestra.jpg" alt="Hero">
     <div class="text">
       <h1>Eigo Sato</h1>
-      <p>指揮者・ヴァイオリニスト・ビジネスコンサルタント</p>
+      <p>指揮者・ヴァイオリニスト・コンサルタント</p>
     </div>
   </header>
 
-  <section id="profile" class="profile">
+  <section class="profile" id="bio">
     <img src="img/profile.jpg" alt="Eigo Sato">
-    <p>（省略）東京外国語大学国際日本学部卒業。東京音楽大学指揮研修生修了。 4歳でヴァイオリンを始め、ソロ・室内楽での演奏に加え、これまでにSeikei String Orchestra、東京外国語大学管弦楽団、VariOrchestraのコンサートマスターを務めた。中学生の頃から混声合唱や弦楽オーケストラなどを指揮し、東京外国語大学在学中に東京音楽大学指揮科研修生として本格的に指揮を学び始める。Bach International Music Competition UK2024で第1位、GYMC2024 CRit. Max Bruch International Competition2024 でPlatinum Prize. WBMC2024で第1位（いずれも指揮部門）。 2020年、都内の音楽大学出身者を中心に呼びかけ、VariOrchestraを設立。演奏会の企画・運営、演奏を行う。定期演奏会においてコンサートマスターとして交響曲を弾き振りし、第3回定期演奏会では協奏曲のソリストを務めた。さらに特別公演ではベートーヴェンやブラームス、モーツァルト、シューベルト等の交響曲を指揮。HIP（Historically informed performance/歴史的知識に基づく演奏）の解釈を取り入れた新鮮な演奏が好評を博し、注目を集めている。 その他中高生のオーケストラの指導や、アマチュアオーケストラを指揮、またカズオ・イシグロ原作「遠い山なみの光」では広瀬すず氏への演奏・所作指導を行う。ヴァイオリンでは東久留米市第15回みんなのクラシックコンサート等に出演。 これまでに、ヴァイオリンを伊藤亮太郎、有働一美、大塚杏奈、白瀬ゆりの各氏に、指揮を増井信貴氏に師事。音楽以外の分野においても、総合コンサルティングファームでの大企業向けビジネス・業務改革支援を行いつつ、オンライン英語塾「TUFLINGUAL」の代表を務めるなど活動の範囲を広げている。</p>
+    <p>東京外国語大学国際日本学部卒業。東京音楽大学指揮研修生修了。 4歳でヴァイオリンを始め、ソロ・室内楽での演奏に加え、これまでにSeikei String Orchestra、東京外国語大学管弦楽団、VariOrchestraのコンサートマスターを務めた。中学生の頃から混声合唱や弦楽オーケストラなどを指揮し、東京外国語大学在学中に東京音楽大学指揮科研修生として本格的に指揮を学び始める。Bach International Music Competition UK2024で第1位、GYMC2024 CRit. Max Bruch International Competition2024 でPlatinum Prize. WBMC2024で第1位（いずれも指揮部門）。 2020年、都内の音楽大学出身者を中心に呼びかけ、VariOrchestraを設立。演奏会の企画・運営、演奏を行う。定期演奏会においてコンサートマスターとして交響曲を弾き振りし、第3回定期演奏会では協奏曲のソリストを務めた。さらに特別公演ではベートーヴェンやブラームス、モーツァルト、シューベルト等の交響曲を指揮。HIP（Historically informed performance/歴史的知識に基づく演奏）の解釈を取り入れた新鮮な演奏が好評を博し、注目を集めている。 その他中高生のオーケストラの指導や、アマチュアオーケストラを指揮、またカズオ・イシグロ原作「遠い山なみの光」では広瀬すず氏への演奏・所作指導を行う。ヴァイオリンでは東久留米市第15回みんなのクラシックコンサート等に出演。 これまでに、ヴァイオリンを伊藤亮太郎、有働一美、大塚杏奈、白瀬ゆりの各氏に、指揮を増井信貴氏に師事。音楽以外の分野においても、総合コンサルティングファームでの大企業向けビジネス・業務改革支援を行いつつ、オンライン英語塾「TUFLINGUAL」の代表を務めるなど活動の範囲を広げている。</p>
   </section>
 
   <section id="photos">
@@ -196,20 +198,21 @@
     <div class="videos">
       <iframe src="https://www.youtube.com/embed/tssEzKuBm8w" title="Mozart" allowfullscreen></iframe>
       <iframe src="https://www.youtube.com/embed/7GpPmL6eCuM" title="Brahms" allowfullscreen></iframe>
-      <iframe src="https://www.youtube.com/embed/1cV0FeP0r-I" title="Encore" allowfullscreen></iframe>
-      <iframe src="https://www.youtube.com/embed/iFwB8kfx0XU" title="Rehearsal" allowfullscreen></iframe>
     </div>
   </section>
 
-  <section id="schedule" class="schedule">
+  <section id="schedule">
     <h2>Schedule</h2>
-    <p><strong>2025/08/11</strong> — カーザクラシカ　室内楽コンサート</p>
-    <p><strong>2025/09/20</strong> — Legame String Orchestra（指揮）</p>
-    <p><strong>2025/09/21</strong> — 帝国ホテル（非公開イベント出演）</p>
-    <p><strong>2025/09/28</strong> — 弦楽トリオコンサート @紀尾井町コンサートサロン</p>
-    <p><strong>2025/11/01</strong> — VariOrchestra×東京外国語大学（共催）</p>
-    <p><strong>2025/12/20</strong> — coming soon</p>
-    <p><strong>2026/03/31</strong> — coming soon</p>
+    <table class="schedule-table">
+      <tr><th>日付</th><th>イベント</th></tr>
+      <tr><td>8/11</td><td>カーザクラシカ 室内楽コンサート</td></tr>
+      <tr><td>9/20</td><td>Legame String Orchestra（指揮）</td></tr>
+      <tr><td>9/21</td><td>帝国ホテル（非公開イベント出演）</td></tr>
+      <tr><td>9/28</td><td>弦楽トリオコンサート @紀尾井町コンサートサロン</td></tr>
+      <tr><td>11/1</td><td>VariOrchestra×東京外国語大学（共催）</td></tr>
+      <tr><td>12/20</td><td>coming soon</td></tr>
+      <tr><td>3/31</td><td>coming soon</td></tr>
+    </table>
   </section>
 
   <footer class="contact">
