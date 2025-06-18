@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>佐藤瑛吾 | 指揮者・ヴァイオリニスト</title>
-  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <title>Eigo Sato Official Site</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;700&display=swap" rel="stylesheet">
   <style>
     body {
-      font-family: 'Helvetica Neue', sans-serif;
       margin: 0;
+      font-family: 'Noto Serif JP', serif;
       background: #fff;
       color: #111;
     }
@@ -20,78 +20,110 @@
       justify-content: center;
       align-items: center;
       color: white;
-      text-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.7);
+      animation: zoom 20s ease-in-out infinite alternate;
     }
-    header h1 {
+    @keyframes zoom {
+      from { background-size: 100%; }
+      to { background-size: 110%; }
+    }
+    h1 {
       font-size: 3rem;
+      margin: 0.5em 0 0.2em;
+    }
+    .subtitle {
+      font-size: 1.4rem;
       margin: 0;
     }
-    header p {
-      font-size: 1.5rem;
+    .section {
+      padding: 2rem 5%;
     }
-    section {
-      max-width: 1000px;
-      margin: 5rem auto;
-      padding: 0 1rem;
-    }
-    .gallery {
+    .profile {
       display: flex;
       flex-wrap: wrap;
-      gap: 1rem;
+      gap: 2rem;
+      align-items: center;
+      justify-content: center;
+    }
+    .profile img {
+      width: 280px;
+      border-radius: 12px;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+    }
+    .profile p {
+      max-width: 600px;
+      line-height: 1.8;
+      font-size: 1.1rem;
+    }
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      padding: 1rem 0;
     }
     .gallery img {
-      width: calc(33% - 10px);
-      border-radius: 8px;
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      border-radius: 12px;
+      transition: transform 0.3s ease;
+    }
+    .gallery img:hover {
+      transform: scale(1.05);
     }
     iframe {
       width: 100%;
-      height: 315px;
-      margin-bottom: 1rem;
+      height: 450px;
+      border: none;
+      border-radius: 12px;
+      margin-bottom: 2rem;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+      transition: transform 0.3s ease;
     }
-    footer {
-      background: #f2f2f2;
-      text-align: center;
-      padding: 2rem;
-      font-size: 0.8rem;
+    iframe:hover {
+      transform: scale(1.01);
+    }
+    h2 {
+      font-size: 1.8rem;
+      border-left: 6px solid #0074d9;
+      padding-left: 0.5rem;
+      margin-bottom: 1rem;
     }
   </style>
 </head>
 <body>
   <header>
-    <h1 data-aos="fade-down">Eigo Sato</h1>
-    <p data-aos="fade-up">指揮者・ヴァイオリニスト・コンサルタント</p>
+    <h1>Eigo Sato</h1>
+    <p class="subtitle">指揮者・ヴァイオリニスト・コンサルタント</p>
   </header>
 
-  <section data-aos="fade-up">
-    <h2>プロフィール</h2>
-    <p>佐藤瑛吾（Eigo Sato）。東京都出身、現在25歳。Bach International Music Competition UK2024第1位、Gabriel Fauré Music World Competition第1位、GYMC2024銀賞、Max Bruch International Competition2024でPlatinum Prize、WBMC2024第1位など、国際的な指揮コンクールで数多くの受賞歴を持つ。2025年にはベルギーで開催された国際オペラ指揮者コンクール本選にも出場。</p>
-    <p>4歳からヴァイオリンを、13歳から指揮を始める。東京外国語大学で言語学を学び、東京音楽大学で指揮研修生として指揮法を学ぶ。2020年にVariOrchestraを設立し、指揮者・コンマス・ソリストなど多面的に活動。</p>
-    <p>Mahler Project、学芸第九、埼玉大学管弦楽団、Seikei String Orchestra、Legame String Orchestra、ハルモニアオーケストラなどでの指揮に加え、映画『遠いやまなみの光』では演奏・所作指導も担当。</p>
-  </section>
-
-  <section data-aos="fade-up">
-    <h2>写真</h2>
-    <div class="gallery">
-      <img src="img/profile.jpg" alt="プロフィール写真" data-aos="zoom-in">
-      <img src="img/concert.jpg" alt="コンサート写真" data-aos="fade-up">
-      <img src="img/opera.jpg" alt="劇場にて" data-aos="flip-left">
-      <img src="img/reading.jpg" alt="指揮者会議" data-aos="zoom-in">
-      <img src="img/event.jpg" alt="演奏会後" data-aos="fade-right">
-      <img src="img/stainedglass.jpg" alt="教会にて" data-aos="fade-left">
+  <section class="section">
+    <div class="profile">
+      <img src="img/profile.jpg" alt="Eigo Sato">
+      <p>
+        東京都出身、現在25歳。Bach International Music Competition UK2024で第1位、Max Bruch International Competition2024でPlatinum Prize、GYMC2024銀賞など受賞多数。2025年にはベルギーで開催された国際オペラ指揮者コンクール本選出場。<br>
+        東京外国語大学で言語学を学びつつ、東京音楽大学で指揮を学ぶ。VariOrchestra創設者。指揮者としてベートーヴェンやブラームス等を多数演奏。ヴァイオリン奏者としても様々な演奏会に出演。<br>
+        現在は大手コンサルファーム勤務の傍ら、語学教育事業TUFLINGUALの代表を務める。
+      </p>
     </div>
   </section>
 
-  <section data-aos="fade-up">
-    <h2>動画</h2>
-    <iframe src="https://www.youtube.com/embed/7GpPmL6eCuM" frameborder="0" allowfullscreen></iframe>
-    <iframe src="https://www.youtube.com/embed/tssEzKuBm8w" frameborder="0" allowfullscreen></iframe>
+  <section class="section">
+    <h2>ギャラリー</h2>
+    <div class="gallery">
+      <img src="img/profile.jpg" alt="Profile">
+      <img src="img/concert.jpg" alt="Concert">
+      <img src="img/event.jpg" alt="Event">
+      <img src="img/reading.jpg" alt="Reading">
+      <img src="img/opera.jpg" alt="Opera">
+      <img src="img/stainedglass.jpg" alt="Stained Glass">
+    </div>
   </section>
 
-  <footer>
-    &copy; 2025 Eigo Sato | <a href="mailto:info@variorchestra.com">お問い合わせ</a>
-  </footer>
-
-  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-  <script>AOS.init({ duration: 1000, once: true });</script>
+  <section class="section">
+    <h2>動画</h2>
+    <iframe src="https://www.youtube.com/embed/tssEzKuBm8w" allowfullscreen></iframe>
+    <iframe src="https://www.youtube.com/embed/7GpPmL6eCuM" allowfullscreen></iframe>
+  </section>
 </body>
 </html>
