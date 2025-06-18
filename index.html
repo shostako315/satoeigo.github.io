@@ -8,7 +8,7 @@
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
-      font-family: 'Noto Serif JP', serif;
+      font-family: -apple-system, BlinkMacSystemFont, "Noto Serif JP", serif;
       line-height: 1.6;
       color: #333;
       background-color: #fff;
@@ -81,7 +81,7 @@
     .videos iframe {
       width: 100%;
       max-width: 800px;
-      height: 450px;
+      aspect-ratio: 16 / 9;
       margin-bottom: 2rem;
       border-radius: 10px;
       display: block;
@@ -109,12 +109,6 @@
       }
       .gallery img {
         height: 150px;
-      }
-      .videos iframe {
-        height: 250px;
-      }
-      header .text {
-        white-space: normal;
       }
     }
   </style>
@@ -150,8 +144,8 @@
     <h2>Videos</h2>
     <iframe src="https://www.youtube.com/embed/tssEzKuBm8w" title="Mozart" allowfullscreen></iframe>
     <iframe src="https://www.youtube.com/embed/7GpPmL6eCuM" title="Brahms" allowfullscreen></iframe>
-    <iframe src="https://youtu.be/1cV0FeP0r-I?si=0PJEI8v5DrzPnpfc" title="Brahms" allowfullscreen></iframe>
-    <iframe src="https://youtu.be/iFwB8kfx0XU?si=SORda_HOlwh-_19y" allowfullscreen></iframe>
+    <iframe src="https://www.youtube.com/embed/1cV0FeP0r-I" title="New 1" allowfullscreen></iframe>
+    <iframe src="https://www.youtube.com/embed/iFwB8kfx0XU" title="New 2" allowfullscreen></iframe>
   </section>
 
   <footer class="contact">
