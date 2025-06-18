@@ -4,46 +4,57 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Eigo Sato Official Site</title>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP&display=swap" rel="stylesheet">
   <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
-      margin: 0;
       font-family: 'Noto Serif JP', serif;
+      line-height: 1.6;
+      color: #333;
       background-color: #fff;
-      color: #111;
     }
     header {
-      background: url("img/top_orchestra.jpg") center/cover no-repeat;
-      height: 80vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
+      position: relative;
+      text-align: center;
       color: white;
-      text-shadow: 2px 2px 4px #000;
     }
-    header h1 {
+    header img {
+      width: 100%;
+      height: 100vh;
+      object-fit: cover;
+    }
+    header .text {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: white;
+      text-shadow: 2px 2px 6px rgba(0,0,0,0.7);
+    }
+    header .text h1 {
       font-size: 3rem;
-      margin: 0;
     }
-    header p {
-      font-size: 1.5rem;
-      margin: 0;
+    header .text p {
+      font-size: 1.2rem;
     }
-    .section {
+    section {
       padding: 2rem;
-      max-width: 1200px;
+      max-width: 1000px;
       margin: auto;
     }
     .profile {
       display: flex;
       flex-wrap: wrap;
-      align-items: center;
       gap: 2rem;
+      align-items: center;
     }
     .profile img {
-      width: 300px;
+      max-width: 300px;
       border-radius: 8px;
+    }
+    .profile p {
+      flex: 1;
+      font-size: 1rem;
     }
     .gallery {
       overflow-x: auto;
@@ -51,54 +62,62 @@
       padding: 1rem 0;
     }
     .gallery img {
-      height: 250px;
-      border-radius: 12px;
-      margin-right: 10px;
-      vertical-align: middle;
+      height: 200px;
+      margin-right: 1rem;
+      border-radius: 10px;
+      display: inline-block;
     }
-    iframe {
+    .videos iframe {
       width: 100%;
-      height: 480px;
-      border: none;
+      max-width: 800px;
+      height: 450px;
       margin-bottom: 2rem;
+      border-radius: 10px;
     }
     .contact {
-      background-color: #f5f5f5;
-      padding: 2rem;
       text-align: center;
+      margin-top: 2rem;
+      padding-top: 1rem;
+      border-top: 1px solid #ccc;
+      font-size: 0.95rem;
     }
-    .contact p {
-      margin: 0.5rem 0;
+    @media (max-width: 768px) {
+      header .text h1 {
+        font-size: 2rem;
+      }
+      .profile {
+        flex-direction: column;
+      }
+      .gallery img {
+        height: 150px;
+      }
+      .videos iframe {
+        height: 250px;
+      }
     }
   </style>
 </head>
 <body>
   <header>
-    <h1>Eigo Sato</h1>
-    <p>指揮者・ヴァイオリニスト・コンサルタント</p>
+    <img src="img/top_orchestra.jpg" alt="Hero">
+    <div class="text">
+      <h1>Eigo Sato</h1>
+      <p>指揮者・ヴァイオリニスト・コンサルタント</p>
+    </div>
   </header>
 
-  <section class="section">
-    <div class="profile">
-      <img src="img/profile.jpg" alt="Eigo Sato">
-      <div>
-        <h2>プロフィール</h2>
-        <p>
-          東京外国語大学国際日本学部卒業。東京音楽大学指揮研修生修了。<br>
-          4歳でヴァイオリンを始め、ソロ・室内楽での演奏に加え、これまでにSeikei String Orchestra、東京外国語大学管弦楽団、VariOrchestraのコンサートマスターを務めた。<br>
-          中学生の頃から混声合唱や弦楽オーケストラなどを指揮し、東京外国語大学在学中に東京音楽大学指揮科研修生として本格的に指揮を学び始める。<br>
-          Bach International Music Competition UK2024で第1位、GYMC2024 CRit. Max Bruch International Competition2024 でPlatinum Prize. WBMC2024で第1位（いずれも指揮部門）。<br>
-          2020年、都内の音楽大学出身者を中心に呼びかけ、VariOrchestraを設立。演奏会の企画・運営、演奏を行う。定期演奏会においてコンサートマスターとして交響曲を弾き振りし、第3回定期演奏会では協奏曲のソリストを務めた。<br>
-          さらに特別公演ではベートーヴェンやブラームス、モーツァルト、シューベルト等の交響曲を指揮。HIP（Historically informed performance/歴史的知識に基づく演奏）の解釈を取り入れた新鮮な演奏が好評を博し、注目を集めている。<br>
-          その他中高生のオーケストラの指導や、アマチュアオーケストラを指揮、映画撮影における演奏・所作指導を行う。ヴァイオリンでは東久留米市第15回みんなのクラシックコンサート等に出演。<br>
-          これまでに、ヴァイオリンを有働一美、大塚杏奈、白瀬ゆりの各氏に、指揮を増井信貴氏に師事。<br>
-          音楽以外の分野においても、総合コンサルティングファームでの大企業向けビジネス・業務改革支援を行いつつ、オンライン英語塾「TUFLINGUAL」の代表を務めるなど活動の範囲を広げている。
-        </p>
-      </div>
-    </div>
+  <section class="profile">
+    <img src="img/profile.jpg" alt="Eigo Sato">
+    <p>
+      東京外国語大学国際日本学部卒業。東京音楽大学指揮研修生修了。
+4歳でヴァイオリンを始め、ソロ・室内楽での演奏に加え、これまでにSeikei String Orchestra、東京外国語大学管弦楽団、VariOrchestraのコンサートマスターを務めた。中学生の頃から混声合唱や弦楽オーケストラなどを指揮し、東京外国語大学在学中に東京音楽大学指揮科研修生として本格的に指揮を学び始める。Bach International Music Competition UK2024で第1位、GYMC2024 CRit. Max Bruch International Competition2024 でPlatinum Prize. WBMC2024で第1位（いずれも指揮部門）。
+2020年、都内の音楽大学出身者を中心に呼びかけ、VariOrchestraを設立。演奏会の企画・運営、演奏を行う。定期演奏会においてコンサートマスターとして交響曲を弾き振りし、第3回定期演奏会では協奏曲のソリストを務めた。さらに特別公演ではベートーヴェンやブラームス、モーツァルト、シューベルト等の交響曲を指揮。HIP（Historically informed performance/歴史的知識に基づく演奏）の解釈を取り入れた新鮮な演奏が好評を博し、注目を集めている。
+その他中高生のオーケストラの指導や、アマチュアオーケストラを指揮、またカズオ・イシグロ原作「遠い山なみの光」では広瀬すず氏への演奏・所作指導を行う。ヴァイオリンでは東久留米市第15回みんなのクラシックコンサート等に出演。
+これまでに、ヴァイオリンを伊藤亮太郎、有働一美、大塚杏奈、白瀬ゆりの各氏に、指揮を増井信貴氏に師事。音楽以外の分野においても、総合コンサルティングファームでの大企業向けビジネス・業務改革支援を行いつつ、オンライン英語塾「TUFLINGUAL」の代表を務めるなど活動の範囲を広げている。
+    </p>
   </section>
 
-  <section class="section">
+  <section>
     <h2>写真</h2>
     <div class="gallery">
       <img src="img/profile.jpg" alt="Profile">
@@ -106,20 +125,18 @@
       <img src="img/event.jpg" alt="Event">
       <img src="img/reading.jpg" alt="Reading">
       <img src="img/stainedglass.jpg" alt="Stained Glass">
-      <img src="img/opera.jpg" alt="Opera">
     </div>
   </section>
 
-  <section class="section">
+  <section class="videos">
     <h2>動画</h2>
-    <iframe src="https://www.youtube.com/embed/tssEzKuBm8w?si=r5RO-Bv_-rjInto5" allowfullscreen></iframe>
-    <iframe src="https://www.youtube.com/embed/7GpPmL6eCuM?si=58htBhvJzWme4ekT" allowfullscreen></iframe>
+    <iframe src="https://www.youtube.com/embed/tssEzKuBm8w" title="Mozart"></iframe>
+    <iframe src="https://www.youtube.com/embed/7GpPmL6eCuM" title="Brahms"></iframe>
   </section>
 
   <footer class="contact">
-    <h2>連絡先</h2>
-    <p>📧 メール: <a href="mailto:shostako315@gmail.com">shostako315@gmail.com</a></p>
-    <p>📱 SNS: <a href="https://variorchestra.com/">Instagram</a> | <a href="https://x.com/shostako315">X (Twitter)</a></p>
+    <p>お問い合わせ: <a href="mailto:shostako315@gmail.com">shostako315@gmail.com</a></p>
+    <p>&copy; 2025 Eigo Sato. All Rights Reserved.</p>
   </footer>
 </body>
 </html>
