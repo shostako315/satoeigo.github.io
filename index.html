@@ -1,223 +1,206 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>佐藤瑛吾オフィシャルサイト</title>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
   <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; scroll-behavior: smooth; }
+    :root {
+      --main-color: #1a1a1a;
+      --accent-color: #bfa980;
+      --bg-light: #f9f9f9;
+    }
+    * {
+      margin: 0; padding: 0; box-sizing: border-box;
+    }
     body {
       font-family: 'Noto Serif JP', serif;
-      line-height: 1.6;
-      color: #333;
-      background-color: #fff;
+      background: #fff;
+      color: var(--main-color);
+      scroll-behavior: smooth;
     }
     header {
-      position: relative;
-      text-align: center;
-      color: white;
-    }
-    header img {
-      width: 100%;
-      height: 100vh;
-      object-fit: cover;
-    }
-    header .text {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      color: white;
-      text-shadow: 2px 2px 6px rgba(0,0,0,0.7);
-      padding: 0 1rem;
-      animation: fadeIn 2s ease-in-out;
-    }
-    header .text h1 {
-      font-size: 3rem;
-    }
-    header .text p {
-      font-size: 1.2rem;
-      white-space: nowrap;
-    }
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translate(-50%, -40%); }
-      to { opacity: 1; transform: translate(-50%, -50%); }
-    }
-
-    nav {
       position: fixed;
       top: 0;
+      left: 0;
       width: 100%;
-      background-color: rgba(255,255,255,0.95);
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-      padding: 0.7rem 1.5rem;
+      background: rgba(255,255,255,0.9);
       display: flex;
       justify-content: space-between;
       align-items: center;
+      padding: 1rem 2rem;
       z-index: 1000;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     }
-    nav .logo {
-      font-weight: bold;
+    .logo {
       font-size: 1.2rem;
+      font-weight: bold;
     }
-    nav ul {
-      list-style: none;
+    nav {
       display: flex;
-      flex-wrap: wrap;
-      gap: 1rem;
+      gap: 1.5rem;
     }
-    nav ul li a {
+    nav a {
       text-decoration: none;
-      color: #333;
-      font-weight: 500;
+      color: var(--main-color);
       transition: color 0.3s;
     }
-    nav ul li a:hover {
-      color: #555;
+    nav a:hover {
+      color: var(--accent-color);
     }
-
+    .hero {
+      position: relative;
+      height: 100vh;
+      background: url('img/top_orchestra.jpg') center/cover no-repeat;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+    .hero h1, .hero p {
+      color: white;
+      text-shadow: 2px 2px 8px rgba(0,0,0,0.6);
+      opacity: 0;
+      animation: fadeUp 1.5s ease forwards;
+    }
+    .hero h1 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+    .hero p {
+      font-size: 1.2rem;
+      animation-delay: 0.5s;
+    }
     section {
-      padding: 4rem 1rem 2rem;
+      padding: 5rem 2rem 2rem;
       max-width: 1000px;
       margin: auto;
+      opacity: 0;
+      transform: translateY(40px);
+      transition: all 0.7s ease-out;
     }
-
-    .profile {
+    section.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .gallery, .videos {
       display: flex;
-      flex-wrap: wrap;
-      gap: 2rem;
-      align-items: center;
-      justify-content: center;
-    }
-    .profile img {
-      max-width: 300px;
-      width: 100%;
-      border-radius: 8px;
-    }
-    .profile p {
-      flex: 1;
-      font-size: 1rem;
-      min-width: 280px;
-    }
-
-    .gallery {
       overflow-x: auto;
-      white-space: nowrap;
+      gap: 1rem;
       padding: 1rem 0;
     }
-    .gallery img {
+    .gallery img, .videos iframe {
       height: 200px;
-      margin-right: 1rem;
       border-radius: 10px;
-      display: inline-block;
+      flex: 0 0 auto;
     }
-
-    .videos {
-      overflow-x: auto;
-      display: flex;
-      gap: 1rem;
-    }
-    .videos iframe {
-      min-width: 300px;
-      height: 200px;
-      flex-shrink: 0;
+    .schedule-list {
+      background: var(--bg-light);
+      padding: 2rem;
       border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.05);
     }
-
-    .schedule-table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 2rem;
+    .schedule-item {
+      border-bottom: 1px solid #ccc;
+      padding: 1rem 0;
     }
-    .schedule-table th, .schedule-table td {
-      border: 1px solid #ddd;
-      padding: 0.75rem;
-      text-align: left;
+    .schedule-item:last-child {
+      border-bottom: none;
     }
-    .schedule-table th {
-      background-color: #f4f4f4;
-    }
-    .schedule-table tr:nth-child(even) {
-      background-color: #fcfcfc;
-    }
-
-    .contact {
+    footer {
+      background: #eee;
       text-align: center;
-      margin-top: 2rem;
-      padding: 2rem 1rem 1rem;
-      border-top: 1px solid #ccc;
-      font-size: 0.95rem;
+      padding: 2rem 1rem;
+      margin-top: 3rem;
     }
-
+    @keyframes fadeUp {
+      0% { opacity: 0; transform: translateY(30px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
     @media (max-width: 768px) {
-      header .text h1 { font-size: 2rem; }
-      header .text p { font-size: 1rem; }
-      nav ul { flex-direction: column; align-items: flex-end; gap: 0.5rem; }
-      .videos iframe { height: 180px; }
+      nav {
+        display: none;
+      }
+      .logo {
+        font-size: 1rem;
+      }
     }
   </style>
 </head>
 <body>
-  <nav>
-    <div class="logo">佐藤瑛吾オフィシャルサイト</div>
-    <ul>
-      <li><a href="#bio">Biography</a></li>
-      <li><a href="#photos">Photos</a></li>
-      <li><a href="#videos">Videos</a></li>
-      <li><a href="#schedule">Schedule</a></li>
-      <li><a href="/en">English</a></li>
-    </ul>
-  </nav>
-
   <header>
-    <img src="img/top_orchestra.jpg" alt="Hero">
-    <div class="text">
+    <div class="logo">佐藤瑛吾オフィシャルサイト</div>
+    <nav>
+      <a href="#bio">Biography</a>
+      <a href="#photos">Photos</a>
+      <a href="#videos">Videos</a>
+      <a href="#schedule">Schedule</a>
+      <a href="index.en.html">English</a>
+    </nav>
+  </header>
+
+  <div class="hero">
+    <div>
       <h1>Eigo Sato</h1>
       <p>指揮者・ヴァイオリニスト・コンサルタント</p>
     </div>
-  </header>
+  </div>
 
-  <section class="profile" id="bio">
-    <img src="img/profile.jpg" alt="Eigo Sato">
-    <p>東京外国語大学国際日本学部卒業。東京音楽大学指揮研修生修了。 4歳でヴァイオリンを始め、ソロ・室内楽での演奏に加え、これまでにSeikei String Orchestra、東京外国語大学管弦楽団、VariOrchestraのコンサートマスターを務めた。中学生の頃から混声合唱や弦楽オーケストラなどを指揮し、東京外国語大学在学中に東京音楽大学指揮科研修生として本格的に指揮を学び始める。Bach International Music Competition UK2024で第1位、GYMC2024 CRit. Max Bruch International Competition2024 でPlatinum Prize. WBMC2024で第1位（いずれも指揮部門）。 2020年、都内の音楽大学出身者を中心に呼びかけ、VariOrchestraを設立。演奏会の企画・運営、演奏を行う。定期演奏会においてコンサートマスターとして交響曲を弾き振りし、第3回定期演奏会では協奏曲のソリストを務めた。さらに特別公演ではベートーヴェンやブラームス、モーツァルト、シューベルト等の交響曲を指揮。HIP（Historically informed performance/歴史的知識に基づく演奏）の解釈を取り入れた新鮮な演奏が好評を博し、注目を集めている。 その他中高生のオーケストラの指導や、アマチュアオーケストラを指揮、またカズオ・イシグロ原作「遠い山なみの光」では広瀬すず氏への演奏・所作指導を行う。ヴァイオリンでは東久留米市第15回みんなのクラシックコンサート等に出演。 これまでに、ヴァイオリンを伊藤亮太郎、有働一美、大塚杏奈、白瀬ゆりの各氏に、指揮を増井信貴氏に師事。音楽以外の分野においても、総合コンサルティングファームでの大企業向けビジネス・業務改革支援を行いつつ、オンライン英語塾「TUFLINGUAL」の代表を務めるなど活動の範囲を広げている。</p>
+  <section id="bio">
+    <h2>Biography</h2>
+    <p>東京外国語大学国際日本学部卒業。東京音楽大学指揮研修生修了。 4歳でヴァイオリンを始め、ソロ・室内楽での演奏に加え、これまでにSeikei String Orchestra、東京外国語大学管弦楽団、VariOrchestraのコンサートマスターを務めた。中学生の頃から混声合唱や弦楽オーケストラなどを指揮し、東京外国語大学在学中に東京音楽大学指揮科研修生として本格的に指揮を学び始める。Bach International Music Competition UK2024で第1位、GYMC2024 CRit. Max Bruch International Competition2024 でPlatinum Prize. WBMC2024で第1位（いずれも指揮部門）。 2020年、都内の音楽大学出身者を中心に呼びかけ、VariOrchestraを設立。演奏会の企画・運営、演奏を行う。定期演奏会においてコンサートマスターとして交響曲を弾き振りし、第3回定期演奏会では協奏曲のソリストを務めた。さらに特別公演ではベートーヴェンやブラームス、モーツァルト、シューベルト等の交響曲を指揮。HIP（Historically informed performance/歴史的知識に基づく演奏）の解釈を取り入れた新鮮な演奏が好評を博し、注目を集めている。 その他中高生のオーケストラの指導や、アマチュアオーケストラを指揮、またカズオ・イシグロ原作「遠い山なみの光」では広瀬すず氏への演奏・所作指導を行う。ヴァイオリンでは東久留米市第15回みんなのクラシックコンサート等に出演。 これまでに、ヴァイオリンを伊藤亮太郎、有働一美、大塚杏奈、白瀬ゆりの各氏に、指揮を増井信貴氏に師事。音楽以外の分野においても、総合コンサルティングファームでの大企業向けビジネス・業務改革支援を行いつつ、オンライン英語塾「TUFLINGUAL」の代表を務めるなど活動の範囲を広げている。
+    </p>
   </section>
 
   <section id="photos">
     <h2>Photos</h2>
     <div class="gallery">
-      <img src="img/concert.jpg" alt="Concert">
-      <img src="img/event.jpg" alt="Event">
-      <img src="img/reading.jpg" alt="Reading">
-      <img src="img/stainedglass.jpg" alt="Stained Glass">
+      <img src="img/concert.jpg">
+      <img src="img/event.jpg">
+      <img src="img/stainedglass.jpg">
     </div>
   </section>
 
   <section id="videos">
     <h2>Videos</h2>
     <div class="videos">
-      <iframe src="https://www.youtube.com/embed/tssEzKuBm8w" title="Mozart" allowfullscreen></iframe>
-      <iframe src="https://www.youtube.com/embed/7GpPmL6eCuM" title="Brahms" allowfullscreen></iframe>
+      <iframe src="https://www.youtube.com/embed/tssEzKuBm8w" allowfullscreen></iframe>
+      <iframe src="https://www.youtube.com/embed/7GpPmL6eCuM" allowfullscreen></iframe>
     </div>
   </section>
 
   <section id="schedule">
     <h2>Schedule</h2>
-    <table class="schedule-table">
-      <tr><th>日付</th><th>イベント</th></tr>
-      <tr><td>8/11</td><td>カーザクラシカ 室内楽コンサート</td></tr>
-      <tr><td>9/20</td><td>Legame String Orchestra（指揮）</td></tr>
-      <tr><td>9/21</td><td>帝国ホテル（非公開イベント出演）</td></tr>
-      <tr><td>9/28</td><td>弦楽トリオコンサート @紀尾井町コンサートサロン</td></tr>
-      <tr><td>11/1</td><td>VariOrchestra×東京外国語大学（共催）</td></tr>
-      <tr><td>12/20</td><td>coming soon</td></tr>
-      <tr><td>3/31</td><td>coming soon</td></tr>
-    </table>
+    <div class="schedule-list">
+      <div class="schedule-item"><strong>8/11</strong>　カーザクラシカ 室内楽コンサート</div>
+      <div class="schedule-item"><strong>9/20</strong>　Legame String Orchestra（指揮）</div>
+      <div class="schedule-item"><strong>9/21</strong>　帝国ホテル（非公開イベント出演）</div>
+      <div class="schedule-item"><strong>9/28</strong>　弦楽トリオコンサート @紀尾井町コンサートサロン</div>
+      <div class="schedule-item"><strong>11/1</strong>　VariOrchestra×東京外国語大学（共催）</div>
+      <div class="schedule-item"><strong>12/20</strong>　coming soon</div>
+      <div class="schedule-item"><strong>3/31</strong>　coming soon</div>
+    </div>
   </section>
 
-  <footer class="contact">
+  <footer>
     <p>Contact: <a href="mailto:shostako315@gmail.com">shostako315@gmail.com</a></p>
     <p>&copy; 2025 Eigo Sato. All Rights Reserved.</p>
   </footer>
+
+  <script>
+    // Intersection Observer for section fade-in
+    const sections = document.querySelectorAll('section');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('show');
+        }
+      });
+    }, { threshold: 0.1 });
+
+    sections.forEach(sec => observer.observe(sec));
+  </script>
 </body>
 </html>
