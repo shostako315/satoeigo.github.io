@@ -1,260 +1,454 @@
-/* Reset & base */
-* { box-sizing: border-box; margin: 0; padding: 0; }
-body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  line-height: 1.75;
-  color: #1a1a1a;
-  background-color: #fff;
-}
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>佐藤瑛吾オフィシャルサイト</title>
+  <style>
+    /* === 統合CSS (提供されたCSSをベースに調整) === */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      line-height: 1.75;
+      color: #1a1a1a;
+      background-color: #fff;
+    }
 
-/* Header Hero */
-header {
-  position: relative;
-  text-align: center;
-  color: white;
-}
-header img {
-  width: 100%;
-  height: 100vh;
-  object-fit: cover;
-}
-header .text {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  text-shadow: 2px 2px 10px rgba(0,0,0,0.6);
-  padding: 0 1rem;
-  white-space: nowrap;
-}
-header .text h1 {
-  font-size: 3.5rem;
-  font-weight: 600;
-}
-header .text p {
-  font-size: 1.3rem;
-  opacity: 0.9;
-}
+    /* Header Hero */
+    header {
+      position: relative;
+      text-align: center;
+      color: white;
+    }
+    header img {
+      width: 100%;
+      height: 100vh;
+      object-fit: cover;
+    }
+    header .hero-content {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-shadow: 2px 2px 10px rgba(0,0,0,0.6);
+      padding: 0 1rem;
+    }
+    header .hero-content h1 {
+      font-size: 3.5rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    header .hero-content p {
+      font-size: 1.3rem;
+      opacity: 0.9;
+    }
 
-/* Sections */
-section {
-  padding: 6rem 1rem;
-  max-width: 1000px;
-  margin: auto;
-}
-section:nth-of-type(even) {
-  background-color: #f9f9f9;
-}
+    /* Navigation */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      z-index: 1000;
+      padding: 1rem 0;
+      transform: translateY(-100%);
+      transition: transform 0.3s ease;
+    }
+    nav.visible {
+      transform: translateY(0);
+    }
+    nav ul {
+      display: flex;
+      justify-content: center;
+      list-style: none;
+      gap: 2rem;
+    }
+    nav a {
+      color: #1a1a1a;
+      text-decoration: none;
+      font-weight: 500;
+      position: relative;
+    }
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: #e74c3c;
+      transition: width 0.3s ease;
+    }
+    nav a:hover::after,
+    nav a.active::after {
+      width: 100%;
+    }
 
-/* Profile section */
-.profile {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 2rem;
-  align-items: center;
-  justify-content: center;
-}
-.profile img {
-  max-width: 300px;
-  width: 100%;
-  border-radius: 16px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-}
-.profile p {
-  flex: 1;
-  font-size: 1.05rem;
-  min-width: 280px;
-  line-height: 1.75;
-}
+    /* Sections */
+    section {
+      padding: 6rem 1rem;
+      max-width: 1000px;
+      margin: auto;
+    }
+    section:nth-of-type(even) {
+      background-color: #f9f9f9;
+    }
 
-/* Gallery section */
-.gallery {
-  overflow-x: auto;
-  white-space: nowrap;
-  padding: 1rem 0;
-}
-.gallery img {
-  height: 200px;
-  margin-right: 1rem;
-  border-radius: 12px;
-  display: inline-block;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-}
+    /* Profile section */
+    .profile-content {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      align-items: center;
+      justify-content: center;
+    }
+    .profile-content img {
+      max-width: 300px;
+      width: 100%;
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    }
+    .bio-text {
+      flex: 1;
+      font-size: 1.05rem;
+      min-width: 280px;
+      line-height: 1.75;
+    }
 
-/* Videos */
-.videos h2 {
-  text-align: center;
-  font-size: 2rem;
-  margin-bottom: 2rem;
-}
-.video-scroll {
-  overflow-x: auto;
-  display: flex;
-  gap: 2rem;
-  scroll-snap-type: x mandatory;
-  padding-bottom: 1rem;
-}
-.video-scroll iframe {
-  min-width: 320px;
-  max-width: 600px;
-  flex-shrink: 0;
-  height: 350px;
-  scroll-snap-align: center;
-  border-radius: 12px;
-  box-shadow: 0 6px 20px rgba(0,0,0,0.1);
-  border: none;
-}
+    /* Schedule section */
+    .schedule {
+      max-width: 900px;
+      margin: auto;
+    }
+    .schedule h2 {
+      font-size: 2rem;
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+    .schedule-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+    .schedule-item {
+      display: flex;
+      align-items: center;
+      padding: 1.2rem;
+      border-radius: 12px;
+      background-color: #f5f5f5;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+      transition: all 0.3s ease;
+    }
+    .schedule-item:hover {
+      background-color: #eaeaea;
+      transform: translateY(-2px);
+    }
+    .schedule-item .date {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #2d2d2d;
+      width: 80px;
+      flex-shrink: 0;
+    }
+    .schedule-item .details {
+      flex: 1;
+    }
+    .schedule-item .details h3 {
+      margin: 0 0 0.5rem;
+      font-size: 1.1rem;
+    }
+    .schedule-item .btn {
+      display: inline-block;
+      background: #5f4dee;
+      color: white;
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      text-decoration: none;
+      font-size: 0.9rem;
+    }
+    .schedule-item .btn:hover {
+      background: #4a3ecc;
+    }
 
-/* Footer */
-.contact {
-  text-align: center;
-  padding: 2rem 1rem;
-  background-color: #fafafa;
-  font-size: 0.9rem;
-  color: #666;
-}
-.contact a {
-  color: #1a1a1a;
-  text-decoration: none;
-  font-weight: 500;
-}
-.contact a:hover {
-  text-decoration: underline;
-}
+    /* Videos section */
+    .videos h2 {
+      text-align: center;
+      font-size: 2rem;
+      margin-bottom: 2rem;
+    }
+    .video-scroll {
+      overflow-x: auto;
+      display: flex;
+      gap: 2rem;
+      scroll-snap-type: x mandatory;
+      padding-bottom: 1rem;
+    }
+    .video-scroll iframe {
+      min-width: 320px;
+      max-width: 600px;
+      flex-shrink: 0;
+      height: 350px;
+      scroll-snap-align: center;
+      border-radius: 12px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+      border: none;
+    }
 
-/* Language Switch */
-.lang-switch {
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-}
-.lang-switch a {
-  color: white;
-  font-weight: bold;
-  text-decoration: none;
-  margin-left: 1rem;
-  background: rgba(0,0,0,0.4);
-  padding: 0.4rem 0.8rem;
-  border-radius: 4px;
-}
-.lang-switch a:hover {
-  background: rgba(0,0,0,0.6);
-}
+    /* Photos section */
+    .gallery {
+      overflow-x: auto;
+      white-space: nowrap;
+      padding: 1rem 0;
+    }
+    .gallery img {
+      height: 200px;
+      margin-right: 1rem;
+      border-radius: 12px;
+      display: inline-block;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    }
 
-/* Responsive */
-@media (max-width: 768px) {
-  header .text h1 {
-    font-size: 2rem;
-  }
-  header .text p {
-    font-size: 1rem;
-  }
-  .profile {
-    flex-direction: column;
-  }
-  .gallery img {
-    height: 140px;
-  }
-  .video-scroll iframe {
-    height: 220px;
-    min-width: 90%;
-  }
-}
+    /* Contact section */
+    .contact-form {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+    .form-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+    }
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      padding: 0.8rem;
+      border: 2px solid #e0e0e0;
+      border-radius: 8px;
+      font-size: 1rem;
+      transition: border-color 0.3s ease;
+    }
+    .form-group input:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: #5f4dee;
+    }
+    .submit-btn {
+      width: 100%;
+      padding: 1rem;
+      background: #e74c3c;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    .submit-btn:hover {
+      background: #c0392b;
+    }
 
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 2rem 1rem;
+      background-color: #fafafa;
+      font-size: 0.9rem;
+      color: #666;
+    }
 
-/* === Schedule Section (追加分) === */
-.schedule {
-  padding: 4rem 1rem;
-  max-width: 900px;
-  margin: auto;
-}
-.schedule h2 {
-  font-size: 2rem;
-  margin-bottom: 2rem;
-  text-align: center;
-}
-.schedule-list {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-}
-.schedule-item {
-  display: flex;
-  align-items: center;
-  padding: 1.2rem;
-  border-radius: 12px;
-  background-color: #f5f5f5;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-  transition: all 0.3s ease;
-}
-.schedule-item:hover {
-  background-color: #eaeaea;
-  transform: translateY(-2px);
-}
-.schedule-item .date {
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: #2d2d2d;
-  width: 80px;
-  flex-shrink: 0;
-}
-.schedule-item .details {
-  flex: 1;
-}
-.schedule-item .details h3 {
-  margin: 0 0 0.5rem;
-  font-size: 1.1
+    /* Responsive */
+    @media (max-width: 768px) {
+      header .hero-content h1 {
+        font-size: 2rem;
+      }
+      header .hero-content p {
+        font-size: 1rem;
+      }
+      .profile-content {
+        flex-direction: column;
+      }
+      .gallery img {
+        height: 140px;
+      }
+      .video-scroll iframe {
+        height: 220px;
+        min-width: 90%;
+      }
+      .schedule-item {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .schedule-item .date {
+        margin-bottom: 0.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="img/opera.jpg" alt="ヘッダー背景">
+    <div class="hero-content">
+      <h1>佐藤瑛吾</h1>
+      <p>Official Website</p>
+    </div>
+  </header>
 
-.schedule-list {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-  margin-top: 2rem;
-}
-.schedule-item {
-  display: flex;
-  align-items: center;
-  background: #f5f5f5;
-  padding: 1.2rem 1.5rem;
-  border-radius: 16px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-  flex-wrap: wrap;
-}
-.schedule-item .date {
-  font-size: 1.5rem;
-  font-weight: 700;
-  margin-right: 1.5rem;
-  min-width: 70px;
-  text-align: center;
-}
-.schedule-item .details {
-  flex: 1;
-}
-.schedule-item .details h3 {
-  margin-bottom: 0.6rem;
-  font-size: 1.1rem;
-  font-weight: bold;
-}
-.schedule-item .btn {
-  display: inline-block;
-  background: #5f4dee;
-  color: white;
-  padding: 0.5rem 1rem;
-  border-radius: 6px;
-  text-decoration: none;
-  font-size: 0.9rem;
-}
-.schedule-item .btn:hover {
-  background: #4a3ecc;
-}
+  <nav id="nav">
+    <ul>
+      <li><a href="#bio">Biography</a></li>
+      <li><a href="#schedule">Schedule</a></li>
+      <li><a href="#videos">Videos</a></li>
+      <li><a href="#photos">Photos</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
 
-/* Responsive fix */
-@media (max-width: 600px) {
-  .schedule-item {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-  .schedule-item .date {
-    margin-bottom: 0.5rem;
-  }
-}
+  <section id="bio">
+    <h2>Biography</h2>
+    <div class="profile-content">
+      <img src="img/profile.jpg" alt="佐藤瑛吾プロフィール写真">
+      <div class="bio-text">
+        <p>東京外国語大学国際日本学部卒業。東京音楽大学指揮研修生修了。4歳でヴァイオリンを始め、ソロ・室内楽での演奏に加え、これまでにSeikei String Orchestra、東京外国語大学管弦楽団、VariOrchestraのコンサートマスターを務めた。</p>
+        <p>中学生の頃から混声合唱や弦楽オーケストラなどを指揮し、東京外国語大学在学中に東京音楽大学指揮科研修生として本格的に指揮を学び始める。国内外の音楽祭・コンクール等にて受賞歴多数。</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="schedule" class="schedule">
+    <h2>Schedule</h2>
+    <div class="schedule-list">
+      <div class="schedule-item" onclick="openSchedule('0811')">
+        <div class="date">8/11</div>
+        <div class="details">
+          <h3>カーザクラシカ 室内楽コンサート</h3>
+          <p>時間: 18:00開場 / 19:00開演</p>
+        </div>
+        <a href="schedule/0811.html" class="btn">詳細</a>
+      </div>
+      <div class="schedule-item" onclick="openSchedule('0920')">
+        <div class="date">9/20</div>
+        <div class="details">
+          <h3>Legame String Orchestra（指揮）</h3>
+          <p>場所: 東京文化会館</p>
+        </div>
+        <a href="schedule/0920.html" class="btn">詳細</a>
+      </div>
+      <div class="schedule-item" onclick="openSchedule('0921')">
+        <div class="date">9/21</div>
+        <div class="details">
+          <h3>帝国ホテル（非公開イベント出演）</h3>
+          <p>プライベートイベント</p>
+        </div>
+        <a href="schedule/0921.html" class="btn">詳細</a>
+      </div>
+      <div class="schedule-item" onclick="openSchedule('0928')">
+        <div class="date">9/28</div>
+        <div class="details">
+          <h3>紀尾井町コンサートサロン 弦楽トリオ</h3>
+          <p>曲目: ベートーヴェン「弦楽三重奏曲」</p>
+        </div>
+        <a href="schedule/0928.html" class="btn">詳細</a>
+      </div>
+      <div class="schedule-item" onclick="openSchedule('1101')">
+        <div class="date">11/1</div>
+        <div class="details">
+          <h3>VariOrchestra × 東京外国語大学（共催）</h3>
+          <p>学生限定コンサート</p>
+        </div>
+        <a href="schedule/1101.html" class="btn">詳細</a>
+      </div>
+      <div class="schedule-item">
+        <div class="date">12/20</div>
+        <div class="details">
+          <h3>Coming Soon</h3>
+          <p>詳細決定次第公開</p>
+        </div>
+        <span class="btn" style="background:#aaa; cursor:default">準備中</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="videos" class="videos">
+    <h2>Videos</h2>
+    <div class="video-scroll">
+      <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID" allowfullscreen></iframe>
+      <!-- 追加のビデオがあればここに -->
+    </div>
+  </section>
+
+  <section id="photos">
+    <h2>Photos</h2>
+    <div class="gallery">
+      <img src="img/concert.jpg" alt="コンサート写真">
+      <img src="img/event.jpg" alt="イベント写真">
+      <img src="img/reading.jpg" alt="読書写真">
+      <img src="img/stainedglass.jpg" alt="ステンドグラス写真">
+      <img src="img/top_orchestra.jpg" alt="オーケストラ写真">
+    </div>
+  </section>
+
+  <section id="contact">
+    <h2>Contact</h2>
+    <form class="contact-form">
+      <div class="form-group">
+        <label for="name">お名前</label>
+        <input type="text" id="name" name="name" required>
+      </div>
+      <div class="form-group">
+        <label for="email">メールアドレス</label>
+        <input type="email" id="email" name="email" required>
+      </div>
+      <div class="form-group">
+        <label for="message">メッセージ</label>
+        <textarea id="message" name="message" rows="5" required></textarea>
+      </div>
+      <button type="submit" class="submit-btn">送信</button>
+    </form>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Eigo Sato Official Website. All Rights Reserved.</p>
+  </footer>
+
+  <script>
+    // ナビゲーション制御
+    window.addEventListener('scroll', () => {
+      const nav = document.getElementById('nav');
+      nav.classList.toggle('visible', window.scrollY > 100);
+      
+      // アクティブリンク更新
+      const sections = document.querySelectorAll('section');
+      const navLinks = document.querySelectorAll('nav a');
+      
+      let current = '';
+      sections.forEach(section => {
+        if (window.scrollY >= section.offsetTop - 200) {
+          current = section.getAttribute('id');
+        }
+      });
+      
+      navLinks.forEach(link => {
+        link.classList.toggle('active', link.getAttribute('href') === `#${current}`);
+      });
+    });
+
+    // スケジュール詳細ページを開く
+    function openSchedule(date) {
+      window.open(`schedule/${date}.html`, '_blank');
+    }
+
+    // フォーム送信処理
+    document.querySelector('.contact-form').addEventListener('submit', (e) => {
+      e.preventDefault();
+      alert('お問い合わせありがとうございます。後ほどご連絡いたします。');
+      e.target.reset();
+    });
+  </script>
+</body>
+</html>
