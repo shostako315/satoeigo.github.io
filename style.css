@@ -160,3 +160,47 @@ section:nth-of-type(even) {
     min-width: 90%;
   }
 }
+
+
+/* === Schedule Section (追加分) === */
+.schedule {
+  padding: 4rem 1rem;
+  max-width: 900px;
+  margin: auto;
+}
+.schedule h2 {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+.schedule-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+.schedule-item {
+  display: flex;
+  align-items: center;
+  padding: 1.2rem;
+  border-radius: 12px;
+  background-color: #f5f5f5;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+  transition: all 0.3s ease;
+}
+.schedule-item:hover {
+  background-color: #eaeaea;
+  transform: translateY(-2px);
+}
+.schedule-item .date {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #2d2d2d;
+  width: 80px;
+  flex-shrink: 0;
+}
+.schedule-item .details {
+  flex: 1;
+}
+.schedule-item .details h3 {
+  margin: 0 0 0.5rem;
+  font-size: 1.1
