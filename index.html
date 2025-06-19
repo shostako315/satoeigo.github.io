@@ -6,7 +6,7 @@
   <title>佐藤瑛吾オフィシャルサイト</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
   <style>
-    /* --- ここからCSS（デザインの設定）--- */
+    /* --- 基本デザイン --- */
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -29,15 +29,20 @@
       width: 100%;
       height: 100%;
       background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5));
+      z-index: 1;
     }
+    /* ▼▼▼ ここが新しいアニメーションと画像 ▼▼▼ */
     .hero-background img {
       width: 100%;
       height: 100%;
       object-fit: cover;
       opacity: 0;
-      animation: fadeInImage 2s ease-out 0.5s forwards;
+      animation: fadeInImage 1.8s ease-out forwards;
     }
-    @keyframes fadeInImage { from { opacity: 0; transform: scale(1.1); } to { opacity: 1; transform: scale(1); } }
+    @keyframes fadeInImage {
+      from { opacity: 0; transform: scale(1.05);}
+      to { opacity: 1; transform: scale(1);}
+    }
     .hero-content {
       position: relative;
       z-index: 2;
@@ -46,26 +51,32 @@
       max-width: 800px;
       padding: 0 2rem;
     }
+    .hero-content h1, .hero-content .subtitle {
+      opacity: 0;
+      animation: fadeInUp 1.5s ease-out forwards;
+    }
     .hero-content h1 {
+      animation-delay: 1.2s;
       font-family: 'Playfair Display', serif;
       font-size: clamp(3rem, 8vw, 6rem);
       font-weight: 300;
       margin-bottom: 1rem;
-      opacity: 0;
-      animation: fadeInUp 1.5s ease-out 1s forwards;
       letter-spacing: 0.02em;
       text-shadow: 2px 2px 20px rgba(0, 0, 0, 0.7);
     }
-    @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
     .hero-content .subtitle {
+      animation-delay: 1.5s;
       font-size: clamp(1.2rem, 3vw, 2rem);
       font-weight: 300;
       opacity: 0.9;
       margin-bottom: 2rem;
-      opacity: 0;
-      animation: fadeInUp 1.5s ease-out 1.3s forwards;
       letter-spacing: 0.1em;
     }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px);}
+      to { opacity: 1; transform: translateY(0);}
+    }
+    /* --- ナビゲーション --- */
     nav {
       position: fixed;
       top: 0;
@@ -203,9 +214,34 @@
       letter-spacing: 0.05em;
     }
     .schedule-item .btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(44, 44, 44, 0.3); }
-    .videos-section { background: #2c2c2c; color: #fff; padding: 8rem 0; overflow: hidden; }
-    .videos-section h2 { color: #fff; }
-    .videos-section h2::after { background: linear-gradient(135deg, #d4af37 0%, #f4e7c7 100%); }
+
+    /* ▼▼▼ 写真・動画タイトルの装飾とスペース調整 ▼▼▼ */
+    #photos h2, #videos h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 3rem;
+      font-weight: 600;
+      color: #d4af37;
+      text-align: center;
+      margin-bottom: 3rem;
+      letter-spacing: 0.15em;
+      position: relative;
+      padding-bottom: 1rem;
+      text-shadow: 0 2px 8px #fff8;
+    }
+    #photos h2::after, #videos h2::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 120px;
+      height: 4px;
+      background: linear-gradient(90deg, #d4af37, #f4e7c7);
+      border-radius: 2px;
+    }
+    #photos, #videos { padding-top: 6rem; padding-bottom: 6rem; }
+
+    .videos-section { background: #2c2c2c; color: #fff; padding: 6rem 0; overflow: hidden; }
     .videos-carousel {
       display: flex;
       gap: 2rem;
@@ -312,14 +348,13 @@
       nav ul { gap: 1.5rem; padding: 0 1rem; }
       .schedule-item .details h3 { font-size: 1rem; }
     }
-    /* --- ここまでCSS --- */
   </style>
 </head>
 <body>
-  <!-- ヘッダー画像とタイトル -->
+  <!-- ▼▼▼ ヘッダー（最初の画面の後ろにtop_orchestra.jpgを使います） ▼▼▼ -->
   <header>
     <div class="hero-background">
-      <img src="img/top_orchestrated.jpg" alt="佐藤瑛吾 オーケストラ">
+      <img src="img/top_orchestra.jpg" alt="佐藤瑛吾 オーケストラ">
     </div>
     <div class="hero-content">
       <h1>佐藤瑛吾</h1>
@@ -327,7 +362,7 @@
     </div>
   </header>
 
-  <!-- ナビゲーション -->
+  <!-- ▼▼▼ ナビゲーション ▼▼▼ -->
   <nav id="nav">
     <ul>
       <li><a href="#bio">Biography</a></li>
@@ -338,7 +373,7 @@
     </ul>
   </nav>
 
-  <!-- ここがプロフィール（Biography）セクションです -->
+  <!-- ▼▼▼ プロフィール（Biography） ▼▼▼ -->
   <section id="bio">
     <h2>Biography</h2>
     <div class="profile-content">
@@ -353,7 +388,7 @@
     </div>
   </section>
 
-  <!-- スケジュール -->
+  <!-- ▼▼▼ スケジュール ▼▼▼ -->
   <section id="schedule">
     <h2>Schedule</h2>
     <div class="schedule-list">
@@ -408,9 +443,9 @@
     </div>
   </section>
 
-  <!-- 動画 -->
+  <!-- ▼▼▼ 動画 ▼▼▼ -->
   <section id="videos" class="videos-section">
-    <h2>Videos</h2>
+    <h2>Videos / 動画ギャラリー</h2>
     <div class="videos-carousel">
       <div class="video-item">
         <iframe src="https://www.youtube.com/embed/d5s7aulgFFc" allowfullscreen></iframe>
@@ -430,9 +465,9 @@
     </div>
   </section>
 
-  <!-- 写真 -->
+  <!-- ▼▼▼ 写真 ▼▼▼ -->
   <section id="photos">
-    <h2>Photos</h2>
+    <h2>Photos / フォトギャラリー</h2>
     <div class="photos-carousel">
       <div class="photo-item">
         <img src="img/concert.jpg" alt="コンサート写真">
@@ -452,7 +487,7 @@
     </div>
   </section>
 
-  <!-- お問い合わせ -->
+  <!-- ▼▼▼ お問い合わせ ▼▼▼ -->
   <section id="contact">
     <h2>Contact</h2>
     <form class="contact-form">
@@ -472,7 +507,7 @@
     </form>
   </section>
 
-  <!-- フッター -->
+  <!-- ▼▼▼ フッター ▼▼▼ -->
   <footer>
     <div class="footer-content">
       <div class="footer-logo">佐藤瑛吾</div>
@@ -480,7 +515,7 @@
     </div>
   </footer>
 
-  <!-- JavaScript（動きやフォーム送信） -->
+  <!-- ▼▼▼ JavaScript（動きやフォーム送信） ▼▼▼ -->
   <script>
     document.addEventListener('DOMContentLoaded', function() {
       // ナビゲーション制御
