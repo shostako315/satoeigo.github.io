@@ -4,205 +4,112 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>佐藤瑛吾オフィシャルサイト</title>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/scrollReveal.js/4.0.9/scrollreveal.min.js"></script>
-  <style>
-    body {
-      font-family: 'Noto Serif JP', serif;
-      margin: 0;
-      padding: 0;
-      background: #fff;
-      color: #333;
-    }
-    nav {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1rem;
-      background-color: white;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    }
-    .logo {
-      font-weight: bold;
-      font-size: 1.2rem;
-    }
-    .hamburger {
-      display: none;
-      flex-direction: column;
-      gap: 5px;
-      cursor: pointer;
-    }
-    .hamburger div {
-      width: 25px;
-      height: 3px;
-      background: #333;
-    }
-    .menu {
-      list-style: none;
-      display: flex;
-      gap: 1rem;
-    }
-    .menu a {
-      text-decoration: none;
-      color: #333;
-    }
-    @media (max-width: 768px) {
-      .hamburger { display: flex; }
-      .menu {
-        position: absolute;
-        top: 60px;
-        right: 1rem;
-        background: white;
-        border-radius: 8px;
-        display: none;
-        flex-direction: column;
-        gap: 1rem;
-        padding: 1rem;
-        box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-      }
-      .menu.active { display: flex; animation: fadeIn 0.3s ease; }
-      @keyframes fadeIn {
-        from { opacity: 0; transform: translateY(-10px); }
-        to { opacity: 1; transform: translateY(0); }
-      }
-    }
-    header {
-      height: 100vh;
-      background: url('img/top_orchestra.jpg') center/cover no-repeat;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-    .hero {
-      background-color: rgba(0,0,0,0.6);
-      padding: 2rem;
-      border-radius: 10px;
-      color: white;
-      text-align: center;
-      animation: fadeIn 2s ease-out;
-    }
-    .section {
-      padding: 3rem 1rem;
-      max-width: 900px;
-      margin: auto;
-    }
-    .gallery img {
-      width: 100%;
-      max-width: 250px;
-      border-radius: 8px;
-      margin: 0.5rem;
-    }
-    .schedule-list .event {
-      background: #f5f5f5;
-      padding: 1rem;
-      margin-bottom: 1rem;
-      border-radius: 8px;
-      display: flex;
-      flex-direction: column;
-    }
-    .schedule-list .event a {
-      margin-top: 0.5rem;
-      color: #0056cc;
-      text-decoration: none;
-    }
-    iframe {
-      width: 100%;
-      aspect-ratio: 16 / 9;
-      border: none;
-      border-radius: 8px;
-      margin-bottom: 2rem;
-    }
-    footer {
-      background: #eee;
-      text-align: center;
-      padding: 1rem;
-    }
-  </style>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <nav>
-    <div class="logo">佐藤瑛吾オフィシャルサイト</div>
-    <div class="hamburger" onclick="document.querySelector('.menu').classList.toggle('active')">
-      <div></div><div></div><div></div>
-    </div>
-    <ul class="menu">
-      <li><a href="#biography" onclick="closeMenu()">Biography</a></li>
-      <li><a href="#photos" onclick="closeMenu()">Photos</a></li>
-      <li><a href="#schedule" onclick="closeMenu()">Schedule</a></li>
-      <li><a href="#videos" onclick="closeMenu()">Videos</a></li>
-      <li><a href="#contact" onclick="closeMenu()">Contact</a></li>
-    </ul>
-  </nav>
-
-  <header>
-    <div class="hero">
+  <header class="hero">
+    <img src="img/top_orchestra.jpg" alt="トップ画像" class="hero-image">
+    <div class="hero-text">
       <h1>Eigo Sato</h1>
       <p>指揮者・ヴァイオリニスト・コンサルタント</p>
     </div>
   </header>
 
+  <nav class="navbar">
+    <div class="logo">佐藤瑛吾オフィシャルサイト</div>
+    <div class="language-switch"><a href="en.html">EN</a></div>
+    <div class="hamburger" onclick="toggleMenu()">
+      <div></div><div></div><div></div>
+    </div>
+    <ul class="nav-menu">
+      <li><a href="#biography">Biography</a></li>
+      <li><a href="#photos">Photos</a></li>
+      <li><a href="#schedule">Schedule</a></li>
+      <li><a href="#videos">Videos</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
   <section id="biography" class="section">
     <h2>Biography</h2>
-    <p>東京外国語大学国際日本学部卒業。東京音楽大学指揮研修生修了。 4歳でヴァイオリンを始め、ソロ・室内楽での演奏に加え、これまでにSeikei String Orchestra、東京外国語大学管弦楽団、VariOrchestraのコンサートマスターを務めた。中学生の頃から混声合唱や弦楽オーケストラなどを指揮し、東京外国語大学在学中に東京音楽大学指揮科研修生として本格的に指揮を学び始める。Bach International Music Competition UK2024で第1位、GYMC2024 CRit. Max Bruch International Competition2024 でPlatinum Prize. WBMC2024で第1位（いずれも指揮部門）。 2020年、都内の音楽大学出身者を中心に呼びかけ、VariOrchestraを設立。演奏会の企画・運営、演奏を行う。定期演奏会においてコンサートマスターとして交響曲を弾き振りし、第3回定期演奏会では協奏曲のソリストを務めた。さらに特別公演ではベートーヴェンやブラームス、モーツァルト、シューベルト等の交響曲を指揮。HIP（Historically informed performance/歴史的知識に基づく演奏）の解釈を取り入れた新鮮な演奏が好評を博し、注目を集めている。 その他中高生のオーケストラの指導や、アマチュアオーケストラを指揮、またカズオ・イシグロ原作「遠い山なみの光」では広瀬すず氏への演奏・所作指導を行う。ヴァイオリンでは東久留米市第15回みんなのクラシックコンサート等に出演。 これまでに、ヴァイオリンを伊藤亮太郎、有働一美、大塚杏奈、白瀬ゆりの各氏に、指揮を増井信貴氏に師事。音楽以外の分野においても、総合コンサルティングファームでの大企業向けビジネス・業務改革支援を行いつつ、オンライン英語塾「TUFLINGUAL」の代表を務めるなど活動の範囲を広げている。</p>
+    <img src="img/profile.jpg" class="bio-photo" alt="プロフィール写真">
+    <p>東京外国語大学国際日本学部卒業。東京音楽大学指揮研修生修了。4歳でヴァイオリンを始め、ソロ・室内楽での演奏に加え、これまでにSeikei String Orchestra、東京外国語大学管弦楽団、VariOrchestraのコンサートマスターを務めた。中学生の頃から混声合唱や弦楽オーケストラなどを指揮し、東京外国語大学在学中に東京音楽大学指揮科研修生として本格的に指揮を学び始める。Bach International Music Competition UK2024で第1位、GYMC2024 CRit. Max Bruch International Competition2024 でPlatinum Prize. WBMC2024で第1位（いずれも指揮部門）。2020年、都内の音楽大学出身者を中心に呼びかけ、VariOrchestraを設立。演奏会の企画・運営、演奏を行う。定期演奏会においてコンサートマスターとして交響曲を弾き振りし、第3回定期演奏会では協奏曲のソリストを務めた。さらに特別公演ではベートーヴェンやブラームス、モーツァルト、シューベルト等の交響曲を指揮。HIP（Historically informed performance/歴史的知識に基づく演奏）の解釈を取り入れた新鮮な演奏が好評を博し、注目を集めている。その他中高生のオーケストラの指導や、アマチュアオーケストラを指揮、またカズオ・イシグロ原作「遠い山なみの光」では広瀬すず氏への演奏・所作指導を行う。ヴァイオリンでは東久留米市第15回みんなのクラシックコンサート等に出演。これまでに、ヴァイオリンを伊藤亮太郎、有働一美、大塚杏奈、白瀬ゆりの各氏に、指揮を増井信貴氏に師事。音楽以外の分野においても、総合コンサルティングファームでの大企業向けビジネス・業務改革支援を行いつつ、オンライン英語塾「TUFLINGUAL」の代表を務めるなど活動の範囲を広げている。</p>
   </section>
 
   <section id="photos" class="section">
     <h2>Photos</h2>
     <div class="gallery">
-      <img src="img/photo1.jpg" alt="イベント写真1">
-      <img src="img/photo2.jpg" alt="イベント写真2">
+      <img src="img/concert.jpg" alt="Concert">
+      <img src="img/event.jpg" alt="Event">
+      <img src="img/opera.jpg" alt="Opera">
+      <img src="img/reading.jpg" alt="Reading">
+      <img src="img/stainedglass.jpg" alt="Stained Glass">
     </div>
   </section>
 
   <section id="schedule" class="section">
     <h2>Schedule</h2>
     <div class="schedule-list">
-      <div class="event">
-        <div>8/11 カーザクラシカ 室内楽コンサート</div>
-        <a href="schedule/0811.html">詳細はこちら</a>
+      <div class="schedule-item">
+        <strong>8/11</strong> カーザクラシカ 室内楽コンサート
+        <a href="schedule/0811.html">詳しくはこちら</a>
       </div>
-      <div class="event">
-        <div>9/20 Legame String Orchestra（指揮）</div>
-        <a href="schedule/0920.html">詳細はこちら</a>
+      <div class="schedule-item">
+        <strong>9/20</strong> Legame String Orchestra（指揮）
+        <a href="schedule/0920.html">詳しくはこちら</a>
       </div>
-      <!-- 以下省略 -->
+      <div class="schedule-item">
+        <strong>9/21</strong> 帝国ホテル（非公開イベント出演）
+        <a href="schedule/0921.html">詳しくはこちら</a>
+      </div>
+      <div class="schedule-item">
+        <strong>9/28</strong> 紀尾井町コンサートサロン 弦楽トリオ
+        <a href="schedule/0928.html">詳しくはこちら</a>
+      </div>
+      <div class="schedule-item">
+        <strong>11/1</strong> VariOrchestra × 東京外国語大学（共催）
+        <a href="schedule/1101.html">詳しくはこちら</a>
+      </div>
+      <div class="schedule-item">
+        <strong>12/20</strong> coming soon
+        <a href="schedule/1220.html">詳しくはこちら</a>
+      </div>
+      <div class="schedule-item">
+        <strong>3/31</strong> coming soon
+        <a href="schedule/0331.html">詳しくはこちら</a>
+      </div>
     </div>
   </section>
 
   <section id="videos" class="section">
     <h2>Videos</h2>
-    <iframe src="https://www.youtube.com/embed/tssEzKuBm8w" allowfullscreen></iframe>
-    <iframe src="https://www.youtube.com/embed/7GpPmL6eCuM" allowfullscreen></iframe>
+    <iframe src="https://www.youtube.com/embed/tssEzKuBm8w" title="Mozart" allowfullscreen></iframe>
+    <iframe src="https://www.youtube.com/embed/7GpPmL6eCuM" title="Brahms" allowfullscreen></iframe>
   </section>
 
   <section id="contact" class="section">
     <h2>Contact</h2>
     <form action="https://formsubmit.co/shostako315@gmail.com" method="POST">
-      <input type="text" name="name" placeholder="お名前" required><br>
-      <input type="email" name="email" placeholder="メールアドレス" required><br>
-      <textarea name="message" placeholder="お問い合わせ内容" rows="4" required></textarea><br>
+      <input type="text" name="name" placeholder="お名前" required>
+      <input type="email" name="email" placeholder="メールアドレス" required>
+      <textarea name="message" placeholder="お問い合わせ内容" required></textarea>
       <button type="submit">送信</button>
     </form>
   </section>
 
   <footer>
-    &copy; 2025 Eigo Sato
+    <p>&copy; 2025 Eigo Sato</p>
   </footer>
 
   <script>
-    function closeMenu() {
-      document.querySelector('.menu').classList.remove('active');
+    function toggleMenu() {
+      const menu = document.querySelector('.nav-menu');
+      menu.classList.toggle('active');
     }
-    ScrollReveal().reveal('.section', {
-      duration: 1000,
-      origin: 'bottom',
-      distance: '50px',
-      easing: 'ease-in-out',
-      reset: false
+    document.querySelectorAll('.nav-menu a').forEach(link => {
+      link.addEventListener('click', () => {
+        document.querySelector('.nav-menu').classList.remove('active');
+      });
     });
   </script>
 </body>
