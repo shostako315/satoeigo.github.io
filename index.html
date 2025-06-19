@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>佐藤瑛吾オフィシャルサイト</title>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/scrollReveal.js/4.0.9/scrollreveal.min.js"></script>
   <style>
     body {
@@ -13,26 +12,7 @@
       margin: 0;
       background-color: #fff;
       color: #333;
-    }
-    header {
-      position: relative;
-      text-align: center;
-      height: 100vh;
-      background: url('img/top_orchestra.jpg') center/cover no-repeat;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-    header .hero-text {
-      background-color: rgba(0,0,0,0.5);
-      padding: 2rem;
-      border-radius: 10px;
-      color: white;
-      animation: fadeIn 2s ease-out;
-    }
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
+      scroll-behavior: smooth;
     }
     nav {
       position: fixed;
@@ -59,28 +39,42 @@
       text-decoration: none;
       color: #333;
       font-weight: 500;
-      transition: opacity 0.3s ease;
     }
-    nav ul li a:hover {
-      opacity: 0.6;
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+    }
+    .hamburger div {
+      width: 25px;
+      height: 3px;
+      background: #333;
+      margin: 4px 0;
+    }
+    header {
+      position: relative;
+      text-align: center;
+      height: 100vh;
+      background: url('img/top_orchestra.jpg') center/cover no-repeat;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    header .hero-text {
+      background-color: rgba(0,0,0,0.5);
+      padding: 2rem;
+      border-radius: 10px;
+      color: white;
+      opacity: 0;
+      animation: fadeInMain 2s ease-out 0.5s forwards;
+    }
+    @keyframes fadeInMain {
+      to { opacity: 1; transform: translateY(0); }
     }
     .section {
       padding: 4rem 1rem;
       max-width: 1000px;
       margin: auto;
-    }
-    .schedule-table {
-      width: 100%;
-      border-collapse: collapse;
-      background-color: #f9f9f9;
-      border-radius: 10px;
-      overflow: hidden;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.05);
-    }
-    .schedule-table td, .schedule-table th {
-      padding: 1rem;
-      border-bottom: 1px solid #ddd;
-      font-size: 1rem;
     }
     .gallery {
       overflow-x: auto;
@@ -93,55 +87,91 @@
       margin-right: 1rem;
       border-radius: 10px;
       display: inline-block;
-      transition: transform 0.3s ease;
-    }
-    .gallery img:hover {
-      transform: scale(1.05);
     }
     iframe {
       width: 100%;
       max-width: 800px;
-      height: 450px;
-      border-radius: 10px;
+      height: auto;
+      aspect-ratio: 16 / 9;
       display: block;
       margin: 2rem auto;
+      border-radius: 10px;
+    }
+    .biography-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      align-items: flex-start;
+    }
+    .biography-container img {
+      max-width: 200px;
+      border-radius: 10px;
+    }
+    .schedule-table {
+      width: 100%;
+      border-collapse: collapse;
+      background-color: #f9f9f9;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+    }
+    .schedule-table td, .schedule-table th {
+      padding: 1rem;
+      border-bottom: 1px solid #ddd;
+    }
+    form {
+      max-width: 500px;
+      margin: 2rem auto;
+      display: flex;
+      flex-direction: column;
+    }
+    form input, form textarea {
+      padding: 0.5rem;
+      margin-bottom: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    form button {
+      padding: 0.5rem;
+      background: #333;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
     }
     footer {
       text-align: center;
       font-size: 0.9rem;
-      color: #666;
-      padding: 2rem 1rem;
+      padding: 2rem;
       border-top: 1px solid #ccc;
     }
     @media (max-width: 768px) {
       nav ul {
         display: none;
         flex-direction: column;
-        background: white;
         position: absolute;
         top: 60px;
         right: 10px;
+        background: #fff;
         padding: 1rem;
         border: 1px solid #ccc;
         border-radius: 10px;
       }
       nav ul.active {
         display: flex;
+        animation: slideDown 0.5s ease;
+      }
+      @keyframes slideDown {
+        from { transform: translateY(-10px); opacity: 0; }
+        to { transform: translateY(0); opacity: 1; }
       }
       .hamburger {
-        display: block;
-        cursor: pointer;
+        display: flex;
       }
-    }
-    .hamburger {
-      display: none;
-      flex-direction: column;
-      gap: 4px;
-    }
-    .hamburger div {
-      width: 25px;
-      height: 3px;
-      background: #333;
+      .biography-container {
+        flex-direction: column;
+        align-items: center;
+      }
     }
   </style>
 </head>
@@ -163,7 +193,7 @@
   <header>
     <div class="hero-text">
       <h1>Eigo Sato</h1>
-      <p>指揮者・ヴァイオリニスト・コンサルタント</p>
+      <p>指揮者・ヴァイオリニスト</p>
     </div>
   </header>
 
@@ -171,7 +201,7 @@
     <h2>Schedule</h2>
     <table class="schedule-table">
       <tr><td>8/11</td><td>カーザクラシカ 室内楽コンサート</td></tr>
-      <tr><td>9/20</td><td>Legame String Orchestra（指揮）</td></tr>
+      <tr><td>9/20</td><td>LegameStringOrchestra（指揮）</td></tr>
       <tr><td>9/21</td><td>帝国ホテル（非公開イベント出演）</td></tr>
       <tr><td>9/28</td><td>弦楽トリオコンサート @紀尾井町コンサートサロン</td></tr>
       <tr><td>11/1</td><td>VariOrchestra × 東京外国語大学（共催）</td></tr>
@@ -182,7 +212,10 @@
 
   <section id="biography" class="section">
     <h2>Biography</h2>
-    <p>東京外国語大学国際日本学部卒業。東京音楽大学指揮研修生修了。 4歳でヴァイオリンを始め、ソロ・室内楽での演奏に加え、これまでにSeikei String Orchestra、東京外国語大学管弦楽団、VariOrchestraのコンサートマスターを務めた。中学生の頃から混声合唱や弦楽オーケストラなどを指揮し、東京外国語大学在学中に東京音楽大学指揮科研修生として本格的に指揮を学び始める。Bach International Music Competition UK2024で第1位、GYMC2024 CRit. Max Bruch International Competition2024 でPlatinum Prize. WBMC2024で第1位（いずれも指揮部門）。 2020年、都内の音楽大学出身者を中心に呼びかけ、VariOrchestraを設立。演奏会の企画・運営、演奏を行う。定期演奏会においてコンサートマスターとして交響曲を弾き振りし、第3回定期演奏会では協奏曲のソリストを務めた。さらに特別公演ではベートーヴェンやブラームス、モーツァルト、シューベルト等の交響曲を指揮。HIP（Historically informed performance/歴史的知識に基づく演奏）の解釈を取り入れた新鮮な演奏が好評を博し、注目を集めている。 その他中高生のオーケストラの指導や、アマチュアオーケストラを指揮、またカズオ・イシグロ原作「遠い山なみの光」では広瀬すず氏への演奏・所作指導を行う。ヴァイオリンでは東久留米市第15回みんなのクラシックコンサート等に出演。 これまでに、ヴァイオリンを伊藤亮太郎、有働一美、大塚杏奈、白瀬ゆりの各氏に、指揮を増井信貴氏に師事。音楽以外の分野においても、総合コンサルティングファームでの大企業向けビジネス・業務改革支援を行いつつ、オンライン英語塾「TUFLINGUAL」の代表を務めるなど活動の範囲を広げている。</p>
+    <div class="biography-container">
+      <img src="img/profile.jpg" alt="Eigo Sato">
+      <p>東京外国語大学国際日本学部卒業。東京音楽大学指揮研修生修了。 4歳でヴァイオリンを始め、ソロ・室内楽での演奏に加え、これまでにSeikei String Orchestra、東京外国語大学管弦楽団、VariOrchestraのコンサートマスターを務めた。中学生の頃から混声合唱や弦楽オーケストラなどを指揮し、東京外国語大学在学中に東京音楽大学指揮科研修生として本格的に指揮を学び始める。Bach International Music Competition UK2024で第1位、GYMC2024 CRit. Max Bruch International Competition2024 でPlatinum Prize. WBMC2024で第1位（いずれも指揮部門）。 2020年、都内の音楽大学出身者を中心に呼びかけ、VariOrchestraを設立。演奏会の企画・運営、演奏を行う。定期演奏会においてコンサートマスターとして交響曲を弾き振りし、第3回定期演奏会では協奏曲のソリストを務めた。さらに特別公演ではベートーヴェンやブラームス、モーツァルト、シューベルト等の交響曲を指揮。HIP（Historically informed performance/歴史的知識に基づく演奏）の解釈を取り入れた新鮮な演奏が好評を博し、注目を集めている。 その他中高生のオーケストラの指導や、アマチュアオーケストラを指揮、またカズオ・イシグロ原作「遠い山なみの光」では広瀬すず氏への演奏・所作指導を行う。ヴァイオリンでは東久留米市第15回みんなのクラシックコンサート等に出演。 これまでに、ヴァイオリンを伊藤亮太郎、有働一美、大塚杏奈、白瀬ゆりの各氏に、指揮を増井信貴氏に師事。音楽以外の分野においても、総合コンサルティングファームでの大企業向けビジネス・業務改革支援を行いつつ、オンライン英語塾「TUFLINGUAL」の代表を務めるなど活動の範囲を広げている。</p>
+    </div>
   </section>
 
   <section id="photos" class="section">
@@ -198,12 +231,21 @@
 
   <section id="videos" class="section">
     <h2>Videos</h2>
-    <iframe src="https://www.youtube.com/embed/tssEzKuBm8w" title="Mozart" allowfullscreen></iframe>
-    <iframe src="https://www.youtube.com/embed/7GpPmL6eCuM" title="Brahms" allowfullscreen></iframe>
+    <iframe src="https://www.youtube.com/embed/tssEzKuBm8w" allowfullscreen></iframe>
+    <iframe src="https://www.youtube.com/embed/7GpPmL6eCuM" allowfullscreen></iframe>
+  </section>
+
+  <section id="contact" class="section">
+    <h2>Contact</h2>
+    <form action="mailto:shostako315@gmail.com" method="post" enctype="text/plain">
+      <input type="text" name="name" placeholder="お名前" required>
+      <input type="email" name="email" placeholder="メールアドレス" required>
+      <textarea name="message" placeholder="お問い合わせ内容" rows="5" required></textarea>
+      <button type="submit">送信</button>
+    </form>
   </section>
 
   <footer>
-    <p>Contact: <a href="mailto:shostako315@gmail.com">shostako315@gmail.com</a></p>
     <p>&copy; 2025 Eigo Sato. All Rights Reserved.</p>
   </footer>
 
