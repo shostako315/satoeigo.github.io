@@ -1,242 +1,170 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>佐藤瑛吾オフィシャルサイト</title>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP&display=swap" rel="stylesheet">
-  <link href="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.css" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.js"></script>
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <link rel="stylesheet" href="style.css" />
   <style>
     body {
-      font-family: 'Noto Serif JP', serif;
+      font-family: 'Helvetica Neue', sans-serif;
       margin: 0;
-      background-color: #fff;
-      color: #333;
+      padding: 0;
     }
     header {
       position: relative;
       text-align: center;
-      background: url('img/top_orchestra.jpg') center/cover no-repeat;
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      overflow: hidden;
     }
-    header .hero-text {
-      background-color: rgba(0, 0, 0, 0.6);
-      color: white;
-      padding: 2rem;
-      border-radius: 10px;
+    header img {
+      width: 100%;
+      height: auto;
+      object-fit: cover;
     }
     nav {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      background: rgba(255,255,255,0.9);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 0.8rem 1.5rem;
-      z-index: 999;
+      position: absolute;
+      top: 1rem;
+      left: 1rem;
     }
-    nav .logo {
-      font-weight: bold;
-      font-size: 1.2rem;
+    .menu {
+      display: none;
+      cursor: pointer;
     }
     nav ul {
       list-style: none;
+      margin: 0;
+      padding: 0;
       display: flex;
+      flex-direction: column;
       gap: 1rem;
     }
-    nav ul li a {
-      text-decoration: none;
-      color: #333;
-      font-weight: 500;
-    }
-    nav ul li a:hover {
-      opacity: 0.6;
-    }
-    .hamburger {
-      display: none;
-      flex-direction: column;
-      gap: 4px;
-      cursor: pointer;
-    }
-    .hamburger div {
-      width: 25px;
-      height: 3px;
-      background: #333;
-    }
-    @media (max-width: 768px) {
-      nav ul {
-        display: none;
-        position: absolute;
-        right: 10px;
-        top: 60px;
-        background: white;
-        padding: 1rem;
-        border-radius: 8px;
-        box-shadow: 0 2px 6px rgba(0,0,0,0.15);
-        flex-direction: column;
-      }
-      nav ul.active {
-        display: flex;
-      }
-      .hamburger {
-        display: flex;
-      }
-    }
     .section {
-      padding: 4rem 1rem;
-      max-width: 1000px;
-      margin: auto;
-    }
-    .bio-container {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-    .bio-container img {
-      max-width: 250px;
-      border-radius: 10px;
-      margin-bottom: 1rem;
-    }
-    .schedule-list {
-      background: #f5f5f5;
       padding: 1rem;
-      border-radius: 10px;
     }
     .schedule-item {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-bottom: 1px solid #ddd;
-      padding: 0.8rem 0;
+      background: #f5f5f5;
+      padding: 1rem;
+      margin: 0.5rem 0;
+      border-radius: 8px;
     }
-    .schedule-item a {
-      padding: 0.3rem 0.7rem;
+    .button {
+      display: inline-block;
+      padding: 0.4rem 0.8rem;
+      margin-top: 0.5rem;
       background: #444;
       color: #fff;
       border-radius: 6px;
       text-decoration: none;
     }
-    .gallery {
-      max-width: 90%;
-      margin: 0 auto;
+    iframe {
+      width: 100%;
+      max-width: 560px;
+      height: 315px;
+      border: none;
+    }
+    .carousel {
       display: flex;
       overflow-x: auto;
-      gap: 1rem;
       scroll-snap-type: x mandatory;
+      gap: 1rem;
+      padding: 1rem;
     }
-    .gallery img {
-      flex: 0 0 auto;
+    .carousel img {
       width: 300px;
       height: auto;
       border-radius: 10px;
-      scroll-snap-align: center;
+      scroll-snap-align: start;
+      object-fit: cover;
     }
-    iframe {
+    .profile-image {
+      max-width: 300px;
       width: 100%;
-      max-width: 800px;
-      height: 450px;
-      display: block;
-      margin: 2rem auto;
+      float: left;
+      margin: 0 1rem 1rem 0;
+      border-radius: 10px;
     }
     footer {
       text-align: center;
-      padding: 2rem;
+      padding: 1rem;
       background: #eee;
-      font-size: 0.9rem;
-    }
-    form {
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
-      max-width: 500px;
-      margin: auto;
-    }
-    form input, form textarea {
-      padding: 0.5rem;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-    }
-    form button {
-      padding: 0.6rem;
-      background-color: #444;
-      color: white;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
     }
   </style>
 </head>
 <body>
-  <nav>
-    <div class="logo">佐藤瑛吾オフィシャルサイト</div>
-    <div class="hamburger" onclick="toggleMenu()">
-      <div></div><div></div><div></div>
-    </div>
-    <ul>
-      <li><a href="#biography">Biography</a></li>
-      <li><a href="#photos">Photos</a></li>
-      <li><a href="#calendar">Schedule</a></li>
-      <li><a href="#videos">Videos</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
-  </nav>
-
   <header>
-    <div class="hero-text">
-      <h1>Eigo Sato</h1>
-      <p>指揮者・ヴァイオリニスト・コンサルタント</p>
-    </div>
+    <img src="img/top_orchestra.jpg" alt="Top Orchestra" />
+    <nav>
+      <div class="menu">☰</div>
+      <ul>
+        <li><a href="#biography">Biography</a></li>
+        <li><a href="#schedule">Schedule</a></li>
+        <li><a href="#videos">Videos</a></li>
+        <li><a href="#photos">Photos</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
   </header>
 
   <section id="biography" class="section">
     <h2>Biography</h2>
-    <div class="bio-container">
-      <img src="img/profile.jpg" alt="プロフィール">
-      <p>東京外国語大学国際日本学部卒業。東京音楽大学指揮研修生修了。4歳でヴァイオリンを始め、ソロ・室内楽での演奏に加え、これまでにSeikei String Orchestra、東京外国語大学管弦楽団、VariOrchestraのコンサートマスターを務めた。中学生の頃から混声合唱や弦楽オーケストラなどを指揮し、東京外国語大学在学中に東京音楽大学指揮科研修生として本格的に指揮を学び始める。Bach International Music Competition UK2024で第1位、GYMC2024 CRit. Max Bruch International Competition2024 でPlatinum Prize. WBMC2024で第1位（いずれも指揮部門）。2020年、都内の音楽大学出身者を中心に呼びかけ、VariOrchestraを設立。演奏会の企画・運営、演奏を行う。定期演奏会においてコンサートマスターとして交響曲を弾き振りし、第3回定期演奏会では協奏曲のソリストを務めた。さらに特別公演ではベートーヴェンやブラームス、モーツァルト、シューベルト等の交響曲を指揮。HIP（Historically informed performance/歴史的知識に基づく演奏）の解釈を取り入れた新鮮な演奏が好評を博し、注目を集めている。その他中高生のオーケストラの指導や、アマチュアオーケストラを指揮、またカズオ・イシグロ原作「遠い山なみの光」では広瀬すず氏への演奏・所作指導を行う。ヴァイオリンでは東久留米市第15回みんなのクラシックコンサート等に出演。これまでに、ヴァイオリンを伊藤亮太郎、有働一美、大塚杏奈、白瀬ゆりの各氏に、指揮を増井信貴氏に師事。音楽以外の分野においても、総合コンサルティングファームでの大企業向けビジネス・業務改革支援を行いつつ、オンライン英語塾「TUFLINGUAL」の代表を務めるなど活動の範囲を広げている。</p>
-    </div>
+    <img src="img/profile.jpg" alt="佐藤瑛吾" class="profile-image" />
+    <p>
+      東京外国語大学国際日本学部卒業。東京音楽大学指揮研修生修了。4歳でヴァイオリンを始め、ソロ・室内楽での演奏に加え、これまでにSeikei String Orchestra、東京外国語大学管弦楽団、VariOrchestraのコンサートマスターを務めた。中学生の頃から混声合唱や弦楽オーケストラなどを指揮し、東京外国語大学在学中に東京音楽大学指揮科研修生として本格的に指揮を学び始める。
+      Bach International Music Competition UK2024で第1位、GYMC2024 CRit. Max Bruch International Competition2024でPlatinum Prize。WBMC2024で第1位（いずれも指揮部門）。
+      2020年、都内の音楽大学出身者を中心に呼びかけ、VariOrchestraを設立。演奏会の企画・運営、演奏を行う。定期演奏会においてコンサートマスターとして交響曲を弾き振りし、第3回定期演奏会では協奏曲のソリストを務めた。さらに特別公演ではベートーヴェンやブラームス、モーツァルト、シューベルト等の交響曲を指揮。HIP（Historically informed performance/歴史的知識に基づく演奏）の解釈を取り入れた新鮮な演奏を展開する。
+      音楽以外の分野においても、総合コンサルティングファームでの経験を活かし、音楽×ビジネス・業務改革・国際文化戦略などのテーマでも活動。単文援を行いつつ、オンライン英語塾「TUFLINGUAL」の代表を務めるなど活動の範囲を広げている。
+    </p>
   </section>
 
-  <section id="photos" class="section">
-    <h2>Photos</h2>
-    <div class="gallery">
-      <img src="img/event.jpg" alt="event">
-      <img src="img/stainedglass.jpg" alt="stainedglass">
-      <img src="img/concert.jpg" alt="concert">
-    </div>
-  </section>
-
-  <section id="calendar" class="section">
+  <section id="schedule" class="section">
     <h2>Schedule</h2>
-    <div class="schedule-list">
-      <div class="schedule-item"><span>8/11 カーザクラシカ 室内楽コンサート</span><a href="schedule/0811.html">詳しくはこちら</a></div>
-      <div class="schedule-item"><span>9/20 Legame String Orchestra（指揮）</span><a href="schedule/0920.html">詳しくはこちら</a></div>
-      <div class="schedule-item"><span>9/21 帝国ホテル（非公開イベント出演）</span><a href="schedule/0921.html">詳しくはこちら</a></div>
-      <div class="schedule-item"><span>9/28 紀尾井町コンサートサロン 弦楽トリオ</span><a href="schedule/0928.html">詳しくはこちら</a></div>
-      <div class="schedule-item"><span>11/1 VariOrchestra × 東京外国語大学（共催）</span><a href="schedule/1101.html">詳しくはこちら</a></div>
-      <div class="schedule-item"><span>12/20 coming soon</span><a href="schedule/1220.html">詳しくはこちら</a></div>
+    <div class="schedule-item">
+      <span>8/11 カーザクラシカ 室内楽コンサート</span><br />
+      <a class="button" href="schedule/0811.html">詳しくはこちら</a>
+    </div>
+    <div class="schedule-item">
+      <span>9/20 Legame String Orchestra（指揮）</span><br />
+      <a class="button" href="schedule/0920.html">詳しくはこちら</a>
+    </div>
+    <div class="schedule-item">
+      <span>9/21 帝国ホテル（非公開イベント出演）</span><br />
+      <a class="button" href="schedule/0921.html">詳しくはこちら</a>
+    </div>
+    <div class="schedule-item">
+      <span>9/28 紀尾井町コンサートサロン 弦楽トリオ</span><br />
+      <a class="button" href="schedule/0928.html">詳しくはこちら</a>
+    </div>
+    <div class="schedule-item">
+      <span>11/1 VariOrchestra × 東京外国語大学（共催）</span><br />
+      <a class="button" href="schedule/1101.html">詳しくはこちら</a>
+    </div>
+    <div class="schedule-item">
+      <span>12/20 coming soon</span><br />
+      <a class="button" href="schedule/1220.html">詳しくはこちら</a>
     </div>
   </section>
 
   <section id="videos" class="section">
     <h2>Videos</h2>
-    <iframe src="https://www.youtube.com/embed/tssEzKuBm8w" title="Mozart" allowfullscreen></iframe>
-    <iframe src="https://www.youtube.com/embed/7GpPmL6eCuM" title="Brahms" allowfullscreen></iframe>
+    <iframe src="https://www.youtube.com/embed/example1"></iframe>
+    <iframe src="https://www.youtube.com/embed/example2"></iframe>
+  </section>
+
+  <section id="photos" class="section">
+    <h2>Photos</h2>
+    <div class="carousel">
+      <img src="img/concert.jpg" alt="concert" />
+      <img src="img/event.jpg" alt="event" />
+      <img src="img/reading.jpg" alt="reading" />
+      <img src="img/stainedglass.jpg" alt="stainedglass" />
+    </div>
   </section>
 
   <section id="contact" class="section">
     <h2>Contact</h2>
     <form>
-      <input type="text" placeholder="お名前">
-      <input type="email" placeholder="メールアドレス">
-      <textarea rows="5" placeholder="お問い合わせ内容"></textarea>
+      <label>お名前:<br /><input type="text" name="name" required /></label><br />
+      <label>メール:<br /><input type="email" name="email" required /></label><br />
+      <label>お問い合わせ内容:<br /><textarea name="message" rows="5" required></textarea></label><br />
       <button type="submit">送信</button>
     </form>
   </section>
@@ -244,17 +172,5 @@
   <footer>
     <p>&copy; 2025 Eigo Sato</p>
   </footer>
-
-  <script>
-    function toggleMenu() {
-      const menu = document.querySelector('nav ul');
-      menu.classList.toggle('active');
-    }
-    document.querySelectorAll('nav ul li a').forEach(link => {
-      link.addEventListener('click', () => {
-        document.querySelector('nav ul').classList.remove('active');
-      });
-    });
-  </script>
 </body>
 </html>
