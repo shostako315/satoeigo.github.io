@@ -1,90 +1,106 @@
+html {
+  font-size: 16px;
+  text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+}
+
 body {
   font-family: 'Noto Sans JP', Arial, sans-serif;
   color: #222;
   background: #fff;
   line-height: 1.7;
+  font-size: 1rem;
 }
 
 h1, h2, h3, h4, h5, h6, .navbar-brand, .nav-link {
   font-family: 'Noto Sans JP', Arial, sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.01em;
 }
 
-.hero-section {
-  background: linear-gradient(135deg, #f8f9fa 0%, #e8f4f8 100%);
-  padding: 60px 0 30px 0;
+.hero-section h1 {
+  font-size: 2rem;
+  margin-bottom: 0.5em;
+}
+
+.hero-section p {
+  font-size: 1.1rem;
+}
+
+h2 {
+  font-size: 1.3rem;
+  margin-bottom: 1em;
+}
+
+@media (max-width: 768px) {
+  html {
+    font-size: 14px;
+  }
+  .hero-section h1 {
+    font-size: 1.4rem;
+  }
+  h2 {
+    font-size: 1.1rem;
+  }
 }
 
 .navbar-brand {
-  font-size: 1.5rem;
-  color: #2c3e50 !important;
+  font-size: 1.2rem;
 }
 
 .nav-link {
-  color: #444 !important;
-  font-weight: 500;
-}
-
-.nav-link:hover {
-  color: #8e44ad !important;
-}
-
-#profile h2, #schedule h2, #gallery h2 {
-  font-weight: 700;
-  color: #2c3e50;
-}
-
-#profile ul, #profile p {
-  font-size: 1.08rem;
-}
-
-.table th {
-  background: #2c3e50 !important;
-  color: #fff;
-  border: none;
-}
-
-.table td {
-  vertical-align: middle;
   font-size: 1rem;
 }
 
-/* ギャラリー横スクロール調整 */
+#profile p, #profile ul, #profile li {
+  font-size: 1rem;
+}
+
+.table {
+  font-size: 0.95rem;
+}
+
+@media (max-width: 768px) {
+  .table {
+    font-size: 0.85rem;
+  }
+}
+
+/* ギャラリー横スクロール＆自動流し */
 .gallery-scroll-container {
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
+  overflow: hidden;
+  width: 100%;
+  position: relative;
   margin: 0 auto;
-  max-width: 100vw;
-  padding-bottom: 10px;
 }
 
 .gallery-scroll-inner {
   display: flex;
-  gap: 24px;
   align-items: center;
-  scroll-behavior: smooth;
+  gap: 16px;
+  animation: gallery-scroll 30s linear infinite;
+  will-change: transform;
 }
 
 .gallery-img {
-  height: 220px;
+  height: 160px;
   width: auto;
-  max-width: 350px;
-  border-radius: 12px;
+  max-width: 90vw;
+  border-radius: 10px;
   object-fit: cover;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.11);
-  transition: transform 0.3s;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.10);
   display: block;
 }
 
-.gallery-img:hover {
-  transform: scale(1.03);
+@media (min-width: 768px) {
+  .gallery-img {
+    height: 220px;
+    max-width: 350px;
+  }
 }
 
-@media (max-width: 768px) {
-  .gallery-img {
-    height: 120px;
-    max-width: 90vw;
-  }
-  .hero-section {
-    padding: 40px 0 20px 0;
-  }
+/* 無限ループ風アニメーション */
+@keyframes gallery-scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
 }
