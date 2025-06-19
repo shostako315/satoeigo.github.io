@@ -5,38 +5,36 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>佐藤瑛吾オフィシャルサイト</title>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/scrollReveal.js/4.0.9/scrollreveal.min.js"></script>
-  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
   <style>
     body {
       font-family: 'Noto Serif JP', serif;
       margin: 0;
       background-color: #fff;
       color: #333;
-      overflow-x: hidden;
     }
     nav {
       position: fixed;
       top: 0;
+      left: 0;
       width: 100%;
       background: rgba(255,255,255,0.95);
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 0.8rem 1.5rem;
+      padding: 0.8rem 1rem;
       z-index: 999;
       box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     }
     nav .logo {
       font-weight: bold;
       font-size: 1.2rem;
-      white-space: nowrap;
     }
     nav ul {
       list-style: none;
       display: flex;
       gap: 1rem;
+      margin-left: auto;
     }
     nav ul li a {
       text-decoration: none;
@@ -58,49 +56,81 @@
       height: 3px;
       background: #333;
     }
-    .mobile-nav {
-      display: none;
-      position: absolute;
-      top: 60px;
-      right: 10px;
-      background: white;
-      border: 1px solid #ccc;
-      border-radius: 10px;
-      padding: 1rem;
-      animation: fadeInMenu 0.4s ease;
-    }
-    @keyframes fadeInMenu {
-      from { opacity: 0; transform: translateY(-10px); }
-      to { opacity: 1; transform: translateY(0); }
+    @media (max-width: 768px) {
+      nav ul {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 60px;
+        right: 10px;
+        background: white;
+        padding: 1rem;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+      }
+      nav ul.active {
+        display: flex;
+      }
+      .hamburger {
+        display: flex;
+      }
     }
     header {
       position: relative;
+      text-align: center;
       height: 100vh;
       background: url('img/top_orchestra.jpg') center/cover no-repeat;
       display: flex;
       justify-content: center;
       align-items: center;
+      overflow: hidden;
     }
-    .hero-text {
-      background-color: rgba(0,0,0,0.4);
+    header .hero-text {
+      background-color: rgba(0,0,0,0.5);
       padding: 2rem;
       border-radius: 10px;
       color: white;
-      animation: fadeInMain 3s ease;
+      animation: fadeIn 2s ease-out forwards;
+      opacity: 0;
     }
-    @keyframes fadeInMain {
-      from { opacity: 0; transform: scale(0.98); }
-      to { opacity: 1; transform: scale(1); }
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
     }
     .section {
       padding: 4rem 1rem;
       max-width: 1000px;
       margin: auto;
     }
-    .section h2 {
-      font-size: 1.5rem;
-      border-left: 5px solid #333;
-      padding-left: 0.5rem;
+    .gallery {
+      overflow-x: auto;
+      white-space: nowrap;
+      scroll-behavior: smooth;
+      padding-bottom: 1rem;
+    }
+    .gallery img {
+      height: 200px;
+      margin-right: 1rem;
+      border-radius: 10px;
+      display: inline-block;
+      transition: transform 0.3s ease;
+    }
+    .gallery img:hover {
+      transform: scale(1.05);
+    }
+    iframe {
+      width: 100%;
+      max-width: 800px;
+      height: 250px;
+      border-radius: 10px;
+      display: block;
+      margin: 3rem auto;
     }
     .schedule-table {
       width: 100%;
@@ -115,25 +145,6 @@
       border-bottom: 1px solid #ddd;
       font-size: 1rem;
     }
-    .gallery {
-      display: flex;
-      overflow-x: auto;
-      scroll-behavior: smooth;
-    }
-    .gallery img {
-      height: 200px;
-      margin-right: 1rem;
-      border-radius: 10px;
-      flex-shrink: 0;
-    }
-    iframe {
-      width: 100%;
-      max-width: 800px;
-      height: 450px;
-      border-radius: 10px;
-      display: block;
-      margin: 2rem auto;
-    }
     form {
       display: flex;
       flex-direction: column;
@@ -141,20 +152,19 @@
       max-width: 600px;
       margin: 0 auto;
     }
-    form input, form textarea {
-      padding: 0.8rem;
+    input, textarea {
+      padding: 1rem;
       font-size: 1rem;
       border: 1px solid #ccc;
-      border-radius: 6px;
-      background: #fdfdfd;
+      border-radius: 5px;
     }
-    form button {
-      padding: 0.8rem;
-      background: #333;
+    button {
+      padding: 1rem;
+      font-size: 1rem;
+      background-color: #333;
       color: white;
       border: none;
-      border-radius: 6px;
-      font-weight: bold;
+      border-radius: 5px;
       cursor: pointer;
     }
     footer {
@@ -164,34 +174,18 @@
       padding: 2rem 1rem;
       border-top: 1px solid #ccc;
     }
-    @media (max-width: 768px) {
-      nav ul {
-        display: none;
-      }
-      .hamburger {
-        display: flex;
-      }
-      .mobile-nav.active {
-        display: flex;
-        flex-direction: column;
-        gap: 1rem;
-      }
-      iframe {
-        height: 230px;
-      }
-    }
   </style>
 </head>
 <body>
   <nav>
     <div class="logo">佐藤瑛吾オフィシャルサイト</div>
-    <div class="hamburger" onclick="document.querySelector('.mobile-nav').classList.toggle('active')">
+    <div class="hamburger" onclick="document.querySelector('nav ul').classList.toggle('active')">
       <div></div><div></div><div></div>
     </div>
-    <ul class="mobile-nav">
-      <li><a href="#schedule">Schedule</a></li>
+    <ul>
       <li><a href="#biography">Biography</a></li>
       <li><a href="#photos">Photos</a></li>
+      <li><a href="#schedule">Schedule</a></li>
       <li><a href="#videos">Videos</a></li>
       <li><a href="#contact">Contact</a></li>
       <li><a href="/index.en.html">English</a></li>
@@ -201,27 +195,14 @@
   <header>
     <div class="hero-text">
       <h1>Eigo Sato</h1>
-      <p>指揮者・ヴァイオリニスト・コンサルタント</p>
+      <p>指揮者・ヴァイオリニスト</p>
     </div>
   </header>
 
-  <section id="schedule" class="section">
-    <h2>Schedule</h2>
-    <table class="schedule-table">
-      <tr><td>8/11</td><td>カーザクラシカ 室内楽コンサート</td></tr>
-      <tr><td>9/20</td><td>Legame String Orchestra（指揮）</td></tr>
-      <tr><td>9/21</td><td>帝国ホテル（非公開イベント出演）</td></tr>
-      <tr><td>9/28</td><td>弦楽トリオコンサート @紀尾井町コンサートサロン</td></tr>
-      <tr><td>11/1</td><td>VariOrchestra × 東京外国語大学（共催）</td></tr>
-      <tr><td>12/20</td><td>coming soon</td></tr>
-      <tr><td>3/31</td><td>coming soon</td></tr>
-    </table>
-  </section>
-
   <section id="biography" class="section">
     <h2>Biography</h2>
-    <div style="display: flex; flex-wrap: wrap; gap: 1rem; align-items: flex-start;">
-      <img src="img/profile.jpg" alt="Eigo Sato" style="width: 200px; border-radius: 8px;">
+    <div style="display: flex; flex-wrap: wrap; align-items: flex-start; gap: 2rem;">
+      <img src="img/profile.jpg" alt="Profile" style="max-width: 250px; border-radius: 10px;">
       <p>東京外国語大学国際日本学部卒業。東京音楽大学指揮研修生修了。 4歳でヴァイオリンを始め、ソロ・室内楽での演奏に加え、これまでにSeikei String Orchestra、東京外国語大学管弦楽団、VariOrchestraのコンサートマスターを務めた。中学生の頃から混声合唱や弦楽オーケストラなどを指揮し、東京外国語大学在学中に東京音楽大学指揮科研修生として本格的に指揮を学び始める。Bach International Music Competition UK2024で第1位、GYMC2024 CRit. Max Bruch International Competition2024 でPlatinum Prize. WBMC2024で第1位（いずれも指揮部門）。 2020年、都内の音楽大学出身者を中心に呼びかけ、VariOrchestraを設立。演奏会の企画・運営、演奏を行う。定期演奏会においてコンサートマスターとして交響曲を弾き振りし、第3回定期演奏会では協奏曲のソリストを務めた。さらに特別公演ではベートーヴェンやブラームス、モーツァルト、シューベルト等の交響曲を指揮。HIP（Historically informed performance/歴史的知識に基づく演奏）の解釈を取り入れた新鮮な演奏が好評を博し、注目を集めている。 その他中高生のオーケストラの指導や、アマチュアオーケストラを指揮、またカズオ・イシグロ原作「遠い山なみの光」では広瀬すず氏への演奏・所作指導を行う。ヴァイオリンでは東久留米市第15回みんなのクラシックコンサート等に出演。 これまでに、ヴァイオリンを伊藤亮太郎、有働一美、大塚杏奈、白瀬ゆりの各氏に、指揮を増井信貴氏に師事。音楽以外の分野においても、総合コンサルティングファームでの大企業向けビジネス・業務改革支援を行いつつ、オンライン英語塾「TUFLINGUAL」の代表を務めるなど活動の範囲を広げている。</p>
     </div>
   </section>
@@ -237,6 +218,19 @@
     </div>
   </section>
 
+  <section id="schedule" class="section">
+    <h2>Schedule</h2>
+    <table class="schedule-table">
+      <tr><td>8/11</td><td>カーザクラシカ 室内楽コンサート</td></tr>
+      <tr><td>9/20</td><td>Legame String Orchestra（指揮）</td></tr>
+      <tr><td>9/21</td><td>帝国ホテル（非公開イベント出演）</td></tr>
+      <tr><td>9/28</td><td>弦楽トリオコンサート @紀尾井町コンサートサロン</td></tr>
+      <tr><td>11/1</td><td>VariOrchestra × 東京外国語大学（共催）</td></tr>
+      <tr><td>12/20</td><td>coming soon</td></tr>
+      <tr><td>3/31</td><td>coming soon</td></tr>
+    </table>
+  </section>
+
   <section id="videos" class="section">
     <h2>Videos</h2>
     <iframe src="https://www.youtube.com/embed/tssEzKuBm8w" title="Mozart" allowfullscreen></iframe>
@@ -245,10 +239,10 @@
 
   <section id="contact" class="section">
     <h2>Contact</h2>
-    <form action="mailto:shostako315@gmail.com" method="POST" enctype="text/plain">
+    <form method="GET" action="mailto:shostako315@gmail.com" enctype="text/plain">
       <input type="text" name="name" placeholder="お名前" required>
       <input type="email" name="email" placeholder="メールアドレス" required>
-      <textarea name="message" rows="5" placeholder="お問い合わせ内容" required></textarea>
+      <textarea name="message" rows="5" placeholder="お問い合わせ内容"></textarea>
       <button type="submit">送信</button>
     </form>
   </section>
