@@ -6,7 +6,6 @@
   <title>佐藤瑛吾オフィシャルサイト</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
   <style>
-    /* --- 基本デザイン --- */
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -31,7 +30,6 @@
       background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5));
       z-index: 1;
     }
-    /* ▼▼▼ ここが新しいアニメーションと画像 ▼▼▼ */
     .hero-background img {
       width: 100%;
       height: 100%;
@@ -76,7 +74,6 @@
       from { opacity: 0; transform: translateY(20px);}
       to { opacity: 1; transform: translateY(0);}
     }
-    /* --- ナビゲーション --- */
     nav {
       position: fixed;
       top: 0;
@@ -212,10 +209,10 @@
       font-weight: 500;
       transition: all 0.3s ease;
       letter-spacing: 0.05em;
+      display: inline-block;
     }
     .schedule-item .btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(44, 44, 44, 0.3); }
 
-    /* ▼▼▼ 写真・動画タイトルの装飾とスペース調整 ▼▼▼ */
     .section-title {
       text-align: center;
       margin-bottom: 2rem;
@@ -259,7 +256,6 @@
       .section-title .jp { font-size: 0.95rem; }
       .section-title { margin-bottom: 1.2rem; }
     }
-    /* ▼▼▼ 写真・動画カルーセル ▼▼▼ */
     .videos-section { background: #2c2c2c; color: #fff; padding: 4rem 0; overflow: hidden; }
     .videos-carousel {
       display: flex;
@@ -288,15 +284,21 @@
       padding: 1.5rem 1rem;
     }
     .photo-item {
-      width: 300px;
-      height: 200px;
-      border-radius: 16px;
+      width: 90vw;
+      max-width: 600px;
+      height: 54vw;
+      max-height: 360px;
+      border-radius: 20px;
       overflow: hidden;
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
       flex-shrink: 0;
       scroll-snap-align: center;
+      margin: 0 auto;
     }
-    .photo-item img { width: 100%; height: 100%; object-fit: cover; }
+    .photo-item img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    @media (min-width: 700px) {
+      .photo-item { width: 600px; height: 360px; }
+    }
     .contact-form {
       max-width: 600px;
       margin: 0 auto;
@@ -363,14 +365,13 @@
       .profile-content { grid-template-columns: 1fr; gap: 2rem; text-align: center; }
       .schedule-item { grid-template-columns: 1fr; gap: 1rem; text-align: center; }
       .video-item { width: 300px; height: 169px; }
-      .photo-item { width: 250px; height: 167px; }
+      .photo-item { width: 90vw; height: 54vw; max-height: 360px; }
       nav ul { gap: 1.5rem; padding: 0 1rem; }
       .schedule-item .details h3 { font-size: 1rem; }
     }
   </style>
 </head>
 <body>
-  <!-- ▼▼▼ ヘッダー（最初の画面の後ろにtop_orchestra.jpgを使います） ▼▼▼ -->
   <header>
     <div class="hero-background">
       <img src="img/top_orchestra.jpg" alt="佐藤瑛吾 オーケストラ">
@@ -381,7 +382,6 @@
     </div>
   </header>
 
-  <!-- ▼▼▼ ナビゲーション ▼▼▼ -->
   <nav id="nav">
     <ul>
       <li><a href="#bio">Biography</a></li>
@@ -392,7 +392,6 @@
     </ul>
   </nav>
 
-  <!-- ▼▼▼ プロフィール（Biography） ▼▼▼ -->
   <section id="bio">
     <h2>Biography</h2>
     <div class="profile-content">
@@ -407,7 +406,6 @@
     </div>
   </section>
 
-  <!-- ▼▼▼ スケジュール ▼▼▼ -->
   <section id="schedule">
     <h2>Schedule</h2>
     <div class="schedule-list">
@@ -422,7 +420,7 @@
       <div class="schedule-item">
         <div class="date">9/20</div>
         <div class="details">
-          <h3 Legame String Orchestra（指揮）>
+          <h3>Legame String Orchestra（指揮）</h3>
           <p>場所: 東京文化会館</p>
         </div>
         <a href="schedule/0920.html" class="btn">詳細を見る</a>
@@ -433,7 +431,7 @@
           <h3>帝国ホテル（非公開イベント出演）</h3>
           <p>プライベートイベント</p>
         </div>
-        <a href="schedule/0921.html, class="btn">詳細を見る</a>
+        <a href="schedule/0921.html" class="btn">詳細を見る</a>
       </div>
       <div class="schedule-item">
         <div class="date">9/28</div>
@@ -462,7 +460,6 @@
     </div>
   </section>
 
-  <!-- ▼▼▼ 動画 ▼▼▼ -->
   <section id="videos" class="videos-section">
     <div class="section-title dark">
       <span class="en">Videos</span>
@@ -487,7 +484,6 @@
     </div>
   </section>
 
-  <!-- ▼▼▼ 写真 ▼▼▼ -->
   <section id="photos">
     <div class="section-title">
       <span class="en">Photos</span>
@@ -512,7 +508,6 @@
     </div>
   </section>
 
-  <!-- ▼▼▼ お問い合わせ ▼▼▼ -->
   <section id="contact">
     <h2>Contact</h2>
     <form class="contact-form">
@@ -522,7 +517,7 @@
       </div>
       <div class="form-group">
         <label for="email">メールアドレス</label>
-        <input type="email id="email" name="email" required>
+        <input type="email" id="email" name="email" required>
       </div>
       <div class="form-group">
         <label for="message">メッセージ</label>
@@ -532,7 +527,6 @@
     </form>
   </section>
 
-  <!-- ▼▼▼ フッター ▼▼▼ -->
   <footer>
     <div class="footer-content">
       <div class="footer-logo">佐藤瑛吾</div>
@@ -540,7 +534,6 @@
     </div>
   </footer>
 
-  <!-- ▼▼▼ JavaScript（動きやフォーム送信） ▼▼▼ -->
   <script>
     document.addEventListener('DOMContentLoaded', function() {
       // ナビゲーション制御
@@ -583,4 +576,3 @@
   </script>
 </body>
 </html>
-
