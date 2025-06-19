@@ -4,173 +4,107 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>佐藤瑛吾オフィシャルサイト</title>
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="styles.css" />
   <style>
     body {
-      font-family: 'Helvetica Neue', sans-serif;
+      font-family: 'Noto Sans', sans-serif;
       margin: 0;
       padding: 0;
+      background-color: #fff;
+      color: #333;
+      font-size: 14px;
     }
     header {
-      position: relative;
-      text-align: center;
-    }
-    header img {
-      width: 100%;
-      height: auto;
-      object-fit: cover;
+      background-color: #fff;
+      padding: 1rem;
+      text-align: left;
+      border-bottom: 1px solid #eee;
     }
     nav {
-      position: absolute;
-      top: 1rem;
-      left: 1rem;
+      position: fixed;
+      top: 0.5rem;
+      right: 1rem;
     }
-    .menu {
-      display: none;
-      cursor: pointer;
+    nav a {
+      display: block;
+      color: #444;
+      text-decoration: none;
+      margin-bottom: 0.5rem;
     }
-    nav ul {
-      list-style: none;
-      margin: 0;
-      padding: 0;
+    h2 {
+      font-size: 20px;
+      border-bottom: 1px solid #ccc;
+      padding-bottom: 0.25rem;
+      margin-top: 2rem;
+      margin-bottom: 1rem;
+      padding-left: 1rem;
+    }
+    .biography {
       display: flex;
       flex-direction: column;
-      gap: 1rem;
-    }
-    .section {
+      align-items: center;
       padding: 1rem;
     }
-    .schedule-item {
-      background: #f5f5f5;
-      padding: 1rem;
-      margin: 0.5rem 0;
-      border-radius: 8px;
-    }
-    .button {
-      display: inline-block;
-      padding: 0.4rem 0.8rem;
-      margin-top: 0.5rem;
-      background: #444;
-      color: #fff;
-      border-radius: 6px;
-      text-decoration: none;
-    }
-    iframe {
-      width: 100%;
-      max-width: 560px;
-      height: 315px;
-      border: none;
-    }
-    .carousel {
-      display: flex;
-      overflow-x: auto;
-      scroll-snap-type: x mandatory;
-      gap: 1rem;
-      padding: 1rem;
-    }
-    .carousel img {
-      width: 300px;
+    .biography img {
+      width: 180px;
       height: auto;
       border-radius: 10px;
-      scroll-snap-align: start;
-      object-fit: cover;
+      margin-bottom: 1rem;
     }
-    .profile-image {
-      max-width: 300px;
-      width: 100%;
-      float: left;
-      margin: 0 1rem 1rem 0;
-      border-radius: 10px;
+    .biography p {
+      max-width: 90%;
+      line-height: 1.6;
     }
-    footer {
-      text-align: center;
+    .schedule-list {
+      list-style: none;
       padding: 1rem;
-      background: #eee;
+    }
+    .schedule-list li {
+      border-bottom: 1px solid #ddd;
+      padding: 0.75rem 0;
+      display: flex;
+      justify-content: space-between;
+    }
+    .schedule-list a {
+      color: #666;
+      text-decoration: none;
+      font-size: 16px;
+    }
+    .schedule-list a:hover {
+      color: #000;
     }
   </style>
 </head>
 <body>
   <header>
-    <img src="img/top_orchestra.jpg" alt="Top Orchestra" />
-    <nav>
-      <div class="menu">☰</div>
-      <ul>
-        <li><a href="#biography">Biography</a></li>
-        <li><a href="#schedule">Schedule</a></li>
-        <li><a href="#videos">Videos</a></li>
-        <li><a href="#photos">Photos</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
-    </nav>
+    <h1>佐藤瑛吾オフィシャルサイト</h1>
   </header>
+  <nav>
+    <a href="#biography">Biography</a>
+    <a href="#schedule">Schedule</a>
+    <a href="#videos">Videos</a>
+    <a href="#photos">Photos</a>
+    <a href="#contact">Contact</a>
+  </nav>
 
-  <section id="biography" class="section">
+  <section id="biography" class="biography">
     <h2>Biography</h2>
-    <img src="img/profile.jpg" alt="佐藤瑛吾" class="profile-image" />
+    <img src="img/profile.jpg" alt="プロフィール写真">
     <p>
-      東京外国語大学国際日本学部卒業。東京音楽大学指揮研修生修了。4歳でヴァイオリンを始め、ソロ・室内楽での演奏に加え、これまでにSeikei String Orchestra、東京外国語大学管弦楽団、VariOrchestraのコンサートマスターを務めた。中学生の頃から混声合唱や弦楽オーケストラなどを指揮し、東京外国語大学在学中に東京音楽大学指揮科研修生として本格的に指揮を学び始める。
-      Bach International Music Competition UK2024で第1位、GYMC2024 CRit. Max Bruch International Competition2024でPlatinum Prize。WBMC2024で第1位（いずれも指揮部門）。
-      2020年、都内の音楽大学出身者を中心に呼びかけ、VariOrchestraを設立。演奏会の企画・運営、演奏を行う。定期演奏会においてコンサートマスターとして交響曲を弾き振りし、第3回定期演奏会では協奏曲のソリストを務めた。さらに特別公演ではベートーヴェンやブラームス、モーツァルト、シューベルト等の交響曲を指揮。HIP（Historically informed performance/歴史的知識に基づく演奏）の解釈を取り入れた新鮮な演奏を展開する。
-      音楽以外の分野においても、総合コンサルティングファームでの経験を活かし、音楽×ビジネス・業務改革・国際文化戦略などのテーマでも活動。単文援を行いつつ、オンライン英語塾「TUFLINGUAL」の代表を務めるなど活動の範囲を広げている。
+      東京外国語大学国際日本学部卒業。東京音楽大学指揮研修生修了。4歳でヴァイオリンを始め、ソロ・室内楽での演奏に加え、これまでにSeikei String Orchestra、東京外国語大学管弦楽団、VariOrchestraのコンサートマスターを務めた。中学生の頃から混声合唱や弦楽オーケストラなどを指揮し、東京外国語大学在学中に東京音楽大学指揮科研修生として本格的に指揮を学び始める。Bach International Music Competition UK2024で第1位、GYMC2024 CRit. Max Bruch International Competition2024でPlatinum Prize。WBMC2024で第1位（いずれも指揮部門）。2020年、都内の音楽大学出身者を中心に呼びかけ、VariOrchestraを設立。演奏会の企画・運営、演奏を行う。定期演奏会においてコンサートマスターとして交響曲を弾き振りし、第3回定期演奏会では協奏曲のソリストを務めた。さらに特別公演ではベートーヴェンやブラームス、モーツァルト、シューベルト等の交響曲を指揮。HIP（Historically informed performance/歴史的知識に基づく演奏）の解釈を取り入れた新鮮な演奏に取り組んでいる。音楽活動の傍ら、戦略系コンサルタントとして複数社の経営改革・業務改善支援を行いつつ、オンライン英語塾「TUFLINGUAL」の代表を務めるなど活動の範囲を広げている。
     </p>
   </section>
 
-  <section id="schedule" class="section">
+  <section id="schedule">
     <h2>Schedule</h2>
-    <div class="schedule-item">
-      <span>8/11 カーザクラシカ 室内楽コンサート</span><br />
-      <a class="button" href="schedule/0811.html">詳しくはこちら</a>
-    </div>
-    <div class="schedule-item">
-      <span>9/20 Legame String Orchestra（指揮）</span><br />
-      <a class="button" href="schedule/0920.html">詳しくはこちら</a>
-    </div>
-    <div class="schedule-item">
-      <span>9/21 帝国ホテル（非公開イベント出演）</span><br />
-      <a class="button" href="schedule/0921.html">詳しくはこちら</a>
-    </div>
-    <div class="schedule-item">
-      <span>9/28 紀尾井町コンサートサロン 弦楽トリオ</span><br />
-      <a class="button" href="schedule/0928.html">詳しくはこちら</a>
-    </div>
-    <div class="schedule-item">
-      <span>11/1 VariOrchestra × 東京外国語大学（共催）</span><br />
-      <a class="button" href="schedule/1101.html">詳しくはこちら</a>
-    </div>
-    <div class="schedule-item">
-      <span>12/20 coming soon</span><br />
-      <a class="button" href="schedule/1220.html">詳しくはこちら</a>
-    </div>
+    <ul class="schedule-list">
+      <li><span>8/11 カーザクラシカ 室内楽コンサート</span><a href="#">→</a></li>
+      <li><span>9/20 Legame String Orchestra（指揮）</span><a href="#">→</a></li>
+      <li><span>9/21 帝国ホテル（非公開イベント出演）</span><a href="#">→</a></li>
+      <li><span>9/28 紀尾井町コンサートサロン 弦楽トリオ</span><a href="#">→</a></li>
+      <li><span>11/1 VariOrchestra × 東京外国語大学（共催）</span><a href="#">→</a></li>
+      <li><span>12/20 coming soon</span><a href="#">→</a></li>
+    </ul>
   </section>
-
-  <section id="videos" class="section">
-    <h2>Videos</h2>
-    <iframe src="https://www.youtube.com/embed/example1"></iframe>
-    <iframe src="https://www.youtube.com/embed/example2"></iframe>
-  </section>
-
-  <section id="photos" class="section">
-    <h2>Photos</h2>
-    <div class="carousel">
-      <img src="img/concert.jpg" alt="concert" />
-      <img src="img/event.jpg" alt="event" />
-      <img src="img/reading.jpg" alt="reading" />
-      <img src="img/stainedglass.jpg" alt="stainedglass" />
-    </div>
-  </section>
-
-  <section id="contact" class="section">
-    <h2>Contact</h2>
-    <form>
-      <label>お名前:<br /><input type="text" name="name" required /></label><br />
-      <label>メール:<br /><input type="email" name="email" required /></label><br />
-      <label>お問い合わせ内容:<br /><textarea name="message" rows="5" required></textarea></label><br />
-      <button type="submit">送信</button>
-    </form>
-  </section>
-
-  <footer>
-    <p>&copy; 2025 Eigo Sato</p>
-  </footer>
 </body>
 </html>
