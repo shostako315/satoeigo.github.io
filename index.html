@@ -128,7 +128,7 @@
       font-size: clamp(2.5rem, 5vw, 4rem);
       font-weight: 300;
       text-align: center;
-      margin-bottom: 4rem;
+      margin-bottom: 2.5rem;
       position: relative;
       color: #2c2c2c;
       letter-spacing: 0.02em;
@@ -216,39 +216,58 @@
     .schedule-item .btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(44, 44, 44, 0.3); }
 
     /* ▼▼▼ 写真・動画タイトルの装飾とスペース調整 ▼▼▼ */
-    #photos h2, #videos h2 {
-      font-family: 'Playfair Display', serif;
-      font-size: 3rem;
-      font-weight: 600;
-      color: #d4af37;
+    .section-title {
       text-align: center;
-      margin-bottom: 3rem;
-      letter-spacing: 0.15em;
-      position: relative;
-      padding-bottom: 1rem;
+      margin-bottom: 2rem;
+    }
+    .section-title .en {
+      display: block;
+      font-family: 'Playfair Display', serif;
+      font-size: 2.2rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      color: #d4af37;
       text-shadow: 0 2px 8px #fff8;
     }
-    #photos h2::after, #videos h2::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 120px;
-      height: 4px;
-      background: linear-gradient(90deg, #d4af37, #f4e7c7);
-      border-radius: 2px;
+    .section-title .jp {
+      display: block;
+      font-family: 'Inter', sans-serif;
+      font-size: 1.1rem;
+      color: #b89f3a;
+      margin-top: 0.3em;
+      letter-spacing: 0.2em;
     }
-    #photos, #videos { padding-top: 6rem; padding-bottom: 6rem; }
-
-    .videos-section { background: #2c2c2c; color: #fff; padding: 6rem 0; overflow: hidden; }
+    .section-title::after {
+      content: '';
+      display: block;
+      width: 60px;
+      height: 2px;
+      margin: 1.1em auto 0;
+      background: linear-gradient(90deg, #d4af37, #f4e7c7);
+      border-radius: 1px;
+    }
+    .section-title.dark .en,
+    .section-title.dark .jp {
+      color: #ffe27a;
+      text-shadow: 0 2px 8px #2228;
+    }
+    .section-title.dark::after {
+      background: linear-gradient(90deg, #ffe27a, #e6c86c);
+    }
+    @media (max-width: 600px) {
+      .section-title .en { font-size: 1.4rem; }
+      .section-title .jp { font-size: 0.95rem; }
+      .section-title { margin-bottom: 1.2rem; }
+    }
+    /* ▼▼▼ 写真・動画カルーセル ▼▼▼ */
+    .videos-section { background: #2c2c2c; color: #fff; padding: 4rem 0; overflow: hidden; }
     .videos-carousel {
       display: flex;
       gap: 2rem;
       overflow-x: auto;
       scroll-snap-type: x mandatory;
       -webkit-overflow-scrolling: touch;
-      padding: 2rem 1rem;
+      padding: 1.5rem 1rem;
     }
     .video-item {
       width: 400px;
@@ -266,7 +285,7 @@
       overflow-x: auto;
       scroll-snap-type: x mandatory;
       -webkit-overflow-scrolling: touch;
-      padding: 2rem 1rem;
+      padding: 1.5rem 1rem;
     }
     .photo-item {
       width: 300px;
@@ -380,7 +399,7 @@
       <img src="img/profile.jpg" alt="佐藤瑛吾プロフィール写真">
       <div class="bio-text">
         <p>東京外国語大学国際日本学部卒業。東京音楽大学指揮研修生修了。</p>
-        <p>4歳でヴァイオリンを始め、ソロ・室内楽での演奏に加え、これまでにSeikei String Orchestra、東京外国語大学管弦楽団、VariOrchestraのコンサートマスターを務めた。中学生の頃から混声合唱や弦楽オーケストラなどを指揮し、東京外国語大学在学中に東京音楽大学指揮科研修生として本格的に指揮を学び始める。Bach International Music Competition UK2024で第1位、GYMC2024 CRit. Max Bruch International Competition2024 でPlatinum Prize. WBMC2024で第1位（いずれも指揮部門）。</p>
+        <p>4歳でヴァイオリンを始め、ソロ・室内楽での演奏に加え、これまでにSeikei String Orchestra、東京外国語大学管弦楽団、VariOrchestraのコンサートマスターを務めた。中学生の頃から混声合唱や弦楽オーケストラなどを指揮し、東京外国語大学在学中に東京音楽大学指揮科研修生として本格性地指揮を学び始める。Bach International Music Competition UK2024で第1位、GYMC2024 CRit. Max Bruch International Competition2024 でPlatinum Prize. WBMC2024で第1位（いずれも指揮部門）。</p>
         <p>2020年、都内の音楽大学出身者を中心に呼びかけ、VariOrchestraを設立。演奏会の企画・運営、演奏を行う。定期演奏会においてコンサートマスターとして交響曲を弾き振りし、第3回定期演奏会では協奏曲のソリストを務めた。さらに特別公演ではベートーヴェンやブラームス、モーツァルト、シューベルト等の交響曲を指揮。HIP（Historically informed performance/歴史的知識に基づく演奏）の解釈を取り入れた新鮮な演奏が好評を博し、注目を集めている。</p>
         <p>その他中高生のオーケストラの指導や、アマチュアオーケストラを指揮、またカズオ・イシグロ原作「遠い山なみの光」では広瀬すず氏への演奏・所作指導を行う。ヴァイオリンでは東久留米市第15回みんなのクラシックコンサート等に出演。</p>
         <p>これまでに、ヴァイオリンを伊藤亮太郎、有働一美、大塚杏奈、白瀬ゆりの各氏に、指揮を増井信貴氏に師事。音楽以外の分野においても、総合コンサルティングファームでの大企業向けビジネス・業務改革支援を行いつつ、オンライン英語塾「TUFLINGUAL」の代表を務めるなど活動の範囲を広げている。</p>
@@ -403,7 +422,7 @@
       <div class="schedule-item">
         <div class="date">9/20</div>
         <div class="details">
-          <h3>Legame String Orchestra（指揮）</h3>
+          <h3 Legame String Orchestra（指揮）>
           <p>場所: 東京文化会館</p>
         </div>
         <a href="schedule/0920.html" class="btn">詳細を見る</a>
@@ -414,7 +433,7 @@
           <h3>帝国ホテル（非公開イベント出演）</h3>
           <p>プライベートイベント</p>
         </div>
-        <a href="schedule/0921.html" class="btn">詳細を見る</a>
+        <a href="schedule/0921.html, class="btn">詳細を見る</a>
       </div>
       <div class="schedule-item">
         <div class="date">9/28</div>
@@ -445,7 +464,10 @@
 
   <!-- ▼▼▼ 動画 ▼▼▼ -->
   <section id="videos" class="videos-section">
-    <h2>Videos / 動画ギャラリー</h2>
+    <div class="section-title dark">
+      <span class="en">Videos</span>
+      <span class="jp">動画ギャラリー</span>
+    </div>
     <div class="videos-carousel">
       <div class="video-item">
         <iframe src="https://www.youtube.com/embed/d5s7aulgFFc" allowfullscreen></iframe>
@@ -467,7 +489,10 @@
 
   <!-- ▼▼▼ 写真 ▼▼▼ -->
   <section id="photos">
-    <h2>Photos / フォトギャラリー</h2>
+    <div class="section-title">
+      <span class="en">Photos</span>
+      <span class="jp">フォトギャラリー</span>
+    </div>
     <div class="photos-carousel">
       <div class="photo-item">
         <img src="img/concert.jpg" alt="コンサート写真">
@@ -497,7 +522,7 @@
       </div>
       <div class="form-group">
         <label for="email">メールアドレス</label>
-        <input type="email" id="email" name="email" required>
+        <input type="email id="email" name="email" required>
       </div>
       <div class="form-group">
         <label for="message">メッセージ</label>
@@ -558,3 +583,4 @@
   </script>
 </body>
 </html>
+
