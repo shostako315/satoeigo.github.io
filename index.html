@@ -1,240 +1,55 @@
+<!-- Schedule List -->
+<section id="schedule" class="section">
+  <h2>Schedule</h2>
+  <div class="schedule-list">
+    <div class="event">
+      <div class="event-date">2024.8.11</div>
+      <div class="event-title">カーザクラシカ 室内楽コンサート</div>
+      <a href="schedule/0811.html" class="event-link">詳しくはこちら</a>
+    </div>
+    <div class="event">
+      <div class="event-date">2024.9.20</div>
+      <div class="event-title">Legame String Orchestra（指揮）</div>
+      <a href="schedule/0920.html" class="event-link">詳しくはこちら</a>
+    </div>
+    <div class="event">
+      <div class="event-date">2024.9.21</div>
+      <div class="event-title">帝国ホテル（非公開イベント出演）</div>
+      <a href="schedule/0921.html" class="event-link">詳しくはこちら</a>
+    </div>
+    <div class="event">
+      <div class="event-date">2024.9.28</div>
+      <div class="event-title">弦楽トリオコンサート＠紀尾井町</div>
+      <a href="schedule/0928.html" class="event-link">詳しくはこちら</a>
+    </div>
+    <div class="event">
+      <div class="event-date">2024.11.1</div>
+      <div class="event-title">VariOrchestra × 東京外国語大学（共催）</div>
+      <a href="schedule/1101.html" class="event-link">詳しくはこちら</a>
+    </div>
+  </div>
+</section>
+
+<!-- Sample Detail Page: 0811.html -->
+<!-- save as schedule/0811.html -->
 <!DOCTYPE html>
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>佐藤瑛吾オフィシャルサイト</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/index.global.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP&display=swap" rel="stylesheet">
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Noto Serif JP', serif;
-      color: #333;
-      scroll-behavior: smooth;
-    }
-    header {
-      height: 100vh;
-      background: url('img/top_orchestra.jpg') center/cover no-repeat;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-    }
-    header::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.5);
-    }
-    .hero-text {
-      position: relative;
-      color: white;
-      text-align: center;
-      animation: fadeIn 2s ease-out;
-      z-index: 2;
-    }
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      background: rgba(255,255,255,0.95);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 0.8rem 1rem;
-      z-index: 999;
-    }
-    .logo {
-      font-weight: bold;
-      font-size: 1rem;
-    }
-    .menu-icon, nav ul {
-      display: none;
-    }
-    .lang-switch {
-      margin-right: 1rem;
-      font-size: 0.9rem;
-      font-weight: bold;
-    }
-    .section {
-      padding: 4rem 1rem;
-      max-width: 1000px;
-      margin: auto;
-    }
-    .gallery {
-      display: flex;
-      gap: 1rem;
-      overflow-x: auto;
-    }
-    .gallery img {
-      height: 200px;
-      border-radius: 10px;
-      flex-shrink: 0;
-      object-fit: cover;
-    }
-    iframe {
-      width: 100%;
-      aspect-ratio: 16 / 9;
-      border: none;
-      border-radius: 10px;
-    }
-    .calendar {
-      max-width: 900px;
-      margin: 2rem auto;
-      background: white;
-      border-radius: 10px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-      padding: 1rem;
-    }
-    .bio-container {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 2rem;
-      align-items: flex-start;
-    }
-    .bio-container img {
-      max-width: 200px;
-      border-radius: 10px;
-    }
-    footer {
-      text-align: center;
-      font-size: 0.9rem;
-      color: #666;
-      padding: 2rem 1rem;
-      border-top: 1px solid #ccc;
-    }
-    form {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-      max-width: 600px;
-      margin: auto;
-    }
-    input, textarea {
-      padding: 0.7rem;
-      font-size: 1rem;
-      border-radius: 5px;
-      border: 1px solid #ccc;
-    }
-    button {
-      background: #333;
-      color: white;
-      padding: 0.7rem;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-    @media (max-width: 768px) {
-      .menu-icon {
-        display: block;
-        font-size: 1.5rem;
-        cursor: pointer;
-      }
-      nav ul {
-        position: absolute;
-        top: 100%;
-        right: 0;
-        background: white;
-        flex-direction: column;
-        display: none;
-        padding: 1rem;
-        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-      }
-      nav ul.show {
-        display: flex;
-        animation: slideDown 0.3s ease-out;
-      }
-      @keyframes slideDown {
-        from { transform: translateY(-10px); opacity: 0; }
-        to { transform: translateY(0); opacity: 1; }
-      }
-    }
-  </style>
+  <title>8/11 コンサート詳細</title>
+  <link href="../style.css" rel="stylesheet">
 </head>
 <body>
-  <nav>
-    <div class="logo">佐藤瑛吾オフィシャルサイト</div>
-    <div class="lang-switch"><a href="index.en.html">EN</a></div>
-    <div class="menu-icon" onclick="document.querySelector('nav ul').classList.toggle('show')">&#9776;</div>
-    <ul>
-      <li><a href="#biography">Biography</a></li>
-      <li><a href="#photos">Photos</a></li>
-      <li><a href="#calendar">Schedule</a></li>
-      <li><a href="#videos">Videos</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
-  </nav>
-
   <header>
-    <div class="hero-text">
-      <h1>Eigo Sato</h1>
-      <p>指揮者・ヴァイオリニスト・コンサルタント</p>
-    </div>
+    <h1>カーザクラシカ 室内楽コンサート</h1>
+    <p>2024年8月11日 開催</p>
   </header>
-
-  <section id="biography" class="section">
-    <h2>Biography</h2>
-    <div class="bio-container">
-      <img src="img/profile.jpg" alt="プロフィール">
-      <p>東京外国語大学国際日本学部卒業。東京音楽大学指揮研修生修了。 4歳でヴァイオリンを始め、ソロ・室内楽での演奏に加え、これまでにSeikei String Orchestra、東京外国語大学管弦楽団、VariOrchestraのコンサートマスターを務めた。中学生の頃から混声合唱や弦楽オーケストラなどを指揮し、東京外国語大学在学中に東京音楽大学指揮科研修生として本格的に指揮を学び始める。Bach International Music Competition UK2024で第1位、GYMC2024 CRit. Max Bruch International Competition2024 でPlatinum Prize. WBMC2024で第1位（いずれも指揮部門）。 2020年、都内の音楽大学出身者を中心に呼びかけ、VariOrchestraを設立。演奏会の企画・運営、演奏を行う。定期演奏会においてコンサートマスターとして交響曲を弾き振りし、第3回定期演奏会では協奏曲のソリストを務めた。さらに特別公演ではベートーヴェンやブラームス、モーツァルト、シューベルト等の交響曲を指揮。HIP（Historically informed performance/歴史的知識に基づく演奏）の解釈を取り入れた新鮮な演奏が好評を博し、注目を集めている。 その他中高生のオーケストラの指導や、アマチュアオーケストラを指揮、またカズオ・イシグロ原作「遠い山なみの光」では広瀬すず氏への演奏・所作指導を行う。ヴァイオリンでは東久留米市第15回みんなのクラシックコンサート等に出演。 これまでに、ヴァイオリンを伊藤亮太郎、有働一美、大塚杏奈、白瀬ゆりの各氏に、指揮を増井信貴氏に師事。音楽以外の分野においても、総合コンサルティングファームでの大企業向けビジネス・業務改革支援を行いつつ、オンライン英語塾「TUFLINGUAL」の代表を務めるなど活動の範囲を広げている。</p>
-    </div>
-  </section>
-
-  <section id="photos" class="section">
-    <h2>Photos</h2>
-    <div class="gallery">
-      <img src="img/event1.jpg" alt="event1">
-      <img src="img/event2.jpg" alt="event2">
-      <img src="img/event3.jpg" alt="event3">
-    </div>
-  </section>
-
-  <section id="calendar" class="section">
-    <h2>Schedule</h2>
-    <div id='calendar' class="calendar"></div>
-  </section>
-
-  <section id="videos" class="section">
-    <h2>Videos</h2>
-    <iframe src="https://www.youtube.com/embed/tssEzKuBm8w" title="Mozart"></iframe>
-  </section>
-
-  <section id="contact" class="section">
-    <h2>Contact</h2>
-    <form action="https://formspree.io/f/xwkjprnl" method="POST">
-      <input type="text" name="name" placeholder="お名前" required>
-      <input type="email" name="email" placeholder="メールアドレス" required>
-      <textarea name="message" rows="5" placeholder="メッセージ" required></textarea>
-      <button type="submit">送信</button>
-    </form>
-  </section>
-
-  <footer>
-    <p>&copy; 2025 Eigo Sato</p>
-  </footer>
-
-  <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/index.global.min.js"></script>
-  <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      const calendarEl = document.getElementById('calendar');
-      const calendar = new FullCalendar.Calendar(calendarEl, {
-        initialView: 'dayGridMonth',
-        events: [
-          { title: 'カーザクラシカ 室内楽コンサート', start: '2025-08-11' },
-          { title: 'Legame String Orchestra（指揮）', start: '2025-09-20' },
-          { title: '帝国ホテル（非公開イベント）', start: '2025-09-21' },
-          { title: '弦楽トリオコンサート @紀尾井町', start: '2025-09-28' },
-          { title: 'VariOrchestra × 外語大', start: '2025-11-01' },
-          { title: 'coming soon', start: '2025-12-20' },
-          { title: 'coming soon', start: '2026-03-31' }
-        ]
-      });
-      calendar.render();
-    });
-  </script>
+  <main>
+    <section>
+      <p>このページはサンプルです。後ほど詳細情報を追記予定です。</p>
+    </section>
+    <a href="../index.html">← トップページに戻る</a>
+  </main>
 </body>
 </html>
