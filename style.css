@@ -48,12 +48,13 @@ h1, h2, h3, h4, h5, h6, .navbar-brand, .nav-link {
   font-size: 1rem;
 }
 
+/* ギャラリー横スクロール調整 */
 .gallery-scroll-container {
   overflow-x: auto;
-  white-space: nowrap;
-  padding-bottom: 10px;
+  -webkit-overflow-scrolling: touch;
   margin: 0 auto;
   max-width: 100vw;
+  padding-bottom: 10px;
 }
 
 .gallery-scroll-inner {
@@ -64,33 +65,23 @@ h1, h2, h3, h4, h5, h6, .navbar-brand, .nav-link {
 }
 
 .gallery-img {
-  height: 260px;
+  height: 220px;
   width: auto;
-  max-width: 380px;
+  max-width: 350px;
   border-radius: 12px;
   object-fit: cover;
   box-shadow: 0 4px 20px rgba(0,0,0,0.11);
   transition: transform 0.3s;
-  display: inline-block;
+  display: block;
 }
 
 .gallery-img:hover {
   transform: scale(1.03);
 }
 
-footer {
-  background: #23272b;
-  color: #fff;
-}
-
-footer a {
-  color: #fff;
-  text-decoration: underline;
-}
-
 @media (max-width: 768px) {
   .gallery-img {
-    height: 160px;
+    height: 120px;
     max-width: 90vw;
   }
   .hero-section {
