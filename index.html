@@ -82,6 +82,40 @@
       </div>
     </section>
 
+<!-- プロフィールの直後、演奏会予定の直前に挿入 -->
+<section class="gallery-scroll-section py-4">
+  <div class="container" style="max-width:1000px;">
+    <div class="gallery-scroll-outer">
+      <div class="gallery-scroll-inner" id="galleryScrollInner">
+        <img src="img/poster1.jpg" alt="Poster 1" class="gallery-scroll-img" onclick="openModal('img/poster1.jpg')">
+        <img src="img/poster2.jpg" alt="Poster 2" class="gallery-scroll-img" onclick="openModal('img/poster2.jpg')">
+        <img src="img/poster3.jpg" alt="Poster 3" class="gallery-scroll-img" onclick="openModal('img/poster3.jpg')">
+        <img src="img/poster4.jpg" alt="Poster 4" class="gallery-scroll-img" onclick="openModal('img/poster4.jpg')">
+        <img src="img/poster5.jpg" alt="Poster 5" class="gallery-scroll-img" onclick="openModal('img/poster5.jpg')">
+        <img src="img/poster6.jpg" alt="Poster 6" class="gallery-scroll-img" onclick="openModal('img/poster6.jpg')">
+        <!-- 画像数が少ない場合は下の行のように繰り返しを追加 -->
+        <img src="img/poster1.jpg" alt="Poster 1" class="gallery-scroll-img" onclick="openModal('img/poster1.jpg')">
+        <img src="img/poster2.jpg" alt="Poster 2" class="gallery-scroll-img" onclick="openModal('img/poster2.jpg')">
+        <img src="img/poster3.jpg" alt="Poster 3" class="gallery-scroll-img" onclick="openModal('img/poster3.jpg')">
+        <img src="img/poster4.jpg" alt="Poster 4" class="gallery-scroll-img" onclick="openModal('img/poster4.jpg')">
+        <img src="img/poster5.jpg" alt="Poster 5" class="gallery-scroll-img" onclick="openModal('img/poster5.jpg')">
+        <img src="img/poster6.jpg" alt="Poster 6" class="gallery-scroll-img" onclick="openModal('img/poster6.jpg')">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- モーダル（ページ末尾に追加） -->
+<div class="modal fade" id="imageModal" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content bg-transparent border-0">
+      <img src="" alt="拡大画像" class="img-fluid rounded shadow-lg" id="modalImg">
+    </div>
+  </div>
+</div>
+
+
+    
     <!-- 公演予定 -->
     <section id="schedule" class="py-5 bg-light">
       <div class="container" style="max-width:900px;">
@@ -209,29 +243,3 @@
   <script src="js/script.js"></script>
 </body>
 </html>
-
-<!-- プロフィールセクションの直後に挿入 -->
-<section class="gallery-scroll-section py-4">
-  <div class="container" style="max-width: 1000px;">
-    <div class="gallery-scroll-outer">
-      <div class="gallery-scroll-inner" id="galleryScrollInner">
-        <img src="img/poster1.jpg" alt="Poster 1" class="gallery-scroll-img" onclick="openModal('img/poster1.jpg')">
-        <img src="img/poster2.jpg" alt="Poster 2" class="gallery-scroll-img" onclick="openModal('img/poster2.jpg')">
-        <img src="img/poster3.jpg" alt="Poster 3" class="gallery-scroll-img" onclick="openModal('img/poster3.jpg')">
-        <img src="img/poster4.jpg" alt="Poster 4" class="gallery-scroll-img" onclick="openModal('img/poster4.jpg')">
-        <img src="img/poster5.jpg" alt="Poster 5" class="gallery-scroll-img" onclick="openModal('img/poster5.jpg')">
-        <img src="img/poster6.jpg" alt="Poster 6" class="gallery-scroll-img" onclick="openModal('img/poster6.jpg')">
-        <!-- 画像数は必要に応じて追加・複製 -->
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- モーダル（ページ末尾に追加） -->
-<div class="modal fade" id="imageModal" tabindex="-1">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content bg-transparent border-0">
-      <img src="" alt="拡大画像" class="img-fluid rounded shadow-lg" id="modalImg">
-    </div>
-  </div>
-</div>
