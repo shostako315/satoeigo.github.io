@@ -80,16 +80,15 @@
     height: 160px;
   }
 }
-
 .gallery-scroll-section {
   background: #f8f9fa;
+  margin-bottom: 2rem;
 }
 
 .gallery-scroll-outer {
   overflow: hidden;
-  position: relative;
   width: 100%;
-  margin: 0 auto;
+  position: relative;
 }
 
 .gallery-scroll-inner {
@@ -97,20 +96,20 @@
   gap: 32px;
   align-items: center;
   animation: gallery-scroll 40s linear infinite;
-  will-change: transform;
+  min-width: 200vw; /* 画像数に応じて十分な幅を確保 */
 }
 
 .gallery-scroll-img {
-  height: 170px;
+  height: 150px;
   width: auto;
-  max-width: 320px;
+  max-width: 260px;
   border-radius: 14px;
   object-fit: cover;
   box-shadow: 0 4px 18px rgba(142,68,173,0.09);
   cursor: pointer;
-  transition: transform 0.3s;
   background: #fff;
   display: block;
+  transition: transform 0.3s;
 }
 
 .gallery-scroll-img:hover {
@@ -127,7 +126,7 @@
     gap: 16px;
   }
   .gallery-scroll-img {
-    height: 90px;
-    max-width: 60vw;
+    height: 80px;
+    max-width: 50vw;
   }
 }
