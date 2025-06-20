@@ -1,4 +1,3 @@
-// ハンバーガーメニューの優雅なアニメーション
 document.addEventListener('DOMContentLoaded', function() {
   const hamburgerBtn = document.getElementById('hamburgerBtn');
   const slideMenu = document.getElementById('slideMenu');
@@ -20,27 +19,11 @@ document.addEventListener('DOMContentLoaded', function() {
   
   // メニューアイテムクリックで閉じる
   document.querySelectorAll('.menu-items a').forEach(item => {
-    item.addEventListener('click', toggleMenu);
-  });
-  
-  // スクロールアニメーション
-  const observerOptions = {
-    root: null,
-    rootMargin: '0px',
-    threshold: 0.1
-  };
-  
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('animate__animated', 'animate__fadeInUp');
-        observer.unobserve(entry.target);
+    item.addEventListener('click', function(e) {
+      // 外部リンクでない場合のみ閉じる
+      if (!this.classList.contains('english-link')) {
+        toggleMenu();
       }
     });
-  }, observerOptions);
-  
-  // 監視対象の要素
-  document.querySelectorAll('.schedule-card, .highlight-card').forEach(card => {
-    observer.observe(card);
   });
 });
