@@ -36,3 +36,4 @@ function openModal(src) {
   modalImg.src = src;
   modal.show();
 }
+
