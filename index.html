@@ -6,18 +6,16 @@
   <title>佐藤瑛吾 | Official Site</title>
   <meta name="description" content="ヴァイオリニスト・指揮者 佐藤瑛吾の公式サイト。">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;600&family=Montserrat:wght@500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;700&family=Montserrat:wght@600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <!-- ハンバーガーメニュー -->
+  <!-- ハンバーガー -->
   <div class="hamburger-btn" id="hamburgerBtn">
     <span></span>
     <span></span>
     <span></span>
   </div>
-
-  <!-- スライドアウトメニュー -->
   <nav class="slide-menu" id="slideMenu">
     <div class="menu-header">
       <button class="close-btn" id="closeBtn">&times;</button>
@@ -30,10 +28,10 @@
       <li><a href="en.html" class="english-link">🇬🇧 English</a></li>
     </ul>
   </nav>
+  <div class="menu-overlay" id="menuOverlay"></div>
 
-  <!-- メインコンテンツ -->
   <main>
-    <!-- ヒーローセクション -->
+    <!-- ヒーロー -->
     <section class="hero-section">
       <div class="hero-overlay"></div>
       <div class="hero-content">
@@ -44,35 +42,29 @@
 
     <!-- プロフィール -->
     <section id="profile" class="py-5">
-      <div class="container">
-        <div class="section-header">
-          <h2>プロフィール</h2>
+      <div class="container" style="max-width: 900px;">
+        <div class="section-header d-flex justify-content-between align-items-end mb-4">
+          <h2 class="mb-0" style="font-family:'Montserrat','Noto Serif JP',serif;color:#8e44ad;">プロフィール</h2>
           <a href="profile-details.html" class="btn-more">詳細を見る</a>
         </div>
-        <div class="row align-items-center">
-          <div class="col-md-5 text-center mb-4 mb-md-0">
-            <div class="profile-img-container">
-              <img src="img/profile.jpg" alt="佐藤瑛吾" class="profile-img">
-              <div class="img-overlay"></div>
-            </div>
+        <div class="row align-items-center g-4">
+          <div class="col-md-5 text-center">
+            <img src="img/profile.jpg" alt="佐藤瑛吾" class="img-fluid rounded shadow profile-img-fix">
           </div>
           <div class="col-md-7">
-            <div class="profile-highlights">
-              <div class="highlight-card">
-                <div class="highlight-icon">🎻</div>
-                <h3>ヴァイオリニスト</h3>
-                <p>4歳よりヴァイオリンを始め、国内外で演奏活動</p>
-              </div>
-              <div class="highlight-card">
-                <div class="highlight-icon">🎼</div>
-                <h3>指揮者</h3>
-                <p>VariOrchestra代表としてオーケストラを指揮</p>
-              </div>
-              <div class="highlight-card">
-                <div class="highlight-icon">🏆</div>
-                <h3>受賞歴</h3>
-                <p>国際コンクールで複数の賞を受賞</p>
-              </div>
+            <div class="profile-text">
+              <p>
+                4歳からヴァイオリンを、13歳から指揮を始める。東京外国語大学在学中より東京音楽大学指揮科にて研修生として個人レッスン・マスタークラスを受講。卒業後は首都圏各地のアマチュア・学生オーケストラの指揮・指導、ヴァイオリンでの演奏活動、ビジネスコンサルタントとして金融業界を中心とする経営/事業戦略策定、業務改革、組織設計・風土改革等に従事。
+              </p>
+              <ul>
+                <li>Bach International Music Competition UK2024 第1位（指揮部門）</li>
+                <li>Max Bruch International Competition2024 Platinum Prize（指揮部門）</li>
+                <li>2nd Gabriel faure music World Competition　第1位(指揮部門)</li>
+                <li>2025年ベルギー国際オペラ指揮者コンクール出場</li>
+              </ul>
+              <p>
+                ヴァイオリンを伊藤亮太郎、有働一美、大塚杏奈、白瀬ゆりの各氏に、指揮を増井信貴氏に師事。
+              </p>
             </div>
           </div>
         </div>
@@ -81,51 +73,55 @@
 
     <!-- 公演予定 -->
     <section id="schedule" class="py-5 bg-light">
-      <div class="container">
-        <div class="section-header">
-          <h2>公演予定</h2>
+      <div class="container" style="max-width:900px;">
+        <div class="section-header d-flex justify-content-between align-items-end mb-4">
+          <h2 class="mb-0" style="font-family:'Montserrat','Noto Serif JP',serif;color:#8e44ad;">公演予定</h2>
           <a href="schedule-details.html" class="btn-more">全ての公演を見る</a>
         </div>
-        
-        <div class="schedule-cards">
-          <div class="schedule-card">
-            <div class="card-date">2025.08.11</div>
-            <h3 class="card-title">室内楽コンサート</h3>
-            <div class="card-details">
-              <p><strong>会場:</strong> カーザクラシカ</p>
-              <p><strong>時間:</strong> 18:30開場 / 19:00開演</p>
-            </div>
-            <a href="concerts/2025-08-11.html" class="btn-details">詳細を見る</a>
-          </div>
-          
-          <div class="schedule-card featured">
-            <div class="card-date">2025.09.20</div>
-            <h3 class="card-title">Legame String Orchestra</h3>
-            <div class="card-details">
-              <p><strong>会場:</strong> 所沢ミューザ</p>
-              <p><strong>時間:</strong> 17:00開場 / 17:30開演</p>
-            </div>
-            <a href="concerts/2025-09-20.html" class="btn-details">詳細を見る</a>
-          </div>
-          
-          <div class="schedule-card">
-            <div class="card-date">2025.11.01</div>
-            <h3 class="card-title">VariOrchestra × TUFS</h3>
-            <div class="card-details">
-              <p><strong>会場:</strong> 東京外国語大学</p>
-              <p><strong>時間:</strong> 14:00開場 / 14:30開演</p>
-            </div>
-            <a href="concerts/2025-11-01.html" class="btn-details">詳細を見る</a>
-          </div>
+        <div class="table-responsive">
+          <table class="table table-hover align-middle">
+            <thead class="table-dark">
+              <tr>
+                <th>日付</th>
+                <th>会場</th>
+                <th>演奏会名</th>
+                <th>出演</th>
+                <th>詳細</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>2025/08/11</td>
+                <td>カーザクラシカ</td>
+                <td>室内楽コンサート</td>
+                <td>Vn</td>
+                <td><a href="concerts/2025-08-11.html" class="btn-details">詳細</a></td>
+              </tr>
+              <tr>
+                <td>2025/09/20</td>
+                <td>所沢ミューザ</td>
+                <td>Legame String Orchestra</td>
+                <td>指揮</td>
+                <td><a href="concerts/2025-09-20.html" class="btn-details">詳細</a></td>
+              </tr>
+              <tr>
+                <td>2025/11/01</td>
+                <td>東京外国語大学</td>
+                <td>VariOrchestra × TUFS</td>
+                <td>指揮</td>
+                <td><a href="concerts/2025-11-01.html" class="btn-details">詳細</a></td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
     </section>
   </main>
 
   <!-- フッター -->
-  <footer class="footer">
+  <footer class="footer mt-5">
     <div class="container">
-      <div class="footer-content">
+      <div class="footer-content d-flex flex-wrap justify-content-between align-items-end">
         <div class="footer-brand">
           <h3>佐藤 瑛吾</h3>
           <p>Violinist & Conductor</p>
@@ -134,7 +130,7 @@
           <p>Contact: <a href="mailto:shostako315@gmail.com">shostako315@gmail.com</a></p>
         </div>
       </div>
-      <div class="footer-copyright">
+      <div class="footer-copyright text-center mt-3">
         <small>&copy; 2025 Eigo Sato. All rights reserved.</small>
       </div>
     </div>
