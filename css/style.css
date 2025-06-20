@@ -1,88 +1,220 @@
-/* プログラムリストのスタイリング */
-.concert-program {
-  margin-top: 15px;
-  padding-top: 15px;
-  border-top: 1px dashed #e0e0e0;
-}
-
-.program-title {
-  font-size: 1.1rem;
-  color: #8e44ad;
-  margin-bottom: 10px;
-  font-family: 'Montserrat', 'Noto Serif JP', serif;
-}
-
-.program-list {
-  list-style-type: none;
-  padding-left: 0;
-  margin-bottom: 0;
-}
-
-.program-list li {
-  padding: 6px 0;
-  border-bottom: 1px solid #f5f5f5;
-  font-size: 0.95rem;
-}
-
-.program-list li:last-child {
-  border-bottom: none;
-}
-
-/* カード内の余白調整 */
-.card-body {
-  padding: 20px;
-}
-
-.poster-gallery-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-  gap: 32px;
-  margin-top: 20px;
-}
-
-.poster-item {
+body {
+  font-family: 'Noto Serif JP', serif;
+  color: #333;
   background: #fff;
-  border-radius: 14px;
-  overflow: hidden;
-  box-shadow: 0 5px 24px rgba(142,68,173,0.12);
-  transition: box-shadow 0.4s, transform 0.4s;
-  position: relative;
+  line-height: 1.6;
+  margin: 0;
+  padding: 0;
+  font-size: 1rem;
 }
 
-.poster-item:hover {
-  box-shadow: 0 10px 32px rgba(142,68,173,0.20);
-  transform: translateY(-6px) scale(1.03);
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Montserrat', 'Noto Serif JP', serif;
+  font-weight: 700;
+  letter-spacing: 0.5px;
 }
 
-.poster-img {
-  width: 100%;
-  height: 340px;
-  object-fit: cover;
-  transition: transform 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+a {
+  color: #8e44ad;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+a:hover {
+  color: #5e3370;
+}
+
+/* ハンバーガーメニュー */
+.hamburger-btn, .slide-menu {
+  transition: all 1.2s cubic-bezier(0.77, 0, 0.175, 1) !important;
+}
+
+.hamburger-btn {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  width: 44px;
+  height: 44px;
+  background: rgba(255,255,255,0.96);
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  z-index: 1100;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+}
+
+.hamburger-btn span {
+  width: 24px;
+  height: 3px;
+  background: #333;
+  margin: 3px 0;
+  border-radius: 2px;
+  transition: all 0.5s cubic-bezier(.4,2.3,.3,1);
+}
+
+.hamburger-btn.active span:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 6px);
+}
+.hamburger-btn.active span:nth-child(2) {
+  opacity: 0;
+}
+.hamburger-btn.active span:nth-child(3) {
+  transform: rotate(-45deg) translate(7px, -7px);
+}
+
+/* スライドメニュー */
+.slide-menu {
+  position: fixed;
+  top: 0;
+  right: -320px;
+  width: 300px;
+  height: 100vh;
+  background: rgba(255,255,255,0.98);
+  box-shadow: -2px 0 25px rgba(0,0,0,0.12);
+  z-index: 1099;
+  display: flex;
+  flex-direction: column;
+}
+.slide-menu.active {
+  right: 0;
+}
+.menu-header {
+  padding: 24px 20px 12px 20px;
+  border-bottom: 1px solid #eee;
+  text-align: right;
+}
+.close-btn {
+  background: none;
+  border: none;
+  font-size: 2rem;
+  color: #8e44ad;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+.close-btn:hover {
+  color: #5e3370;
+}
+.menu-items {
+  list-style: none;
+  padding: 32px 0 0 0;
+  margin: 0;
+  flex: 1;
+}
+.menu-items li {
+  margin: 0;
+}
+.menu-items a {
   display: block;
-  border-radius: 14px;
+  padding: 18px 36px;
+  color: #333;
+  font-size: 1.15rem;
+  font-family: 'Montserrat', 'Noto Serif JP', serif;
+  border-radius: 0 30px 30px 0;
+  margin-bottom: 2px;
+  transition: background 0.3s, color 0.3s;
+}
+.menu-items a:hover, .menu-items a:focus {
+  background: linear-gradient(90deg, #f3e6fa 0%, #e8f0fa 100%);
+  color: #8e44ad;
+}
+.english-link {
+  background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+  color: #fff !important;
+  font-weight: bold;
+  border-radius: 24px;
+  margin: 12px 24px 0 24px;
+  text-align: center;
+  box-shadow: 0 2px 10px rgba(142,68,173,0.12);
+  display: block;
+}
+.english-link:hover {
+  background: linear-gradient(90deg, #764ba2 0%, #667eea 100%);
+  color: #fff !important;
 }
 
-@media (max-width: 768px) {
-  .poster-gallery-grid {
-    grid-template-columns: 1fr 1fr;
-    gap: 18px;
-  }
-  .poster-img {
-    height: 180px;
-  }
+/* オーバーレイ */
+.menu-overlay {
+  position: fixed;
+  top: 0; left: 0; width: 100vw; height: 100vh;
+  background: rgba(0,0,0,0.33);
+  z-index: 1098;
+  opacity: 0; visibility: hidden;
+  transition: opacity 0.8s cubic-bezier(0.77, 0, 0.175, 1);
 }
-@media (max-width: 480px) {
-  .poster-gallery-grid {
-    grid-template-columns: 1fr;
-  }
-  .poster-img {
-    height: 160px;
-  }
+.menu-overlay.active {
+  opacity: 1;
+  visibility: visible;
 }
+
+/* ヒーローセクション */
+.hero-section {
+  position: relative;
+  height: 60vh;
+  min-height: 320px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.hero-image {
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+}
+.hero-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.hero-overlay {
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(0,0,0,0.38);
+  z-index: 1;
+}
+.hero-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  color: #fff;
+  width: 100%;
+}
+.hero-title {
+  font-size: 2.5rem;
+  font-family: 'Montserrat', 'Noto Serif JP', serif;
+  font-weight: 700;
+  margin-bottom: 0.3em;
+  letter-spacing: 0.06em;
+  text-shadow: 0 2px 12px rgba(0,0,0,0.4);
+}
+.hero-subtitle {
+  font-size: 1.1rem;
+  font-family: 'Montserrat', 'Noto Serif JP', serif;
+  letter-spacing: 0.1em;
+  text-shadow: 0 2px 12px rgba(0,0,0,0.4);
+}
+
+/* プロフィール */
+.profile-content h3 {
+  font-family: 'Montserrat', 'Noto Serif JP', serif;
+  font-weight: 600;
+  border-left: 4px solid #8e44ad;
+  padding-left: 12px;
+  margin-top: 1.5rem;
+}
+.profile-content ul {
+  padding-left: 1.5rem;
+}
+.profile-content li {
+  margin-bottom: 0.3rem;
+}
+
+/* 横スクロールギャラリー */
 .gallery-scroll-section {
   background: #f8f9fa;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
 }
 
 .gallery-scroll-outer {
@@ -93,17 +225,17 @@
 
 .gallery-scroll-inner {
   display: flex;
-  gap: 32px;
+  gap: 24px;
   align-items: center;
   animation: gallery-scroll 40s linear infinite;
-  min-width: 200vw; /* 画像数に応じて十分な幅を確保 */
+  min-width: 200vw;
 }
 
 .gallery-scroll-img {
-  height: 150px;
+  height: 120px;
   width: auto;
-  max-width: 260px;
-  border-radius: 14px;
+  max-width: 200px;
+  border-radius: 12px;
   object-fit: cover;
   box-shadow: 0 4px 18px rgba(142,68,173,0.09);
   cursor: pointer;
@@ -117,16 +249,64 @@
 }
 
 @keyframes gallery-scroll {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
+  0% { transform: translateX(100%); }
+  100% { transform: translateX(-100%); }
 }
 
+/* 公演予定カード */
+.concert-card {
+  background: #fff;
+  border-left: 6px solid #8e44ad;
+  box-shadow: 0 4px 18px rgba(142,68,173,0.07);
+  transition: box-shadow 0.3s;
+}
+
+.concert-card:hover {
+  box-shadow: 0 10px 32px rgba(142,68,173,0.13);
+}
+
+/* フッター */
+.footer {
+  background: linear-gradient(90deg, #8e44ad 0%, #2c3e50 100%);
+  color: #fff;
+  padding: 2.2rem 0 1rem 0;
+  margin-top: 4rem;
+}
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  gap: 1.5em;
+}
+.footer-brand h3 {
+  font-family: 'Montserrat', 'Noto Serif JP', serif;
+  font-size: 1.2rem;
+  margin-bottom: 0.4em;
+}
+.footer-contact {
+  font-size: 1rem;
+}
+.footer-contact a {
+  color: #fff;
+  border-bottom: 1px dotted #fff;
+}
+.footer-contact a:hover {
+  color: #ffe6ff;
+}
+.footer-copyright {
+  text-align: center;
+  margin-top: 1.5em;
+  font-size: 0.9em;
+  opacity: 0.7;
+}
+
+/* レスポンシブ調整 */
 @media (max-width: 768px) {
-  .gallery-scroll-inner {
-    gap: 16px;
-  }
-  .gallery-scroll-img {
-    height: 80px;
-    max-width: 50vw;
-  }
+  html { font-size: 14px; }
+  .hero-section { height: 40vh; min-height: 240px;}
+  .hero-title { font-size: 2.2rem;}
+  .gallery-scroll-inner { gap: 16px; }
+  .gallery-scroll-img { height: 80px; max-width: 50vw; }
+  .slide-menu { width: 85vw; }
 }
