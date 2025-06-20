@@ -3,7 +3,6 @@ document.addEventListener('DOMContentLoaded', function() {
   const slideMenu = document.getElementById('slideMenu');
   const closeBtn = document.getElementById('closeBtn');
   const menuOverlay = document.getElementById('menuOverlay');
-
   function openMenu() {
     hamburgerBtn.classList.add('active');
     slideMenu.classList.add('active');
@@ -30,10 +29,7 @@ document.addEventListener('DOMContentLoaded', function() {
       closeMenu();
     });
   });
-  // 横スクロールギャラリーの画像複製（最初から表示されるので不要）
 });
-
-// モーダル拡大機能
 function openModal(src) {
   const modal = new bootstrap.Modal(document.getElementById('imageModal'));
   const modalImg = document.getElementById('modalImg');
