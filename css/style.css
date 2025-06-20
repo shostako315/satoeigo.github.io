@@ -155,7 +155,6 @@ a:hover {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, #e8eaf6 0%, #f3e6fa 100%);
   overflow: hidden;
 }
 .hero-image {
@@ -166,13 +165,19 @@ a:hover {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  opacity: 0.92;
+  display: block;
+}
+.hero-overlay {
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(0,0,0,0.38);
+  z-index: 1;
 }
 .hero-content {
   position: relative;
   z-index: 2;
   text-align: center;
-  color: #2c3e50;
+  color: #fff;
   width: 100%;
 }
 .hero-title {
@@ -181,48 +186,82 @@ a:hover {
   font-weight: 700;
   margin-bottom: 0.3em;
   letter-spacing: 0.06em;
-  color: #2c3e50;
-  text-shadow: 0 4px 24px rgba(142,68,173,0.08);
+  text-shadow: 0 2px 12px rgba(0,0,0,0.4);
 }
 .hero-subtitle {
   font-size: 1.1rem;
-  color: #6c3483;
   font-family: 'Montserrat', 'Noto Serif JP', serif;
   letter-spacing: 0.1em;
+  text-shadow: 0 2px 12px rgba(0,0,0,0.4);
 }
 
-/* プロフィール調整 */
-#profile .img-fluid {
-  max-width: 220px;
-  width: 100%;
-  height: auto;
-  margin: 0 auto;
-  display: block;
-  box-shadow: 0 15px 40px rgba(0,0,0,0.18);
-  border-radius: 12px;
-}
-
-/* 公演予定テーブル */
-.table {
-  font-size: 0.98rem;
-  border-collapse: separate;
-  border-spacing: 0;
-}
-.table th {
-  background: #8e44ad;
-  color: white;
+/* プロフィール */
+.profile-content h3 {
+  font-family: 'Montserrat', 'Noto Serif JP', serif;
   font-weight: 600;
-  padding: 12px 15px;
+  border-left: 4px solid #8e44ad;
+  padding-left: 12px;
+  margin-top: 1.8rem;
 }
-.table td {
-  padding: 10px 15px;
-  vertical-align: middle;
+.profile-content ul {
+  padding-left: 1.5rem;
+}
+.profile-content li {
+  margin-bottom: 0.5rem;
+}
+
+/* 公演予定カード */
+.concert-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 25px;
+}
+.concert-card {
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 5px 25px rgba(0,0,0,0.08);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.concert-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(142,68,173,0.15);
+}
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  background: #f8f9fa;
   border-bottom: 1px solid #eee;
+}
+.card-date {
+  font-weight: 700;
+  color: #8e44ad;
+  font-size: 1.1rem;
+}
+.card-body {
+  padding: 20px;
+}
+.card-title {
+  font-size: 1.3rem;
+  color: #2c3e50;
+  margin-bottom: 15px;
+}
+.card-info {
+  font-size: 1rem;
+  color: #555;
+}
+.info-label {
+  font-weight: 600;
+  display: inline-block;
+  width: 60px;
+  color: #8e44ad;
 }
 .btn-details {
   display: inline-block;
-  padding: 0.5em 1.2em;
-  background: #f8f9fa;
+  padding: 0.4em 1.5em;
+  background: #fff;
   color: #8e44ad;
   text-decoration: none;
   font-weight: 600;
@@ -277,8 +316,6 @@ a:hover {
   html { font-size: 14px; }
   .hero-section { height: 40vh; min-height: 240px;}
   .hero-title { font-size: 2.2rem;}
-  #profile .img-fluid { max-width: 90vw; }
-  .table { font-size: 0.85rem; }
+  .concert-cards { grid-template-columns: 1fr; }
   .slide-menu { width: 85vw; }
 }
-
