@@ -32,3 +32,51 @@
 .card-body {
   padding: 20px;
 }
+
+.poster-gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 32px;
+  margin-top: 20px;
+}
+
+.poster-item {
+  background: #fff;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 5px 24px rgba(142,68,173,0.12);
+  transition: box-shadow 0.4s, transform 0.4s;
+  position: relative;
+}
+
+.poster-item:hover {
+  box-shadow: 0 10px 32px rgba(142,68,173,0.20);
+  transform: translateY(-6px) scale(1.03);
+}
+
+.poster-img {
+  width: 100%;
+  height: 340px;
+  object-fit: cover;
+  transition: transform 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+  display: block;
+  border-radius: 14px;
+}
+
+@media (max-width: 768px) {
+  .poster-gallery-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+  }
+  .poster-img {
+    height: 180px;
+  }
+}
+@media (max-width: 480px) {
+  .poster-gallery-grid {
+    grid-template-columns: 1fr;
+  }
+  .poster-img {
+    height: 160px;
+  }
+}
