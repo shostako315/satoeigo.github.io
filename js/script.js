@@ -1,43 +1,46 @@
+// ハンバーガーメニューの優雅なアニメーション
 document.addEventListener('DOMContentLoaded', function() {
   const hamburgerBtn = document.getElementById('hamburgerBtn');
   const slideMenu = document.getElementById('slideMenu');
   const closeBtn = document.getElementById('closeBtn');
   const menuOverlay = document.getElementById('menuOverlay');
-
-  // ハンバーガーメニュー開く
-  hamburgerBtn.addEventListener('click', function() {
-    hamburgerBtn.classList.add('active');
-    slideMenu.classList.add('active');
-    menuOverlay.classList.add('active');
-    document.body.style.overflow = 'hidden';
-  });
-
-  // メニュー閉じる
-  function closeMenu() {
-    hamburgerBtn.classList.remove('active');
-    slideMenu.classList.remove('active');
-    menuOverlay.classList.remove('active');
-    document.body.style.overflow = 'auto';
+  
+  // メニュー開閉関数
+  function toggleMenu() {
+    hamburgerBtn.classList.toggle('active');
+    slideMenu.classList.toggle('active');
+    menuOverlay.classList.toggle('active');
+    document.body.classList.toggle('no-scroll');
   }
-
-  closeBtn.addEventListener('click', closeMenu);
-  menuOverlay.addEventListener('click', closeMenu);
-
-  // メニューリンククリック時に閉じる
-  const menuLinks = document.querySelectorAll('.menu-items a');
-  menuLinks.forEach(link => {
-    link.addEventListener('click', function() {
-      // 内部リンクの場合のみメニューを閉じる
-      if (this.getAttribute('href').startsWith('#')) {
-        closeMenu();
+  
+  // イベントリスナー
+  hamburgerBtn.addEventListener('click', toggleMenu);
+  closeBtn.addEventListener('click', toggleMenu);
+  menuOverlay.addEventListener('click', toggleMenu);
+  
+  // メニューアイテムクリックで閉じる
+  document.querySelectorAll('.menu-items a').forEach(item => {
+    item.addEventListener('click', toggleMenu);
+  });
+  
+  // スクロールアニメーション
+  const observerOptions = {
+    root: null,
+    rootMargin: '0px',
+    threshold: 0.1
+  };
+  
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('animate__animated', 'animate__fadeInUp');
+        observer.unobserve(entry.target);
       }
     });
-  });
-
-  // ESCキーでメニューを閉じる
-  document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape') {
-      closeMenu();
-    }
+  }, observerOptions);
+  
+  // 監視対象の要素
+  document.querySelectorAll('.schedule-card, .highlight-card').forEach(card => {
+    observer.observe(card);
   });
 });
