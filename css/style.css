@@ -211,9 +211,9 @@ a:hover {
   margin-bottom: 0.3rem;
 }
 
-/* 横スクロールギャラリー */
+/* 横スクロールギャラリー（画像サイズ大幅アップ） */
 .gallery-scroll-section {
-  background: #f8f9fa;
+  background: linear-gradient(135deg, #f8f9fa 0%, #f1f2f6 100%);
   margin-bottom: 1rem;
 }
 
@@ -225,27 +225,28 @@ a:hover {
 
 .gallery-scroll-inner {
   display: flex;
-  gap: 24px;
+  gap: 30px;
   align-items: center;
-  animation: gallery-scroll 40s linear infinite;
+  animation: gallery-scroll 45s linear infinite;
   min-width: 200vw;
 }
 
 .gallery-scroll-img {
-  height: 120px;
+  height: 200px;
   width: auto;
-  max-width: 200px;
-  border-radius: 12px;
+  max-width: 320px;
+  border-radius: 16px;
   object-fit: cover;
-  box-shadow: 0 4px 18px rgba(142,68,173,0.09);
+  box-shadow: 0 8px 25px rgba(142,68,173,0.15);
   cursor: pointer;
   background: #fff;
   display: block;
-  transition: transform 0.3s;
+  transition: transform 0.4s cubic-bezier(0.19, 1, 0.22, 1);
 }
 
 .gallery-scroll-img:hover {
-  transform: scale(1.05);
+  transform: scale(1.08);
+  box-shadow: 0 12px 35px rgba(142,68,173,0.25);
 }
 
 @keyframes gallery-scroll {
@@ -263,6 +264,142 @@ a:hover {
 
 .concert-card:hover {
   box-shadow: 0 10px 32px rgba(142,68,173,0.13);
+}
+
+/* 過去演奏会タイムライン（洗練されたデザイン） */
+.past-concerts-timeline {
+  position: relative;
+}
+
+.past-concerts-timeline::before {
+  content: '';
+  position: absolute;
+  left: 80px;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: linear-gradient(to bottom, #8e44ad, #6c3483);
+}
+
+.past-concert-card {
+  position: relative;
+  margin-bottom: 40px;
+  padding-left: 160px;
+  min-height: 120px;
+}
+
+.past-concert-card.featured .concert-date-badge {
+  background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+  color: white;
+}
+
+.past-concert-card.featured .concert-card-content {
+  border-left: 4px solid #ff6b6b;
+}
+
+.concert-date-badge {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 120px;
+  height: 60px;
+  background: linear-gradient(135deg, #8e44ad, #6c3483);
+  color: white;
+  border-radius: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 1.1rem;
+  box-shadow: 0 4px 15px rgba(142,68,173,0.3);
+  z-index: 2;
+}
+
+.concert-card-content {
+  background: #fff;
+  border-radius: 16px;
+  padding: 25px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+  border-left: 4px solid #8e44ad;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.concert-card-content:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 40px rgba(142,68,173,0.15);
+}
+
+.concert-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 15px;
+}
+
+.concert-header h3 {
+  font-size: 1.4rem;
+  color: #2c3e50;
+  margin: 0;
+  flex: 1;
+  padding-right: 15px;
+}
+
+.concert-detail-btn {
+  background: linear-gradient(135deg, #8e44ad, #6c3483);
+  color: white;
+  padding: 8px 20px;
+  border-radius: 25px;
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 600;
+  transition: all 0.3s;
+  white-space: nowrap;
+}
+
+.concert-detail-btn:hover {
+  background: linear-gradient(135deg, #6c3483, #4a2c4a);
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(142,68,173,0.4);
+}
+
+.concert-venue {
+  color: #666;
+  margin-bottom: 10px;
+  font-size: 1rem;
+}
+
+.conductor-info {
+  color: #8e44ad;
+  font-weight: 600;
+  margin-bottom: 15px;
+  font-size: 1rem;
+}
+
+.concert-program h4 {
+  color: #8e44ad;
+  font-size: 1.1rem;
+  margin-bottom: 12px;
+  border-bottom: 2px solid #e9ecef;
+  padding-bottom: 8px;
+}
+
+.program-items {
+  display: grid;
+  gap: 8px;
+}
+
+.program-item {
+  background: #f8f9fa;
+  padding: 10px 15px;
+  border-radius: 8px;
+  border-left: 3px solid #8e44ad;
+  font-size: 0.95rem;
+  transition: background 0.3s;
+}
+
+.program-item:hover {
+  background: #e9ecef;
 }
 
 /* フッター */
@@ -306,7 +443,39 @@ a:hover {
   html { font-size: 14px; }
   .hero-section { height: 40vh; min-height: 240px;}
   .hero-title { font-size: 2.2rem;}
-  .gallery-scroll-inner { gap: 16px; }
-  .gallery-scroll-img { height: 80px; max-width: 50vw; }
+  
+  /* 横スクロールギャラリー（スマホ画像サイズアップ） */
+  .gallery-scroll-inner { gap: 20px; }
+  .gallery-scroll-img { 
+    height: 140px; 
+    max-width: 70vw; 
+  }
+  
+  /* 過去演奏会タイムライン（スマホ最適化） */
+  .past-concerts-timeline::before {
+    left: 20px;
+  }
+  
+  .past-concert-card {
+    padding-left: 60px;
+  }
+  
+  .concert-date-badge {
+    width: 80px;
+    height: 50px;
+    font-size: 0.9rem;
+    border-radius: 25px;
+  }
+  
+  .concert-header {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .concert-header h3 {
+    font-size: 1.2rem;
+    padding-right: 0;
+  }
+  
   .slide-menu { width: 85vw; }
 }
