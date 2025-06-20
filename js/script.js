@@ -10,14 +10,12 @@ document.addEventListener('DOMContentLoaded', function() {
     menuOverlay.classList.add('active');
     document.body.classList.add('no-scroll');
   }
-
   function closeMenu() {
     hamburgerBtn.classList.remove('active');
     slideMenu.classList.remove('active');
     menuOverlay.classList.remove('active');
     document.body.classList.remove('no-scroll');
   }
-
   hamburgerBtn.addEventListener('click', () => {
     if (!slideMenu.classList.contains('active')) {
       setTimeout(openMenu, 300);
@@ -25,22 +23,14 @@ document.addEventListener('DOMContentLoaded', function() {
       closeMenu();
     }
   });
-
   closeBtn.addEventListener('click', closeMenu);
   menuOverlay.addEventListener('click', closeMenu);
-
-  // メニューリンククリックで閉じる
   document.querySelectorAll('.menu-items a').forEach(link => {
     link.addEventListener('click', () => {
       closeMenu();
     });
   });
-
-  // 横スクロールギャラリーの画像複製
-  const galleryInner = document.getElementById('galleryScrollInner');
-  if (galleryInner && galleryInner.children.length > 0) {
-    galleryInner.innerHTML += galleryInner.innerHTML;
-  }
+  // 横スクロールギャラリーの画像複製（最初から表示されるので不要）
 });
 
 // モーダル拡大機能
