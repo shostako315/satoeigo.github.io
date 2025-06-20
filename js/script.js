@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
   hamburgerBtn.addEventListener('click', () => {
     if (!slideMenu.classList.contains('active')) {
-      setTimeout(openMenu, 300); // 300ms遅延でより優雅に
+      setTimeout(openMenu, 300);
     } else {
       closeMenu();
     }
