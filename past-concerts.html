@@ -5,18 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>過去の演奏会 | 佐藤瑛吾</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;700&family=Montserrat:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <!-- ハンバーガーメニューボタン -->
+  <!-- ハンバーガー -->
   <div class="hamburger-btn" id="hamburgerBtn">
     <span></span>
     <span></span>
     <span></span>
   </div>
-
-  <!-- スライドアウトメニュー -->
   <nav class="slide-menu" id="slideMenu">
     <div class="menu-header">
       <button class="close-btn" id="closeBtn">&times;</button>
@@ -29,66 +27,92 @@
       <li><a href="en.html" class="english-link">🇬🇧 English</a></li>
     </ul>
   </nav>
-
   <div class="menu-overlay" id="menuOverlay"></div>
 
-  <main class="container py-5">
-    <h1 class="text-center mb-5">過去の演奏会</h1>
-    
-    <!-- VariOrchestra -->
-    <section class="mb-5">
-      <div class="concert-card">
-        <div class="row">
-          <div class="col-md-4 mb-3">
-            <img src="img/vari-orchestra-concert.jpg" alt="VariOrchestra" class="img-fluid rounded">
-          </div>
-          <div class="col-md-8">
-            <h3>VariOrchestra Regular Concerts</h3>
-            <ul class="concert-list">
-              <li>Beethoven symphony No.5</li>
-              <li>Beethoven symphony No.7</li>
-              <li>Schubert symphony No.5</li>
-              <li>Haydn Cello concert No.1</li>
-              <li>Mozart Flute concert No.1</li>
-              <li>Bach Concerto for two violin</li>
-              <li>Vivaldi Il cimento dell'armonia e dell'inventione</li>
-              <li>etc...</li>
-            </ul>
-          </div>
-        </div>
+  <main>
+    <!-- ヒーローセクション -->
+    <section class="hero-section">
+      <div class="hero-image">
+        <img src="img/hero-concert.jpg" alt="Concert Hall" class="fade-in-img">
+      </div>
+      <div class="hero-overlay"></div>
+      <div class="hero-content">
+        <h1 class="hero-title">過去の演奏会</h1>
+        <p class="hero-subtitle">Past Concerts</p>
       </div>
     </section>
 
-    <!-- TUFS Orchestra -->
-    <section class="mb-5">
-      <div class="concert-card">
-        <div class="row">
-          <div class="col-md-4 mb-3">
-            <img src="img/tufs-orchestra.jpg" alt="TUFS Orchestra" class="img-fluid rounded">
+    <!-- 過去の演奏会一覧 -->
+    <section class="py-5">
+      <div class="container" style="max-width:900px;">
+        <h2 class="text-center mb-4" style="font-family:'Montserrat','Noto Serif JP',serif;color:#8e44ad;">過去の演奏会</h2>
+        <div class="concert-cards">
+          <!-- ここに過去の演奏会カードを並べる -->
+          <div class="concert-card">
+            <div class="card-header">
+              <div class="card-date">2023/06/10</div>
+              <a href="concerts/2023-06-10.html" class="btn-details">詳細</a>
+            </div>
+            <div class="card-body">
+              <h3 class="card-title">VariOrchestra 第1回定期演奏会</h3>
+              <div class="card-info">
+                <div><span class="info-label">会場:</span> 紀尾井サロン</div>
+                <div><span class="info-label">出演:</span> 指揮・Vn</div>
+              </div>
+            </div>
           </div>
-          <div class="col-md-8">
-            <h3>TUFS Orchestra Regular Concert vol.100,101,102</h3>
-            <ul class="concert-list">
-              <li>Rimsky korsakov : Scheherazade</li>
-              <li>Saint saens: symphony no.3</li>
-              <li>F.list: Le prelude</li>
-              <li>Shostakovich:symphony No.5</li>
-              <li>Rimsky korsakov:capriccio espagnol</li>
-              <li>etc...</li>
-            </ul>
+          
+          <div class="concert-card">
+            <div class="card-header">
+              <div class="card-date">2023/11/25</div>
+              <a href="concerts/2023-11-25.html" class="btn-details">詳細</a>
+            </div>
+            <div class="card-body">
+              <h3 class="card-title">VariOrchestra 第2回定期演奏会</h3>
+              <div class="card-info">
+                <div><span class="info-label">会場:</span> 東京文化会館</div>
+                <div><span class="info-label">出演:</span> 指揮・Vn</div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="concert-card">
+            <div class="card-header">
+              <div class="card-date">2024/03/17</div>
+              <a href="concerts/2024-03-17.html" class="btn-details">詳細</a>
+            </div>
+            <div class="card-body">
+              <h3 class="card-title">VariOrchestra 第3回定期演奏会</h3>
+              <div class="card-info">
+                <div><span class="info-label">会場:</span> サントリーホール</div>
+                <div><span class="info-label">出演:</span> 指揮・Vn</div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </section>
   </main>
 
-  <footer class="bg-dark text-white py-3">
-    <div class="container text-center">
-      <p class="mb-1">Contact: <a href="mailto:shostako315@gmail.com" class="text-white">shostako315@gmail.com</a></p>
-      <small>&copy; 2025 Eigo Sato. All rights reserved.</small>
+  <!-- フッター -->
+  <footer class="footer mt-5">
+    <div class="container">
+      <div class="footer-content d-flex flex-wrap justify-content-between align-items-end">
+        <div class="footer-brand">
+          <h3>佐藤 瑛吾</h3>
+          <p>Violinist & Conductor</p>
+        </div>
+        <div class="footer-contact">
+          <p>Contact: <a href="mailto:shostako315@gmail.com">shostako315@gmail.com</a></p>
+        </div>
+      </div>
+      <div class="footer-copyright text-center mt-3">
+        <small>&copy; 2025 Eigo Sato. All rights reserved.</small>
+      </div>
     </div>
   </footer>
 
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   <script src="js/script.js"></script>
 </body>
 </html>
