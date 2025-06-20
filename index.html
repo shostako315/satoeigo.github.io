@@ -10,29 +10,41 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <!-- ヘッダー -->
-  <nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top shadow-sm py-2">
-    <div class="container">
-      <a class="navbar-brand fw-bold" href="#">佐藤 瑛吾</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ms-auto">
-          <li class="nav-item"><a class="nav-link" href="#profile">プロフィール</a></li>
-          <li class="nav-item"><a class="nav-link" href="#schedule">公演予定</a></li>
-          <li class="nav-item"><a class="nav-link" href="#gallery">ギャラリー</a></li>
-          <li class="nav-item"><a class="nav-link" href="en.html">English</a></li>
-        </ul>
-      </div>
+  <!-- ハンバーガーメニューボタン -->
+  <div class="hamburger-btn" id="hamburgerBtn">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+
+  <!-- スライドアウトメニュー -->
+  <nav class="slide-menu" id="slideMenu">
+    <div class="menu-header">
+      <button class="close-btn" id="closeBtn">&times;</button>
     </div>
+    <ul class="menu-items">
+      <li><a href="#profile">プロフィール</a></li>
+      <li><a href="#schedule">公演予定</a></li>
+      <li><a href="past-concerts.html">過去の演奏会</a></li>
+      <li><a href="gallery.html">ポスターギャラリー</a></li>
+      <li><a href="en.html" class="english-link">🇬🇧 English</a></li>
+    </ul>
   </nav>
+
+  <!-- メニューオーバーレイ -->
+  <div class="menu-overlay" id="menuOverlay"></div>
 
   <!-- メイン -->
   <main>
-    <section class="hero-section text-center py-4">
-      <h1 class="fw-bold mb-2">Eigo Sato</h1>
-      <p class="text-muted fst-italic mb-0">"Music is the art of the invisible."</p>
+    <!-- ヒーローセクション -->
+    <section class="hero-section">
+      <div class="hero-image">
+        <img src="img/hero-concert.jpg" alt="Concert Hall" class="fade-in-img">
+      </div>
+      <div class="hero-content">
+        <h1 class="hero-title">佐藤 瑛吾</h1>
+        <p class="hero-subtitle">Violinist & Conductor</p>
+      </div>
     </section>
 
     <!-- プロフィール -->
@@ -130,26 +142,6 @@
               </tr>
             </tbody>
           </table>
-        </div>
-      </div>
-    </section>
-
-    <!-- ギャラリー -->
-    <section id="gallery" class="py-4">
-      <div class="container">
-        <h2 class="mb-3 text-center">Gallery</h2>
-        <div class="gallery-scroll-container">
-          <div class="gallery-scroll-inner">
-            <!-- 画像リストを2回繰り返す -->
-            <img src="img/profile.jpg" alt="Profile" class="gallery-img">
-            <img src="img/concert.jpg" alt="Concert" class="gallery-img">
-            <img src="img/top_orchestra.jpg" alt="Orchestra" class="gallery-img">
-            <img src="img/stainedglass.jpg" alt="Stained Glass" class="gallery-img">
-            <img src="img/profile.jpg" alt="Profile" class="gallery-img">
-            <img src="img/concert.jpg" alt="Concert" class="gallery-img">
-            <img src="img/top_orchestra.jpg" alt="Orchestra" class="gallery-img">
-            <img src="img/stainedglass.jpg" alt="Stained Glass" class="gallery-img">
-          </div>
         </div>
       </div>
     </section>
