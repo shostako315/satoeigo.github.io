@@ -1,4 +1,4 @@
-// ハンバーガーメニューの制御
+// ハンバーガーメニューの制御 - 改善版
 document.addEventListener('DOMContentLoaded', function() {
     const hamburgerBtn = document.getElementById('hamburgerBtn');
     const slideMenu = document.getElementById('slideMenu');
@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // メニューを開く
     function openMenu() {
+        hamburgerBtn.classList.add('active');
         slideMenu.classList.add('active');
         menuOverlay.classList.add('active');
         document.body.style.overflow = 'hidden';
@@ -14,15 +15,23 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // メニューを閉じる
     function closeMenu() {
+        hamburgerBtn.classList.remove('active');
         slideMenu.classList.remove('active');
         menuOverlay.classList.remove('active');
         document.body.style.overflow = '';
     }
 
     // イベントリスナー
-    hamburgerBtn.addEventListener('click', openMenu);
-    closeBtn.addEventListener('click', closeMenu);
-    menuOverlay.addEventListener('click', closeMenu);
+    if (hamburgerBtn) hamburgerBtn.addEventListener('click', openMenu);
+    if (closeBtn) closeBtn.addEventListener('click', closeMenu);
+    if (menuOverlay) menuOverlay.addEventListener('click', closeMenu);
+
+    // ESCキーでメニューを閉じる
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && slideMenu && slideMenu.classList.contains('active')) {
+            closeMenu();
+        }
+    });
 
     // スムーズスクロール
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -34,6 +43,16 @@ document.addEventListener('DOMContentLoaded', function() {
                     behavior: 'smooth',
                     block: 'start'
                 });
+                closeMenu();
+            }
+        });
+    });
+
+    // メニュー項目のクリック時にメニューを閉じる
+    document.querySelectorAll('.menu-items a').forEach(link => {
+        link.addEventListener('click', function(e) {
+            // 外部リンクの場合はメニューを閉じる
+            if (!this.getAttribute('href').startsWith('#')) {
                 closeMenu();
             }
         });
