@@ -7,24 +7,43 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // メニューを開く
     function openMenu() {
-        hamburgerBtn.classList.add('active');
-        slideMenu.classList.add('active');
-        menuOverlay.classList.add('active');
+        if (hamburgerBtn) hamburgerBtn.classList.add('active');
+        if (slideMenu) slideMenu.classList.add('active');
+        if (menuOverlay) menuOverlay.classList.add('active');
         document.body.style.overflow = 'hidden';
     }
 
     // メニューを閉じる
     function closeMenu() {
-        hamburgerBtn.classList.remove('active');
-        slideMenu.classList.remove('active');
-        menuOverlay.classList.remove('active');
+        if (hamburgerBtn) hamburgerBtn.classList.remove('active');
+        if (slideMenu) slideMenu.classList.remove('active');
+        if (menuOverlay) menuOverlay.classList.remove('active');
         document.body.style.overflow = '';
     }
 
     // イベントリスナー
-    if (hamburgerBtn) hamburgerBtn.addEventListener('click', openMenu);
-    if (closeBtn) closeBtn.addEventListener('click', closeMenu);
-    if (menuOverlay) menuOverlay.addEventListener('click', closeMenu);
+    if (hamburgerBtn) {
+        hamburgerBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            openMenu();
+        });
+    }
+    
+    if (closeBtn) {
+        closeBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            closeMenu();
+        });
+    }
+    
+    if (menuOverlay) {
+        menuOverlay.addEventListener('click', function(e) {
+            e.preventDefault();
+            closeMenu();
+        });
+    }
 
     // ESCキーでメニューを閉じる
     document.addEventListener('keydown', function(e) {
@@ -53,7 +72,9 @@ document.addEventListener('DOMContentLoaded', function() {
         link.addEventListener('click', function(e) {
             // 外部リンクの場合はメニューを閉じる
             if (!this.getAttribute('href').startsWith('#')) {
-                closeMenu();
+                setTimeout(() => {
+                    closeMenu();
+                }, 100);
             }
         });
     });
