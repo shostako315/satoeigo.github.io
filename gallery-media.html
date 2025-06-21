@@ -7,7 +7,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Noto+Serif+JP:wght@400;700&display=swap" rel="stylesheet">
   <style>
 
-  <!-- ハンバーガーメニュー -->
+  <!-- ハンバーガー -->
   <div class="hamburger-btn" id="hamburgerBtn" aria-label="メニューを開く" tabindex="0">
     <span></span>
     <span></span>
@@ -23,7 +23,7 @@
       <li><a href="index.html#schedule">公演予定</a></li>
       <li><a href="past-concerts.html">過去の演奏会</a></li>
       <li><a href="gallery.html">ポスターギャラリー</a></li>
-      <li><a href="gallery-media.html">メディアギャラリー</a></li>
+      <li><a href="gallery-media.html">メディアギャラリー</a></li> 
       <li><a href="en.html" class="english-link">&#127468;&#127463; English</a></li>
     </ul>
   </nav>
@@ -312,22 +312,5 @@
       <img src="img/vari-orchestra-concert.jpg" alt="Vari Orchestra Concert">
     </div>
   </div>
-</body>
-</html>
-
- document.addEventListener('DOMContentLoaded', function() {
-      const hamburgerBtn = document.getElementById('hamburgerBtn');
-      const slideMenu = document.getElementById('slideMenu');
-      const closeBtn = document.getElementById('closeBtn');
-      hamburgerBtn.addEventListener('click', function() {
-        slideMenu.classList.add('active');
-        hamburgerBtn.style.display = 'none';
-      });
-      closeBtn.addEventListener('click', function() {
-        slideMenu.classList.remove('active');
-        hamburgerBtn.style.display = 'flex';
-      });
-    });
-  </script>
 </body>
 </html>
