@@ -164,51 +164,55 @@ a:hover {
   visibility: visible;
 }
 
-/* 横スクロールギャラリー */
-.gallery-scroll-section {
-  background: linear-gradient(135deg, #f8f9fa 0%, #f1f2f6 100%);
-  margin-bottom: 1rem;
-}
-.gallery-scroll-outer {
-  overflow: hidden;
-  width: 100%;
-  position: relative;
-}
-.gallery-scroll-inner {
+/* プロフィールの紫縦棒・セクション分け */
+.profile-section {
   display: flex;
-  gap: 40px;
-  align-items: center;
-  animation: gallery-scroll 48s linear infinite;
-  min-width: 300vw;
-  transform: translateX(0);
+  align-items: flex-start;
+  margin-bottom: 1.7rem;
 }
-.gallery-scroll-img {
-  height: 420px;
-  width: auto;
-  max-width: 98vw;
-  border-radius: 18px;
-  object-fit: cover;
-  box-shadow: 0 8px 25px rgba(142,68,173,0.15);
-  cursor: pointer;
+.profile-bar {
+  width: 7px;
+  min-width: 7px;
+  height: 100%;
+  background: linear-gradient(180deg, #8e44ad 0%, #764ba2 100%);
+  border-radius: 6px;
+  margin-right: 18px;
+  margin-top: 4px;
+}
+.profile-section-title {
+  font-size: 1.1rem;
+  color: #8e44ad;
+  font-family: 'Montserrat', 'Noto Serif JP', serif;
+  font-weight: 700;
+  margin-bottom: 0.3em;
+}
+
+/* 公演予定カード */
+.concert-card {
   background: #fff;
-  display: block;
-  transition: transform 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+  border-left: 6px solid #8e44ad;
+  box-shadow: 0 4px 18px rgba(142,68,173,0.07);
+  transition: box-shadow 0.3s;
 }
-.gallery-scroll-img:hover {
-  transform: scale(1.08);
-  box-shadow: 0 12px 35px rgba(142,68,173,0.25);
+.concert-card:hover {
+  box-shadow: 0 10px 32px rgba(142,68,173,0.13);
 }
-@keyframes gallery-scroll {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
+.btn-details, .concert-card .btn-outline-primary {
+  background: #fff;
+  color: #8e44ad;
+  border: 2px solid #8e44ad;
+  border-radius: 22px;
+  font-weight: 600;
+  transition: all 0.2s;
+  padding: 0.4em 1.2em;
+  font-size: 0.98rem;
+  display: inline-block;
+  text-align: center;
 }
-@media (max-width: 900px) {
-  .gallery-scroll-inner { gap: 20px; }
-  .gallery-scroll-img { height: 230px; max-width: 98vw; }
-}
-@media (max-width: 600px) {
-  .gallery-scroll-inner { gap: 10px; }
-  .gallery-scroll-img { height: 60vw; min-height: 180px; max-height: 400px; }
+.btn-details:hover, .concert-card .btn-outline-primary:hover {
+  background: #8e44ad;
+  color: #fff;
+  border-color: #8e44ad;
 }
 
 /* フッター紫色 */
@@ -245,29 +249,4 @@ a:hover {
   margin-top: 1.5em;
   font-size: 0.9em;
   opacity: 0.7;
-}
-
-/* 公演予定カード */
-.concert-card {
-  background: #fff;
-  border-left: 6px solid #8e44ad;
-  box-shadow: 0 4px 18px rgba(142,68,173,0.07);
-  transition: box-shadow 0.3s;
-}
-.concert-card:hover {
-  box-shadow: 0 10px 32px rgba(142,68,173,0.13);
-}
-.btn, .btn-details, .concert-card .btn-outline-primary {
-  background: #fff;
-  color: #8e44ad;
-  border: 2px solid #8e44ad;
-  border-radius: 22px;
-  font-weight: 600;
-  transition: all 0.2s;
-  padding: 0.4em 1.2em;
-}
-.btn:hover, .btn-details:hover, .concert-card .btn-outline-primary:hover {
-  background: #8e44ad;
-  color: #fff;
-  border-color: #8e44ad;
 }
