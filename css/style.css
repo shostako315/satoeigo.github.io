@@ -40,32 +40,242 @@ a:hover {
   object-position: center;
   display: block;
 }
+.hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.3);
+  z-index: 1;
+}
+.hero-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  text-align: center;
+  color: white;
+  width: 100%;
+  padding: 0 20px;
+}
+.hero-title {
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+.hero-subtitle {
+  font-size: 1.2rem;
+  font-weight: 300;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+}
 @media (max-width: 600px) {
   .hero-section {
     height: 200px;
     min-height: 120px;
     max-height: 280px;
   }
+  .hero-title {
+    font-size: 2rem;
+  }
+  .hero-subtitle {
+    font-size: 1rem;
+  }
 }
 
-/* ハンバーガーメニュー */
+/* ハンバーガーメニュー - 改善版 */
 .hamburger-btn {
   position: fixed;
   top: 20px;
   right: 20px;
-  width: 44px;
-  height: 44px;
-  background: rgba(255,255,255,0.96);
-  border-radius: 10px;
+  width: 50px;
+  height: 50px;
+  background: rgba(255, 255, 255, 0.95);
+  border: 2px solid rgba(142, 68, 173, 0.2);
+  border-radius: 12px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   cursor: pointer;
   z-index: 1200;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
 }
-/* ハンバーガーアニメーションは省略... */
+.hamburger-btn:hover {
+  background: rgba(142, 68, 173, 0.1);
+  border-color: #8e44ad;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 25px rgba(142, 68, 173, 0.2);
+}
+.hamburger-btn span {
+  width: 24px;
+  height: 3px;
+  background: #8e44ad;
+  margin: 2px 0;
+  transition: all 0.3s ease;
+  border-radius: 2px;
+}
+.hamburger-btn.active span:nth-child(1) {
+  transform: rotate(45deg) translate(6px, 6px);
+}
+.hamburger-btn.active span:nth-child(2) {
+  opacity: 0;
+}
+.hamburger-btn.active span:nth-child(3) {
+  transform: rotate(-45deg) translate(6px, -6px);
+}
+
+/* スライドメニュー - 改善版 */
+.slide-menu {
+  position: fixed;
+  top: 0;
+  right: -350px;
+  width: 350px;
+  height: 100vh;
+  background: linear-gradient(135deg, #fff 0%, #f8f9fa 100%);
+  box-shadow: -10px 0 30px rgba(0, 0, 0, 0.15);
+  transition: right 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  z-index: 1100;
+  padding: 0;
+  overflow-y: auto;
+}
+.slide-menu.active {
+  right: 0;
+}
+.menu-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.4s ease;
+  z-index: 1000;
+  backdrop-filter: blur(3px);
+}
+.menu-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+.menu-header {
+  padding: 25px 30px;
+  border-bottom: 1px solid rgba(142, 68, 173, 0.1);
+  background: linear-gradient(135deg, #8e44ad 0%, #6c3483 100%);
+  color: white;
+  position: relative;
+}
+.menu-header h3 {
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+.close-btn {
+  position: absolute;
+  top: 20px;
+  right: 25px;
+  background: none;
+  border: none;
+  font-size: 32px;
+  color: white;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+}
+.close-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: rotate(90deg);
+}
+.menu-items {
+  list-style: none;
+  padding: 20px 0;
+  margin: 0;
+}
+.menu-items li {
+  margin: 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+.menu-items li:last-child {
+  border-bottom: none;
+}
+.menu-items a {
+  display: flex;
+  align-items: center;
+  padding: 18px 30px;
+  color: #333;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 1.05rem;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+.menu-items a::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 0;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(142, 68, 173, 0.1) 0%, rgba(108, 52, 131, 0.1) 100%);
+  transition: width 0.3s ease;
+  z-index: -1;
+}
+.menu-items a:hover::before {
+  width: 100%;
+}
+.menu-items a:hover {
+  color: #8e44ad;
+  padding-left: 40px;
+  font-weight: 600;
+}
+.menu-items a::after {
+  content: '→';
+  opacity: 0;
+  transform: translateX(-10px);
+  transition: all 0.3s ease;
+  margin-left: auto;
+  color: #8e44ad;
+}
+.menu-items a:hover::after {
+  opacity: 1;
+  transform: translateX(0);
+}
+.english-link {
+  font-size: 0.95rem !important;
+  color: #666 !important;
+  font-weight: 400 !important;
+}
+.english-link:hover {
+  color: #8e44ad !important;
+}
+
+/* モバイル対応 */
+@media (max-width: 480px) {
+  .slide-menu {
+    width: 100vw;
+    right: -100vw;
+  }
+  .hamburger-btn {
+    width: 45px;
+    height: 45px;
+    top: 15px;
+    right: 15px;
+  }
+  .hamburger-btn span {
+    width: 20px;
+  }
+}
 
 /* プロフィール紫縦線 */
 .profile-section {
@@ -164,6 +374,7 @@ a:hover {
   overflow: hidden;
   box-shadow: 0 5px 20px rgba(0,0,0,0.1);
   transition: transform 0.3s;
+  cursor: pointer;
 }
 .poster-item:hover {
   transform: translateY(-8px);
@@ -186,7 +397,33 @@ a:hover {
   padding: 2.2rem 0 1rem 0;
   margin-top: 4rem;
 }
-/* フッタースタイルは省略... */
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  margin-bottom: 1rem;
+}
+.footer-brand h3 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.5rem;
+}
+.footer-brand p {
+  margin: 0;
+  opacity: 0.8;
+  font-style: italic;
+}
+.footer-contact a {
+  color: #fff;
+  text-decoration: underline;
+}
+.footer-contact a:hover {
+  color: #ddd;
+}
+.footer-copyright {
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  padding-top: 1rem;
+  opacity: 0.7;
+}
 
 /* レスポンシブ調整 */
 @media (max-width: 768px) {
@@ -196,159 +433,79 @@ a:hover {
   .poster-img {
     height: 300px;
   }
+  .footer-content {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 1rem;
+  }
 }
 
 /* モーダルスタイル */
 .poster-modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 9999;
-    opacity: 0;
-    visibility: hidden;
-    transition: all 0.3s ease;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 9999;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
 }
-
 .poster-modal.active {
-    opacity: 1;
-    visibility: visible;
+  opacity: 1;
+  visibility: visible;
 }
-
 .modal-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.9);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
 }
-
 .modal-content {
-    position: relative;
-    max-width: 90vw;
-    max-height: 90vh;
-    transform: scale(0.8);
-    transition: transform 0.3s ease;
+  position: relative;
+  max-width: 90vw;
+  max-height: 90vh;
+  transform: scale(0.8);
+  transition: transform 0.3s ease;
 }
-
 .poster-modal.active .modal-content {
-    transform: scale(1);
+  transform: scale(1);
 }
-
 .modal-image {
-    max-width: 100%;
-    max-height: 100%;
-    object-fit: contain;
-    border-radius: 8px;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  border-radius: 8px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
 }
-
 .modal-close {
-    position: absolute;
-    top: -15px;
-    right: -15px;
-    width: 40px;
-    height: 40px;
-    background: #fff;
-    border: none;
-    border-radius: 50%;
-    font-size: 24px;
-    font-weight: bold;
-    color: #333;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-    transition: all 0.2s ease;
+  position: absolute;
+  top: -15px;
+  right: -15px;
+  width: 40px;
+  height: 40px;
+  background: #fff;
+  border: none;
+  border-radius: 50%;
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  transition: all 0.2s ease;
 }
-
 .modal-close:hover {
-    background: #f8f9fa;
-    transform: scale(1.1);
-}
-
-/* ハンバーガーメニューの追加スタイル */
-.slide-menu {
-    position: fixed;
-    top: 0;
-    right: -300px;
-    width: 300px;
-    height: 100vh;
-    background: #fff;
-    box-shadow: -5px 0 20px rgba(0,0,0,0.1);
-    transition: right 0.3s ease;
-    z-index: 1100;
-    padding: 20px 0;
-}
-
-.slide-menu.active {
-    right: 0;
-}
-
-.menu-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0,0,0,0.5);
-    opacity: 0;
-    visibility: hidden;
-    transition: all 0.3s ease;
-    z-index: 1000;
-}
-
-.menu-overlay.active {
-    opacity: 1;
-    visibility: visible;
-}
-
-.menu-header {
-    padding: 20px;
-    border-bottom: 1px solid #eee;
-}
-
-.close-btn {
-    background: none;
-    border: none;
-    font-size: 28px;
-    color: #333;
-    cursor: pointer;
-    float: right;
-}
-
-.menu-items {
-    list-style: none;
-    padding: 20px 0;
-    margin: 0;
-}
-
-.menu-items li {
-    margin: 0;
-}
-
-.menu-items a {
-    display: block;
-    padding: 15px 20px;
-    color: #333;
-    text-decoration: none;
-    font-weight: 500;
-    transition: background 0.2s ease;
-}
-
-.menu-items a:hover {
-    background: #f8f9fa;
-    color: #8e44ad;
-}
-
-.english-link {
-    font-size: 14px;
-    color: #666 !important;
+  background: #f8f9fa;
+  transform: scale(1.1);
 }
