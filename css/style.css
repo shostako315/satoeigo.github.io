@@ -62,7 +62,7 @@ a:hover {
 }
 .hero-title {
   font-size: 3rem;
-  font-weight: 7
+  font-weight: 700;
   margin-bottom: 0.5rem;
   text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
 }
@@ -88,7 +88,7 @@ a:hover {
 /* ハンバーガーメニュー - スマホとPCでの表示調整 */
 @media (max-width: 768px) {
   .slide-menu {
-    width: 280px; /* 画面いっぱいではなく小さめに */
+    width: 280px;
     right: -280px;
     border-radius: 0;
     transition: right 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
@@ -139,7 +139,6 @@ a:hover {
     transform: rotate(-45deg) translate(6px, -6px);
   }
 }
-/* アニメーションのスムーズ化 */
 .hamburger-btn span {
   transition: transform 0.4s ease, opacity 0.4s ease;
 }
@@ -204,7 +203,7 @@ a:hover {
 .menu-header {
   padding: 25px 30px;
   border-bottom: 1px solid rgba(142, 68, 173, 0.1);
-  background: linear-gradient(135deg, #8e44ad 0%, #极
+  background: linear-gradient(135deg, #8e44ad 0%, #6c3483 100%);
   color: white;
   position: relative;
 }
@@ -267,7 +266,7 @@ a:hover {
   width: 0;
   height: 100%;
   background: linear-gradient(135deg, rgba(142, 68, 173, 0.1) 0%, rgba(108, 52, 131, 0.1) 100%);
-  transition: width 极
+  transition: width 0.3s ease;
   z-index: -1;
 }
 .menu-items a:hover::before {
@@ -407,20 +406,21 @@ a:hover {
 /* ポスターギャラリー - 画像表示最適化 */
 .poster-gallery-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 25px;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 18px;
 }
 .poster-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f8f9fa;
   border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+  box-shadow: 0 5px 20px rgba(0,0,0,0.08);
   transition: transform 0.3s;
   cursor: pointer;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: #f8f9fa;
-  max-height: 400px;
+  min-height: 140px;
+  max-height: 220px;
 }
 .poster-item:hover {
   transform: translateY(-8px);
@@ -429,13 +429,27 @@ a:hover {
   width: auto;
   max-width: 100%;
   height: auto;
-  max-height: 380px;
+  max-height: 200px;
   object-fit: contain;
   display: block;
-  transition: transform 0.4s;
+  transition: transform 0.3s;
 }
 .poster-img:hover {
   transform: scale(1.05);
+}
+
+@media (max-width: 600px) {
+  .poster-gallery-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+  .poster-item {
+    min-height: 80px;
+    max-height: 140px;
+  }
+  .poster-img {
+    max-height: 120px;
+  }
 }
 
 /* フッター */
