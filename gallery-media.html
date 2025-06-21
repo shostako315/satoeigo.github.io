@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>メディアギャラリー | 佐藤瑛吾</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;700&family=Montserrat:wght@600;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background: linear-gradient(135deg, #18121b 0%, #232046 100%);
+      color: #f6f1fa;
+      font-family: 'Noto Serif JP', serif;
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+    }
+    .media-hero {
+      position: relative;
+      background: linear-gradient(120deg, #2d1446 0%, #14121a 100%);
+      padding: 60px 0 40px 0;
+      text-align: center;
+    }
+    .media-hero-title {
+      font-family: 'Montserrat', 'Noto Serif JP', serif;
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: #cbb4ff;
+      letter-spacing: 2px;
+      margin-bottom: 0.5rem;
+      text-shadow: 0 2px 16px #000, 0 1px 0 #8e44ad;
+    }
+    .media-hero-sub {
+      font-size: 1.2rem;
+      color: #bbaadd;
+      letter-spacing: 1px;
+      margin-bottom: 0;
+    }
+    .media-section-title {
+      font-family: 'Montserrat', 'Noto Serif JP', serif;
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: #b48fff;
+      letter-spacing: 1px;
+      margin: 2.5rem 0 1.5rem 0;
+      text-align: center;
+      text-shadow: 0 2px 8px #000;
+    }
+    /* Video Gallery */
+    .media-video-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 28px;
+      max-width: 1100px;
+      margin: 0 auto 40px auto;
+      padding: 0 12px;
+    }
+    .media-video-card {
+      background: rgba(40, 20, 60, 0.75);
+      border-radius: 18px;
+      box-shadow: 0 4px 32px rgba(80,50,140,0.18);
+      overflow: hidden;
+      padding: 18px 18px 12px 18px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: transform 0.2s;
+    }
+    .media-video-card:hover {
+      transform: translateY(-4px) scale(1.025);
+      box-shadow: 0 8px 36px #8e44ad44;
+    }
+    .media-video-card iframe {
+      width: 100%;
+      aspect-ratio: 16/9;
+      border-radius: 12px;
+      margin-bottom: 1rem;
+      background: #000;
+      border: none;
+      min-height: 180px;
+    }
+    .media-video-title {
+      font-size: 1.1rem;
+      font-family: 'Montserrat', 'Noto Serif JP', serif;
+      color: #e2d2ff;
+      font-weight: 600;
+      margin-bottom: 0.3rem;
+      text-align: center;
+    }
+    .media-video-desc {
+      font-size: 0.95rem;
+      color: #bbaadd;
+      text-align: center;
+      margin-bottom: 0;
+    }
+    /* Photo Gallery */
+    .media-photo-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 20px;
+      max-width: 1100px;
+      margin: 0 auto 40px auto;
+      padding: 0 12px;
+    }
+    .media-photo-card {
+      background: rgba(40, 20, 60, 0.7);
+      border-radius: 15px;
+      box-shadow: 0 4px 18px #8e44ad33;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 18px;
+      transition: transform 0.2s;
+      min-height: 140px;
+      cursor: pointer;
+      position: relative;
+    }
+    .media-photo-card:hover {
+      transform: scale(1.04);
+      box-shadow: 0 8px 32px #8e44ad55;
+      background: rgba(80, 40, 120, 0.85);
+    }
+    .media-photo-img {
+      width: auto;
+      max-width: 100%;
+      height: auto;
+      max-height: 180px;
+      border-radius: 7px;
+      box-shadow: 0 2px 8px #000a;
+      object-fit: contain;
+      background: #18121b;
+      transition: box-shadow 0.2s;
+      display: block;
+    }
+    /* モーダル */
+    .media-modal {
+      position: fixed;
+      z-index: 9999;
+      top: 0; left: 0; width: 100vw; height: 100vh;
+      background: rgba(15,8,30,0.95);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0; visibility: hidden;
+      transition: opacity 0.25s;
+    }
+    .media-modal.active {
+      opacity: 1;
+      visibility: visible;
+    }
+    .media-modal-content {
+      max-width: 95vw;
+      max-height: 90vh;
+      background: #232046;
+      border-radius: 18px;
+      box-shadow: 0 8px 40px #000a;
+      padding: 20px;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .media-modal-img {
+      max-width: 90vw;
+      max-height: 80vh;
+      border-radius: 10px;
+      background: #18121b;
+      display: block;
+      margin: 0 auto;
+    }
+    .media-modal-close {
+      position: absolute;
+      top: 8px; right: 12px;
+      background: #fff;
+      color: #8e44ad;
+      border: none;
+      border-radius: 50%;
+      width: 38px; height: 38px;
+      font-size: 1.8rem;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 2px 8px #0005;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s;
+    }
+    .media-modal-close:hover {
+      background: #e6dfff;
+      color: #5e3370;
+    }
+    @media (max-width: 600px) {
+      .media-hero-title { font-size: 1.6rem; }
+      .media-section-title { font-size: 1.1rem; }
+      .media-video-card { padding: 10px 6px 8px 6px; }
+      .media-photo-card { padding: 8px; }
+      .media-photo-img { max-height: 90px; }
+      .media-modal-content { padding: 5px; }
+      .media-modal-img { max-height: 60vh; }
+    }
+  </style>
+</head>
+<body>
+  <section class="media-hero">
+    <h1 class="media-hero-title">Media Gallery</h1>
+    <div class="media-hero-sub">動画 & 写真ギャラリー</div>
+  </section>
+
+  <!-- 動画ギャラリー -->
+  <section>
+    <h2 class="media-section-title">Video Gallery</h2>
+    <div class="media-video-grid">
+      <div class="media-video-card">
+        <iframe src="https://www.youtube.com/embed/1cV0FeP0r-I" allowfullscreen title="Beethoven Symphony No.9"></iframe>
+        <div class="media-video-title">ベートーヴェン：交響曲第9番「合唱付き」（第4楽章）</div>
+        <div class="media-video-desc">学芸×第九特別演奏会（2024年3月17日）</div>
+      </div>
+      <div class="media-video-card">
+        <iframe src="https://www.youtube.com/embed/xGMxRVoQ4_A" allowfullscreen title="Bach Double Violin Concerto"></iframe>
+        <div class="media-video-title">J.S.バッハ：2つのヴァイオリンのための協奏曲</div>
+        <div class="media-video-desc">VariOrchestra 第3回定期演奏会（2022年11月13日）</div>
+      </div>
+      <div class="media-video-card">
+        <iframe src="https://www.youtube.com/embed/d5s7aulgFFc" allowfullscreen title="動画3"></iframe>
+        <div class="media-video-title">動画3</div>
+        <div class="media-video-desc">YouTubeリンク</div>
+      </div>
+      <div class="media-video-card">
+        <iframe src="https://www.youtube.com/embed/J2gWR5UTg-s" allowfullscreen title="動画4"></iframe>
+        <div class="media-video-title">動画4</div>
+        <div class="media-video-desc">YouTubeリンク</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 写真ギャラリー -->
+  <section>
+    <h2 class="media-section-title">Photo Gallery</h2>
+    <div class="media-photo-grid">
+      <div class="media-photo-card" onclick="openMediaModal('img/concert.jpg')">
+        <img src="img/concert.jpg" alt="Concert" class="media-photo-img">
+      </div>
+      <div class="media-photo-card" onclick="openMediaModal('img/event.jpg')">
+        <img src="img/event.jpg" alt="Event" class="media-photo-img">
+      </div>
+      <div class="media-photo-card" onclick="openMediaModal('img/hero-concert.jpg')">
+        <img src="img/hero-concert.jpg" alt="Hero Concert" class="media-photo-img">
+      </div>
+      <div class="media-photo-card" onclick="openMediaModal('img/opera.jpg')">
+        <img src="img/opera.jpg" alt="Opera" class="media-photo-img">
+      </div>
+      <div class="media-photo-card" onclick="openMediaModal('img/profile.jpg')">
+        <img src="img/profile.jpg" alt="Profile" class="media-photo-img">
+      </div>
+      <div class="media-photo-card" onclick="openMediaModal('img/reading.jpg')">
+        <img src="img/reading.jpg" alt="Reading" class="media-photo-img">
+      </div>
+      <div class="media-photo-card" onclick="openMediaModal('img/stainedglass.jpg')">
+        <img src="img/stainedglass.jpg" alt="Stained Glass" class="media-photo-img">
+      </div>
+      <div class="media-photo-card" onclick="openMediaModal('img/top_orchestra.jpg')">
+        <img src="img/top_orchestra.jpg" alt="Top Orchestra" class="media-photo-img">
+      </div>
+      <div class="media-photo-card" onclick="openMediaModal('img/tufs-orchestra.jpg')">
+        <img src="img/tufs-orchestra.jpg" alt="TUFS Orchestra" class="media-photo-img">
+      </div>
+      <div class="media-photo-card" onclick="openMediaModal('img/vari-orchestra-concert.jpg')">
+        <img src="img/vari-orchestra-concert.jpg" alt="Vari Orchestra Concert" class="media-photo-img">
+      </div>
+    </div>
+  </section>
+
+  <!-- モーダル -->
+  <div id="mediaModal" class="media-modal" onclick="closeMediaModal()">
+    <div class="media-modal-content" onclick="event.stopPropagation()">
+      <button class="media-modal-close" onclick="closeMediaModal()">&times;</button>
+      <img id="mediaModalImg" src="" alt="拡大画像" class="media-modal-img">
+    </div>
+  </div>
+
+  <script>
+    function openMediaModal(src) {
+      document.getElementById('mediaModalImg').src = src;
+      document.getElementById('mediaModal').classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeMediaModal() {
+      document.getElementById('mediaModal').classList.remove('active');
+      document.body.style.overflow = '';
+    }
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') closeMediaModal();
+    });
+  </script>
+</body>
+</html>
