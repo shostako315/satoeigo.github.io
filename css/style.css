@@ -85,23 +85,78 @@ a:hover {
   }
 }
 
-/* ハンバーガーメニュー - 改善版 */
+/* ハンバーガーメニュー - スマホとPCでの表示調整とアニメーション改善 */
+@media (max-width: 768px) {
+  .slide-menu {
+    width: 100vw;
+    right: -100vw;
+    border-radius: 0;
+    transition: right 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+  .slide-menu.active {
+    right: 0;
+  }
+  .hamburger-btn {
+    width: 45px;
+    height: 45px;
+    top: 15px;
+    right: 15px;
+  }
+  .hamburger-btn span {
+    width: 20px;
+  }
+}
+@media (min-width: 769px) {
+  .slide-menu {
+    width: 300px;
+    right: -300px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    transition: right 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+  .slide-menu.active {
+    right: 0;
+  }
+  .hamburger-btn {
+    width: 50px;
+    height: 50px;
+    top: 20px;
+    right: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  }
+  .hamburger-btn span {
+    width: 24px;
+    height: 3px;
+  }
+  .hamburger-btn.active span:nth-child(1) {
+    transform: rotate(45deg) translate(6px, 6px);
+  }
+  .hamburger-btn.active span:nth-child(2) {
+    opacity: 0;
+  }
+  .hamburger-btn.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(6px, -6px);
+  }
+}
+/* アニメーションのスムーズ化 */
+.hamburger-btn span {
+  transition: transform 0.4s ease, opacity 0.4s ease;
+}
+.hamburger-btn.active span {
+  background-color: #8e44ad;
+}
+
 .hamburger-btn {
   position: fixed;
-  top: 20px;
-  right: 20px;
-  width: 50px;
-  height: 50px;
   background: rgba(255, 255, 255, 0.95);
   border: 2px solid rgba(142, 68, 173, 0.2);
-  border-radius: 12px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   cursor: pointer;
   z-index: 1200;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease;
   backdrop-filter: blur(10px);
 }
@@ -112,39 +167,22 @@ a:hover {
   box-shadow: 0 6px 25px rgba(142, 68, 173, 0.2);
 }
 .hamburger-btn span {
-  width: 24px;
   height: 3px;
   background: #8e44ad;
   margin: 2px 0;
-  transition: all 0.3s ease;
   border-radius: 2px;
 }
-.hamburger-btn.active span:nth-child(1) {
-  transform: rotate(45deg) translate(6px, 6px);
-}
-.hamburger-btn.active span:nth-child(2) {
-  opacity: 0;
-}
-.hamburger-btn.active span:nth-child(3) {
-  transform: rotate(-45deg) translate(6px, -6px);
-}
 
-/* スライドメニュー - 改善版 */
+/* スライドメニュー共通 */
 .slide-menu {
   position: fixed;
   top: 0;
-  right: -350px;
-  width: 350px;
-  height: 100vh;
   background: linear-gradient(135deg, #fff 0%, #f8f9fa 100%);
   box-shadow: -10px 0 30px rgba(0, 0, 0, 0.15);
-  transition: right 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   z-index: 1100;
   padding: 0;
   overflow-y: auto;
-}
-.slide-menu.active {
-  right: 0;
+  height: 100vh;
 }
 .menu-overlay {
   position: fixed;
@@ -191,6 +229,7 @@ a:hover {
   align-items: center;
   justify-content: center;
   border-radius: 8px;
+  z-index: 1101;
 }
 .close-btn:hover {
   background: rgba(255, 255, 255, 0.2);
@@ -260,24 +299,7 @@ a:hover {
   color: #8e44ad !important;
 }
 
-/* モバイル対応 */
-@media (max-width: 480px) {
-  .slide-menu {
-    width: 100vw;
-    right: -100vw;
-  }
-  .hamburger-btn {
-    width: 45px;
-    height: 45px;
-    top: 15px;
-    right: 15px;
-  }
-  .hamburger-btn span {
-    width: 20px;
-  }
-}
-
-/* プロフィール紫縦線 */
+/* プロフィール紫縦線・フォントサイズ調整 */
 .profile-section {
   position: relative;
   padding-left: 20px;
@@ -285,11 +307,14 @@ a:hover {
   border-left: 4px solid #8e44ad;
 }
 .profile-section-title {
-  font-size: 1.1rem;
+  font-size: 1rem;
   color: #8e44ad;
   font-family: 'Montserrat', 'Noto Serif JP', serif;
   font-weight: 700;
   margin-bottom: 0.8rem;
+}
+.profile-section p, .profile-section ul, .profile-section li {
+  font-size: 0.9rem;
 }
 
 /* 公演予定カード */
@@ -425,7 +450,7 @@ a:hover {
   opacity: 0.7;
 }
 
-/* レスポンシブ調整 */
+/* レスポンシブ調整・フッター左寄せ */
 @media (max-width: 768px) {
   .poster-gallery-grid {
     grid-template-columns: 1fr;
@@ -435,9 +460,15 @@ a:hover {
   }
   .footer-content {
     flex-direction: column;
-    align-items: center;
-    text-align: center;
-    gap: 1rem;
+    align-items: flex-start;
+    text-align: left;
+    gap: 0.5rem;
+  }
+  .footer-brand, .footer-contact {
+    width: 100%;
+  }
+  .footer-contact {
+    margin-top: 0.5rem;
   }
 }
 
