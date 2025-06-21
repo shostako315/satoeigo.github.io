@@ -7,6 +7,32 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;700&family=Montserrat:wght@600;700&display=swap" rel="stylesheet">
   <style>
+
+<!-- ハンバーガー -->
+  <div class="hamburger-btn" id="hamburgerBtn" aria-label="メニューを開く" tabindex="0">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+  <nav class="slide-menu" id="slideMenu">
+    <div class="menu-header">
+      <h3>Menu</h3>
+      <button class="close-btn" id="closeBtn" aria-label="メニューを閉じる">&times;</button>
+    </div>
+    <ul class="menu-items">
+      <li><a href="index.html#profile">プロフィール</a></li>
+      <li><a href="index.html#schedule">公演予定</a></li>
+      <li><a href="past-concerts.html">過去の演奏会</a></li>
+      <li><a href="gallery.html">ポスターギャラリー</a></li>
+      <li><a href="gallery-media.html">メディアギャラリー</a></li> <!-- ★ここを追加 -->
+      <li><a href="en.html" class="english-link">&#127468;&#127463; English</a></li>
+    </ul>
+  </nav>
+  <div class="menu-overlay" id="menuOverlay"></div>
+
+
+
+    
     body {
       background: linear-gradient(135deg, #18121b 0%, #232046 100%);
       color: #f6f1fa;
