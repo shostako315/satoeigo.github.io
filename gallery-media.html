@@ -7,47 +7,52 @@
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Noto+Serif+JP:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
   <style>
-    /* 画像拡大モーダル用追加CSS */
-    #imageModal {
+    /* 画像拡大モーダル（Lightbox） */
+    .img-modal {
       display: none;
       position: fixed;
-      z-index: 10000;
-      left: 0;
-      top: 0;
-      width: 100vw;
-      height: 100vh;
-      background: rgba(0,0,0,0.85);
+      z-index: 2000;
+      left: 0; top: 0;
+      width: 100vw; height: 100vh;
+      background: rgba(0,0,0,0.92);
       align-items: center;
       justify-content: center;
+      animation: fadeIn 0.2s;
     }
-    #imageModal.active { display: flex; }
-    #imageModal img {
-      margin: auto;
-      display: block;
+    .img-modal.active {
+      display: flex;
+    }
+    .img-modal-content {
       max-width: 90vw;
       max-height: 80vh;
-      border-radius: 10px;
-      box-shadow: 0 0 32px rgba(255,255,255,0.2);
+      margin: auto;
+      border-radius: 12px;
+      box-shadow: 0 0 32px rgba(0,0,0,0.3);
       background: #181a21;
+      display: block;
     }
-    #imageModal .close {
+    .img-modal-close {
       position: absolute;
-      top: 20px;
-      right: 35px;
+      top: 24px;
+      right: 38px;
       color: #fff;
       font-size: 40px;
       font-weight: bold;
       cursor: pointer;
-      transition: color 0.3s;
-      z-index: 10001;
+      z-index: 2001;
+      transition: color 0.2s;
     }
-    #imageModal .close:hover {
-      color: #bbb;
+    .img-modal-close:hover {
+      color: #bbaadd;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
     }
   </style>
 </head>
 <body>
-  <!-- ハンバーガーメニューここから -->
+  <!-- ハンバーガーメニュー -->
   <div class="hamburger-btn" id="hamburgerBtn" aria-label="メニューを開く" tabindex="0">
     <span></span>
     <span></span>
@@ -68,7 +73,6 @@
     </ul>
   </nav>
   <div class="menu-overlay" id="menuOverlay"></div>
-  <!-- ハンバーガーメニューここまで -->
 
   <section class="media-hero">
     <h1 class="media-hero-title">Media Gallery</h1>
@@ -105,61 +109,64 @@
       <div class="media-caption">動画4</div>
       <div class="media-desc">YouTubeリンク</div>
     </div>
-    <!-- 写真（onclickで拡大） -->
+    <!-- 写真（クリックで拡大） -->
     <div class="media-card">
-      <img src="img/concert.jpg" alt="Concert" onclick="openModal(this.src)">
+      <img src="img/concert.jpg" alt="Concert" onclick="openModal(this)">
     </div>
     <div class="media-card">
-      <img src="img/event.jpg" alt="Event" onclick="openModal(this.src)">
+      <img src="img/event.jpg" alt="Event" onclick="openModal(this)">
     </div>
     <div class="media-card">
-      <img src="img/hero-concert.jpg" alt="Hero Concert" onclick="openModal(this.src)">
+      <img src="img/hero-concert.jpg" alt="Hero Concert" onclick="openModal(this)">
     </div>
     <div class="media-card">
-      <img src="img/opera.jpg" alt="Opera" onclick="openModal(this.src)">
+      <img src="img/opera.jpg" alt="Opera" onclick="openModal(this)">
     </div>
     <div class="media-card">
-      <img src="img/profile.jpg" alt="Profile" onclick="openModal(this.src)">
+      <img src="img/profile.jpg" alt="Profile" onclick="openModal(this)">
     </div>
     <div class="media-card">
-      <img src="img/reading.jpg" alt="Reading" onclick="openModal(this.src)">
+      <img src="img/reading.jpg" alt="Reading" onclick="openModal(this)">
     </div>
     <div class="media-card">
-      <img src="img/stainedglass.jpg" alt="Stained Glass" onclick="openModal(this.src)">
+      <img src="img/stainedglass.jpg" alt="Stained Glass" onclick="openModal(this)">
     </div>
     <div class="media-card">
-      <img src="img/top_orchestra.jpg" alt="Top Orchestra" onclick="openModal(this.src)">
+      <img src="img/top_orchestra.jpg" alt="Top Orchestra" onclick="openModal(this)">
     </div>
     <div class="media-card">
-      <img src="img/tufs-orchestra.jpg" alt="TUFS Orchestra" onclick="openModal(this.src)">
+      <img src="img/tufs-orchestra.jpg" alt="TUFS Orchestra" onclick="openModal(this)">
     </div>
     <div class="media-card">
-      <img src="img/vari-orchestra-concert.jpg" alt="Vari Orchestra Concert" onclick="openModal(this.src)">
+      <img src="img/vari-orchestra-concert.jpg" alt="Vari Orchestra Concert" onclick="openModal(this)">
     </div>
   </div>
 
-  <!-- 画像拡大モーダル（これをbodyの一番下に追加） -->
-  <div id="imageModal">
-    <span class="close" onclick="closeModal()">&times;</span>
-    <img id="modalImage" src="" alt="拡大画像">
+  <!-- 画像拡大モーダル -->
+  <div id="imgModal" class="img-modal">
+    <span class="img-modal-close" onclick="closeModal()">&times;</span>
+    <img class="img-modal-content" id="imgModalContent" alt="">
   </div>
 
-  <!-- JavaScriptはbodyの一番下でOK -->
+  <!-- JavaScript（bodyの一番下でOK） -->
   <script>
-    function openModal(src) {
-      const modal = document.getElementById('imageModal');
-      const modalImg = document.getElementById('modalImage');
+    // 画像拡大ポップアップ
+    function openModal(img) {
+      var modal = document.getElementById('imgModal');
+      var modalImg = document.getElementById('imgModalContent');
       modal.classList.add('active');
-      modalImg.src = src;
+      modalImg.src = img.src;
+      document.body.style.overflow = 'hidden';
     }
     function closeModal() {
-      const modal = document.getElementById('imageModal');
+      var modal = document.getElementById('imgModal');
       modal.classList.remove('active');
+      document.body.style.overflow = '';
     }
-    // ESCキーでも閉じる
     document.addEventListener('keydown', function(e) {
       if (e.key === 'Escape') closeModal();
     });
+
     // ハンバーガーメニュー（既存のものをそのまま）
     document.addEventListener('DOMContentLoaded', function() {
       const hamburgerBtn = document.getElementById('hamburgerBtn');
