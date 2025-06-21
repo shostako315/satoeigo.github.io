@@ -7,7 +7,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // メニューを開く
     function openMenu() {
-        if (hamburgerBtn) hamburgerBtn.classList.add('active');
+        if (hamburgerBtn) {
+            hamburgerBtn.classList.add('active');
+            hamburgerBtn.style.display = 'none';  // ハンバーガーを非表示
+        }
         if (slideMenu) slideMenu.classList.add('active');
         if (menuOverlay) menuOverlay.classList.add('active');
         document.body.style.overflow = 'hidden';
@@ -15,7 +18,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // メニューを閉じる
     function closeMenu() {
-        if (hamburgerBtn) hamburgerBtn.classList.remove('active');
+        if (hamburgerBtn) {
+            hamburgerBtn.classList.remove('active');
+            hamburgerBtn.style.display = 'flex';  // ハンバーガーを表示
+        }
         if (slideMenu) slideMenu.classList.remove('active');
         if (menuOverlay) menuOverlay.classList.remove('active');
         document.body.style.overflow = '';
@@ -70,7 +76,6 @@ document.addEventListener('DOMContentLoaded', function() {
     // メニュー項目のクリック時にメニューを閉じる
     document.querySelectorAll('.menu-items a').forEach(link => {
         link.addEventListener('click', function(e) {
-            // 外部リンクの場合はメニューを閉じる
             if (!this.getAttribute('href').startsWith('#')) {
                 setTimeout(() => {
                     closeMenu();
