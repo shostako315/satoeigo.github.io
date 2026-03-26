@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Virtual Conductor | 指揮者体験</title>
+  <meta name="description" content="マウスを振って指揮者になろう。音楽に合わせてパーティクルが舞い踊るインタラクティブ体験。">
+  <meta property="og:title" content="Virtual Conductor - 指揮者になれるWebゲーム">
+  <meta property="og:description" content="マウスを振るだけで指揮者体験。音符が舞い踊るインタラクティブ音楽ゲーム。">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: #0a0a1a;
+      color: #fff;
+      font-family: 'Montserrat', sans-serif;
+      overflow: hidden;
+      height: 100vh;
+      cursor: none;
+    }
+
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 1;
+    }
+
+    .cursor-baton {
+      position: fixed;
+      z-index: 100;
+      pointer-events: none;
+      width: 4px;
+      height: 60px;
+      background: linear-gradient(to bottom, #fff, #c39bd3);
+      border-radius: 2px;
+      transform-origin: bottom center;
+      box-shadow: 0 0 15px rgba(195, 155, 211, 0.6);
+      transition: transform 0.05s;
+    }
+
+    .cursor-tip {
+      position: absolute;
+      top: -6px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 10px;
+      height: 10px;
+      background: #fff;
+      border-radius: 50%;
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+    }
+
+    .ui-overlay {
+      position: fixed;
+      z-index: 50;
+      pointer-events: none;
+    }
+
+    .title-screen {
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 200;
+      background: rgba(10, 10, 26, 0.95);
+      transition: opacity 1s;
+    }
+
+    .title-screen.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .title-screen h1 {
+      font-size: 4rem;
+      font-weight: 900;
+      letter-spacing: 4px;
+      margin-bottom: 10px;
+      background: linear-gradient(135deg, #c39bd3, #8e44ad, #fff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .title-screen p {
+      font-size: 1.1rem;
+      opacity: 0.6;
+      margin-bottom: 40px;
+      letter-spacing: 2px;
+    }
+
+    .start-btn {
+      padding: 16px 50px;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #fff;
+      background: linear-gradient(135deg, #8e44ad, #6c3483);
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      pointer-events: all;
+      letter-spacing: 2px;
+      transition: all 0.3s;
+      box-shadow: 0 4px 30px rgba(142, 68, 173, 0.4);
+    }
+
+    .start-btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 6px 40px rgba(142, 68, 173, 0.6);
+    }
+
+    .score-display {
+      position: fixed;
+      top: 20px;
+      right: 30px;
+      z-index: 50;
+      font-size: 1.5rem;
+      font-weight: 900;
+      color: #c39bd3;
+      text-shadow: 0 0 20px rgba(195, 155, 211, 0.5);
+      opacity: 0;
+      transition: opacity 0.5s;
+    }
+
+    .score-display.active { opacity: 1; }
+
+    .combo-display {
+      position: fixed;
+      top: 60px;
+      right: 30px;
+      z-index: 50;
+      font-size: 1rem;
+      font-weight: 700;
+      color: #e8d5f0;
+      opacity: 0;
+      transition: opacity 0.5s;
+    }
+
+    .combo-display.active { opacity: 0.7; }
+
+    .tempo-indicator {
+      position: fixed;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 50;
+      font-size: 0.85rem;
+      letter-spacing: 3px;
+      color: rgba(255, 255, 255, 0.3);
+      opacity: 0;
+      transition: opacity 0.5s;
+    }
+
+    .tempo-indicator.active { opacity: 1; }
+
+    .note-target {
+      position: fixed;
+      bottom: 80px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 200px;
+      height: 6px;
+      background: rgba(142, 68, 173, 0.3);
+      border-radius: 3px;
+      z-index: 40;
+      opacity: 0;
+      transition: opacity 0.5s;
+    }
+
+    .note-target.active { opacity: 1; }
+
+    .note-target::after {
+      content: '';
+      position: absolute;
+      top: -4px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 14px;
+      height: 14px;
+      border: 2px solid #8e44ad;
+      border-radius: 50%;
+      animation: pulse 1s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: translateX(-50%) scale(1); opacity: 1; }
+      50% { transform: translateX(-50%) scale(1.3); opacity: 0.5; }
+    }
+
+    .reveal-screen {
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 300;
+      background: rgba(10, 10, 26, 0.97);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 1.5s;
+    }
+
+    .reveal-screen.active {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .reveal-score {
+      font-size: 5rem;
+      font-weight: 900;
+      background: linear-gradient(135deg, #c39bd3, #8e44ad);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 10px;
+    }
+
+    .reveal-label {
+      font-size: 1.2rem;
+      opacity: 0.5;
+      margin-bottom: 30px;
+      letter-spacing: 2px;
+    }
+
+    .reveal-rank {
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin-bottom: 40px;
+      color: #e8d5f0;
+    }
+
+    .reveal-credit {
+      font-size: 0.85rem;
+      opacity: 0.4;
+      margin-bottom: 8px;
+      letter-spacing: 1px;
+    }
+
+    .reveal-name {
+      font-size: 1.6rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      margin-bottom: 6px;
+    }
+
+    .reveal-title {
+      font-size: 0.9rem;
+      opacity: 0.5;
+      font-style: italic;
+      margin-bottom: 30px;
+    }
+
+    .reveal-buttons {
+      display: flex;
+      gap: 16px;
+    }
+
+    .reveal-buttons a, .reveal-buttons button {
+      padding: 12px 30px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: #fff;
+      background: linear-gradient(135deg, #8e44ad, #6c3483);
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      text-decoration: none;
+      letter-spacing: 1px;
+      transition: all 0.3s;
+    }
+
+    .reveal-buttons a:hover, .reveal-buttons button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 20px rgba(142, 68, 173, 0.4);
+    }
+
+    .reveal-buttons .btn-outline {
+      background: transparent;
+      border: 2px solid #8e44ad;
+    }
+
+    @media (max-width: 600px) {
+      .title-screen h1 { font-size: 2.2rem; }
+      .reveal-score { font-size: 3.5rem; }
+      .reveal-buttons { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+
+  <canvas id="canvas"></canvas>
+
+  <div class="cursor-baton" id="baton">
+    <div class="cursor-tip"></div>
+  </div>
+
+  <div class="score-display" id="scoreDisplay">0</div>
+  <div class="combo-display" id="comboDisplay">COMBO x0</div>
+  <div class="tempo-indicator" id="tempoIndicator">MOVE YOUR BATON</div>
+  <div class="note-target" id="noteTarget"></div>
+
+  <div class="title-screen" id="titleScreen">
+    <h1>VIRTUAL CONDUCTOR</h1>
+    <p>マウスを振って、指揮者になろう</p>
+    <button class="start-btn" id="startBtn">START</button>
+  </div>
+
+  <div class="reveal-screen" id="revealScreen">
+    <div class="reveal-score" id="finalScore">0</div>
+    <div class="reveal-label">SCORE</div>
+    <div class="reveal-rank" id="rank"></div>
+    <div class="reveal-credit">This experience was created by</div>
+    <div class="reveal-name">佐藤 瑛吾 / Eigo Sato</div>
+    <div class="reveal-title">Violinist & Conductor</div>
+    <div class="reveal-buttons">
+      <a href="index.html">Official Site</a>
+      <button class="btn-outline" onclick="location.reload()">Play Again</button>
+    </div>
+  </div>
+
+  <script>
+    // ============================
+    // Canvas & Particle System
+    // ============================
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
+
+    function resize() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    resize();
+    window.addEventListener('resize', resize);
+
+    let mouseX = window.innerWidth / 2;
+    let mouseY = window.innerHeight / 2;
+    let prevMouseX = mouseX;
+    let prevMouseY = mouseY;
+    let mouseSpeed = 0;
+    let isPlaying = false;
+    let score = 0;
+    let combo = 0;
+    let maxCombo = 0;
+    let gameTime = 0;
+    const GAME_DURATION = 45; // seconds
+
+    const particles = [];
+    const notes = [];
+    const bgStars = [];
+
+    // Musical note symbols
+    const noteSymbols = ['\u266A', '\u266B', '\u2669', '\u266C'];
+    const colors = ['#c39bd3', '#8e44ad', '#d7bde2', '#a569bd', '#7d3c98', '#e8d5f0', '#f4ecf7'];
+
+    // Background stars
+    for (let i = 0; i < 100; i++) {
+      bgStars.push({
+        x: Math.random() * window.innerWidth,
+        y: Math.random() * window.innerHeight,
+        size: Math.random() * 2,
+        alpha: Math.random() * 0.5 + 0.1,
+        pulse: Math.random() * Math.PI * 2
+      });
+    }
+
+    class Particle {
+      constructor(x, y, speed) {
+        this.x = x;
+        this.y = y;
+        this.vx = (Math.random() - 0.5) * speed * 0.5;
+        this.vy = (Math.random() - 0.5) * speed * 0.5 - Math.random() * 3;
+        this.life = 1;
+        this.decay = 0.01 + Math.random() * 0.02;
+        this.size = 2 + Math.random() * 4 + speed * 0.3;
+        this.color = colors[Math.floor(Math.random() * colors.length)];
+        this.isNote = Math.random() > 0.7;
+        this.note = noteSymbols[Math.floor(Math.random() * noteSymbols.length)];
+        this.rotation = Math.random() * Math.PI * 2;
+        this.rotSpeed = (Math.random() - 0.5) * 0.1;
+      }
+
+      update() {
+        this.x += this.vx;
+        this.y += this.vy;
+        this.vy += 0.02; // slight gravity
+        this.life -= this.decay;
+        this.rotation += this.rotSpeed;
+      }
+
+      draw() {
+        ctx.save();
+        ctx.globalAlpha = this.life;
+        ctx.translate(this.x, this.y);
+        ctx.rotate(this.rotation);
+
+        if (this.isNote) {
+          ctx.fillStyle = this.color;
+          ctx.font = (this.size * 3) + 'px serif';
+          ctx.textAlign = 'center';
+          ctx.textBaseline = 'middle';
+          ctx.fillText(this.note, 0, 0);
+        } else {
+          ctx.fillStyle = this.color;
+          ctx.beginPath();
+          ctx.arc(0, 0, this.size, 0, Math.PI * 2);
+          ctx.fill();
+
+          // Glow
+          ctx.shadowColor = this.color;
+          ctx.shadowBlur = this.size * 2;
+          ctx.fill();
+        }
+
+        ctx.restore();
+      }
+    }
+
+    // Falling notes (rhythm game)
+    class FallingNote {
+      constructor() {
+        this.x = window.innerWidth / 2 + (Math.random() - 0.5) * 160;
+        this.y = -20;
+        this.vy = 2 + Math.random() * 2;
+        this.size = 20 + Math.random() * 10;
+        this.color = colors[Math.floor(Math.random() * colors.length)];
+        this.note = noteSymbols[Math.floor(Math.random() * noteSymbols.length)];
+        this.hit = false;
+        this.alpha = 1;
+        this.targetY = window.innerHeight - 80;
+      }
+
+      update() {
+        if (!this.hit) {
+          this.y += this.vy;
+        } else {
+          this.alpha -= 0.05;
+        }
+      }
+
+      draw() {
+        ctx.save();
+        ctx.globalAlpha = this.alpha;
+        ctx.fillStyle = this.color;
+        ctx.font = this.size + 'px serif';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.shadowColor = this.color;
+        ctx.shadowBlur = 15;
+        ctx.fillText(this.note, this.x, this.y);
+        ctx.restore();
+      }
+
+      isNearTarget() {
+        return Math.abs(this.y - this.targetY) < 40;
+      }
+
+      isPastTarget() {
+        return this.y > this.targetY + 60;
+      }
+    }
+
+    // ============================
+    // Mouse / Touch
+    // ============================
+    const baton = document.getElementById('baton');
+
+    document.addEventListener('mousemove', function(e) {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+
+      // Baton follows cursor
+      baton.style.left = (mouseX - 2) + 'px';
+      baton.style.top = (mouseY - 50) + 'px';
+
+      const dx = mouseX - prevMouseX;
+      const dy = mouseY - prevMouseY;
+      mouseSpeed = Math.sqrt(dx * dx + dy * dy);
+
+      // Rotate baton based on movement
+      const angle = Math.atan2(dx, -Math.abs(dy)) * 0.3;
+      baton.style.transform = 'rotate(' + angle + 'rad)';
+
+      if (isPlaying && mouseSpeed > 3) {
+        const numParticles = Math.min(Math.floor(mouseSpeed / 3), 8);
+        for (let i = 0; i < numParticles; i++) {
+          particles.push(new Particle(mouseX, mouseY - 50, mouseSpeed));
+        }
+
+        // Check note hits
+        notes.forEach(function(note) {
+          if (!note.hit && note.isNearTarget()) {
+            const dist = Math.abs(note.x - mouseX);
+            if (dist < 80) {
+              note.hit = true;
+              combo++;
+              if (combo > maxCombo) maxCombo = combo;
+              const comboBonus = Math.min(combo, 10);
+              score += 10 * comboBonus;
+              updateUI();
+
+              // Burst particles on hit
+              for (let j = 0; j < 15; j++) {
+                particles.push(new Particle(note.x, note.y, 10));
+              }
+            }
+          }
+        });
+      }
+
+      prevMouseX = mouseX;
+      prevMouseY = mouseY;
+    });
+
+    // Touch support
+    document.addEventListener('touchmove', function(e) {
+      e.preventDefault();
+      const t = e.touches[0];
+      const event = new MouseEvent('mousemove', { clientX: t.clientX, clientY: t.clientY });
+      document.dispatchEvent(event);
+    }, { passive: false });
+
+    // ============================
+    // Game Logic
+    // ============================
+    const scoreDisplay = document.getElementById('scoreDisplay');
+    const comboDisplay = document.getElementById('comboDisplay');
+    const tempoIndicator = document.getElementById('tempoIndicator');
+    const noteTarget = document.getElementById('noteTarget');
+
+    function updateUI() {
+      scoreDisplay.textContent = score;
+      comboDisplay.textContent = 'COMBO x' + combo;
+    }
+
+    let noteSpawnTimer = 0;
+    let startTime = 0;
+
+    function startGame() {
+      document.getElementById('titleScreen').classList.add('hidden');
+      scoreDisplay.classList.add('active');
+      comboDisplay.classList.add('active');
+      tempoIndicator.classList.add('active');
+      noteTarget.classList.add('active');
+      isPlaying = true;
+      score = 0;
+      combo = 0;
+      maxCombo = 0;
+      startTime = Date.now();
+      updateUI();
+    }
+
+    function endGame() {
+      isPlaying = false;
+      scoreDisplay.classList.remove('active');
+      comboDisplay.classList.remove('active');
+      tempoIndicator.classList.remove('active');
+      noteTarget.classList.remove('active');
+
+      document.getElementById('finalScore').textContent = score;
+
+      let rank = '';
+      if (score >= 3000) rank = 'Maestro \uD83C\uDFBC';
+      else if (score >= 2000) rank = 'Principal Conductor';
+      else if (score >= 1000) rank = 'Guest Conductor';
+      else if (score >= 500) rank = 'Assistant Conductor';
+      else rank = 'Music Student';
+
+      document.getElementById('rank').textContent = rank;
+      document.getElementById('revealScreen').classList.add('active');
+    }
+
+    document.getElementById('startBtn').addEventListener('click', startGame);
+
+    // ============================
+    // Animation Loop
+    // ============================
+    function animate() {
+      requestAnimationFrame(animate);
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      // Draw background stars
+      const time = Date.now() * 0.001;
+      bgStars.forEach(function(star) {
+        ctx.fillStyle = 'rgba(195, 155, 211, ' + (star.alpha * (0.5 + 0.5 * Math.sin(time + star.pulse))) + ')';
+        ctx.beginPath();
+        ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
+        ctx.fill();
+      });
+
+      // Draw trail line
+      if (isPlaying && mouseSpeed > 2) {
+        ctx.strokeStyle = 'rgba(195, 155, 211, ' + Math.min(mouseSpeed / 30, 0.4) + ')';
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.moveTo(prevMouseX, prevMouseY - 50);
+        ctx.lineTo(mouseX, mouseY - 50);
+        ctx.stroke();
+      }
+
+      // Update & draw particles
+      for (let i = particles.length - 1; i >= 0; i--) {
+        particles[i].update();
+        particles[i].draw();
+        if (particles[i].life <= 0) {
+          particles.splice(i, 1);
+        }
+      }
+
+      // Game logic
+      if (isPlaying) {
+        const elapsed = (Date.now() - startTime) / 1000;
+        const remaining = Math.max(0, GAME_DURATION - elapsed);
+        tempoIndicator.textContent = Math.ceil(remaining) + 's';
+
+        if (remaining <= 0) {
+          endGame();
+          return;
+        }
+
+        // Spawn falling notes
+        noteSpawnTimer++;
+        const spawnRate = Math.max(15, 40 - Math.floor(elapsed / 5) * 3);
+        if (noteSpawnTimer >= spawnRate) {
+          notes.push(new FallingNote());
+          noteSpawnTimer = 0;
+        }
+
+        // Update & draw falling notes
+        for (let i = notes.length - 1; i >= 0; i--) {
+          notes[i].update();
+          notes[i].draw();
+
+          if (notes[i].isPastTarget() && !notes[i].hit) {
+            combo = 0;
+            updateUI();
+            notes.splice(i, 1);
+          } else if (notes[i].alpha <= 0) {
+            notes.splice(i, 1);
+          }
+        }
+      }
+    }
+
+    animate();
+  </script>
+</body>
+</html>
