@@ -6,16 +6,37 @@
   <title>佐藤瑛吾 | Official Site</title>
   <meta name="description" content="ヴァイオリニスト・指揮者 佐藤瑛吾の公式サイト。">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;700&family=Montserrat:wght@600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;700&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <!-- ハンバーガー -->
-  <div class="hamburger-btn" id="hamburgerBtn" aria-label="メニューを開く" tabindex="0">
-    <span></span>
-    <span></span>
-    <span></span>
-  </div>
+
+  <!-- ナビゲーションバー -->
+  <nav class="navbar-fixed" id="navbar">
+    <div class="nav-container">
+      <a href="#" class="nav-logo">佐藤 瑛吾</a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#profile">プロフィール</a></li>
+        <li><a href="#videos">動画</a></li>
+        <li><a href="#schedule">公演予定</a></li>
+        <li><a href="#contact">お問い合わせ</a></li>
+        <li><a href="en.html" class="nav-lang">EN</a></li>
+        <li class="nav-sns">
+          <a href="https://www.youtube.com/@eigosato315" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+          <a href="https://x.com/shostako315" target="_blank" aria-label="X"><i class="fab fa-x-twitter"></i></a>
+          <a href="https://www.instagram.com/eigosato_315/" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+        </li>
+      </ul>
+      <div class="hamburger-btn" id="hamburgerBtn" aria-label="メニューを開く" tabindex="0">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </nav>
+
+  <!-- モバイルスライドメニュー -->
   <nav class="slide-menu" id="slideMenu">
     <div class="menu-header">
       <h3>Menu</h3>
@@ -23,12 +44,19 @@
     </div>
     <ul class="menu-items">
       <li><a href="#profile">プロフィール</a></li>
+      <li><a href="#videos">動画</a></li>
       <li><a href="#schedule">公演予定</a></li>
-      <li><a href="past-concerts.html">過去の演奏会</a></li>
+      <li><a href="#contact">お問い合わせ</a></li>
       <li><a href="gallery.html">ポスターギャラリー</a></li>
-      <li><a href="gallery-media.html">メディアギャラリー</a></li> <!-- ★ここを追加 -->
+      <li><a href="gallery-media.html">メディアギャラリー</a></li>
+      <li><a href="past-concerts.html">過去の演奏会</a></li>
       <li><a href="en.html" class="english-link">&#127468;&#127463; English</a></li>
     </ul>
+    <div class="menu-sns">
+      <a href="https://www.youtube.com/@eigosato315" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+      <a href="https://x.com/shostako315" target="_blank" aria-label="X"><i class="fab fa-x-twitter"></i></a>
+      <a href="https://www.instagram.com/eigosato_315/" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+    </div>
   </nav>
   <div class="menu-overlay" id="menuOverlay"></div>
 
@@ -40,67 +68,46 @@
       </div>
       <div class="hero-overlay"></div>
       <div class="hero-content">
-        <h1 class="hero-title">佐藤 瑛吾</h1>
-        <p class="hero-subtitle">Violinist & Conductor</p>
+        <p class="hero-label fade-in">Violinist & Conductor</p>
+        <h1 class="hero-title fade-in">佐藤 瑛吾</h1>
+        <p class="hero-subtitle fade-in">Eigo Sato</p>
+      </div>
+      <div class="scroll-indicator">
+        <span>Scroll</span>
+        <div class="scroll-arrow"></div>
       </div>
     </section>
 
     <!-- プロフィール -->
-    <section id="profile" class="py-5">
-      <div class="container" style="max-width: 900px;">
-        <h2 class="text-center mb-4" style="font-family:'Montserrat','Noto Serif JP',serif;color:#8e44ad;">プロフィール</h2>
-        <div class="row align-items-start g-4">
-          <div class="col-md-4 text-center">
-            <img src="img/profile.jpg" alt="佐藤瑛吾プロフィール写真" class="img-fluid rounded shadow-lg"
-              style="max-width:320px;width:100%;height:auto;margin:0 auto;display:block;">
+    <section id="profile" class="section-block">
+      <div class="container" style="max-width: 960px;">
+        <h2 class="section-title fade-up">プロフィール</h2>
+        <div class="row align-items-start g-5">
+          <div class="col-md-4 text-center fade-up">
+            <img src="img/profile.jpg" alt="佐藤瑛吾プロフィール写真" class="profile-photo">
           </div>
-          <div class="col-md-8">
+          <div class="col-md-8 fade-up">
             <div class="profile-content">
               <section class="profile-section">
-                <div>
-                  <h3 class="profile-section-title">学歴</h3>
-                  <p>東京外国語大学国際日本学部卒業。東京音楽大学指揮研修生修了。</p>
-                </div>
+                <h3 class="profile-section-title">経歴</h3>
+                <p>
+                  2000年生まれ・東京都出身。東京外国語大学国際日本学部卒業。東京音楽大学指揮研修生修了。一般社団法人VariOrchestra代表理事・音楽監督。ヴァイオリンを白瀬ゆり、伊藤亮太郎の各氏に、指揮を増井信貴氏に師事、アカデミー等を通じて阪哲朗氏、リッカルド・ムーティ氏らの指導を受ける。これまでにワロン王立歌劇場管弦楽団、大阪交響楽団、東京春祭オーケストラ等を指揮。映画『遠い山なみの光』では広瀬すず氏へのヴァイオリン演奏・所作指導に携わる。
+                </p>
               </section>
               <section class="profile-section">
-                <div>
-                  <h3 class="profile-section-title">経歴</h3>
-                  <p>
-                    東京都出身、現在25歳。東京外国語大学在学中より東京音楽大学にて指揮法を学ぶ。びわ湖ホールオペラセミナーⅢにて、大阪交響楽団の演奏によるモーツァルト/フィガロの結婚を指揮。リッカルド・ムーティ氏によるオーディションを経てイタリアン・オペラ・アカデミーvol.5を受講。また、大手コンサルティングファームの金融業界担当として、大企業向けの経営/事業戦略、業務改革、組織設計・風土改革等の支援に従事。オーケストラ『VariOrchestra』の代表を務める。
-                  </p>
-                </div>
+                <h3 class="profile-section-title">主な受賞歴</h3>
+                <ul>
+                  <li>Bach International Music Competition UK2024 第1位（指揮部門）</li>
+                  <li>Max Bruch International Competition2024 Platinum Prize（指揮部門）</li>
+                  <li>Gabriel Faure Music World Competition 第1位（指揮部門）</li>
+                  <li>2025年ベルギー国際オペラ指揮者コンクール本選出場</li>
+                </ul>
               </section>
               <section class="profile-section">
-                <div>
-                  <h3 class="profile-section-title">主な受賞歴</h3>
-                  <ul>
-                    <li>Bach International Music Competition UK2024 第1位（指揮部門）</li>
-                    <li>Max Bruch International Competition2024 Platinum Prize（指揮部門）</li>
-                    <li>2nd Gabriel faure music World Competition　第1位(指揮部門)</li>
-                    <li>2025年ベルギー国際オペラ指揮者コンクール出場</li>
-                  </ul>
-                </div>
-              </section>
-              <section class="profile-section">
-                <div>
-                  <h3 class="profile-section-title">VariOrchestra設立と活動</h3>
-                  <p>
-                   2020年、音楽大学出身の音楽家らと共に指揮者をおかない室内オーケストラ《VariOrchestra》を設立し、現在代表、コンサートマスター。定期演奏会においてはコンサートマスターとして交響曲を弾き振り、第3回定期演奏会では協奏曲のソリストを、さらに特別公演では全公演を指揮。室内楽演奏会や新曲初演から、企業様向けのイベント演奏受託など幅広く企画・運営。
-                </div>
-              </section>
-              <section class="profile-section">
-                <div>
-                  <h3 class="profile-section-title">その他の活動</h3>
-                  <p>
-                   映画撮影における活動もあり、カズオ・イシグロ原作「遠い山なみの光」では広瀬すず氏への演奏・所作指導を行う。
-                  </p>
-                </div>
-              </section>
-              <section class="profile-section">
-                <div>
-                  <h3 class="profile-section-title">師事歴</h3>
-                  <p>ヴァイオリンを伊藤亮太郎、有働一美、大塚杏奈、白瀬ゆりの各氏に、指揮を増井信貴氏に師事。</p>
-                </div>
+                <h3 class="profile-section-title">その他</h3>
+                <p>
+                  NTTDグループのコンサルティングファームで金融業界向けの経営・事業戦略策定・業務改革等の支援にも従事しており、『The Finance』への寄稿実績もある。
+                </p>
               </section>
             </div>
           </div>
@@ -108,233 +115,200 @@
       </div>
     </section>
 
-    <!-- 2025年の公演 -->
-    <section id="schedule" class="py-5 bg-light">
-      <div class="container" style="max-width:900px;">
-        <h2 class="text-center mb-4" style="font-family:'Montserrat','Noto Serif JP',serif;color:#8e44ad;">2025年以降の公演予定</h2>
+    <!-- 動画 -->
+    <section id="videos" class="section-block section-alt">
+      <div class="container" style="max-width:960px;">
+        <h2 class="section-title fade-up">Movie</h2>
+        <div class="video-grid fade-up">
+          <div class="video-card">
+            <div class="video-wrapper">
+              <iframe src="https://www.youtube.com/embed/1cV0FeP0r-I" title="ベートーヴェン：交響曲第9番" allowfullscreen></iframe>
+            </div>
+            <h4 class="video-title">ベートーヴェン：交響曲第9番「合唱付き」</h4>
+            <p class="video-desc">学芸×第九特別演奏会（2024年）</p>
+          </div>
+          <div class="video-card">
+            <div class="video-wrapper">
+              <iframe src="https://www.youtube.com/embed/J2gWR5UTg-s" title="ブラームス：交響曲第1番" allowfullscreen></iframe>
+            </div>
+            <h4 class="video-title">ブラームス：交響曲第1番</h4>
+            <p class="video-desc">VariOrchestra特別公演 Vol.1</p>
+          </div>
+          <div class="video-card">
+            <div class="video-wrapper">
+              <iframe src="https://www.youtube.com/embed/d5s7aulgFFc" title="モーツァルト：セレナータノットゥルナ" allowfullscreen></iframe>
+            </div>
+            <h4 class="video-title">モーツァルト：セレナータノットゥルナ</h4>
+            <p class="video-desc">VariOrchestra 第五回定期演奏会</p>
+          </div>
+        </div>
+        <div class="text-center mt-4 fade-up">
+          <a href="gallery-media.html" class="btn-more">もっと見る <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 公演予定 -->
+    <section id="schedule" class="section-block">
+      <div class="container" style="max-width:960px;">
+        <h2 class="section-title fade-up">2026年以降の公演予定</h2>
         <div class="row g-3">
 
-          <div class="col-md-6">
-            <div class="concert-card p-3 rounded shadow-sm">
-              <div class="d-flex justify-content-between align-items-center mb-2">
-                <span class="fw-bold text-primary">2025/01/04</span>
-                <a href="https://mahlerproject2024.wixsite.com/my-site-6" class="btn-details">詳細</a>
+          <div class="col-md-6 fade-up">
+            <div class="concert-card">
+              <div class="concert-card-header">
+                <span class="concert-date">2026/02/05</span>
               </div>
-              <h4 class="fs-6 mb-1">Mahler Project Vol.1</h4>
-              <div><span class="fw-bold">会場:</span> 調布グリーンホール</div>
-              <div><span class="fw-bold">出演:</span> 指揮</div>
-            </div>
-          </div>
-          
-          <div class="col-md-6">
-            <div class="concert-card p-3 rounded shadow-sm">
-              <div class="d-flex justify-content-between align-items-center mb-2">
-                <span class="fw-bold text-primary">2025/02/11</span>
-                <a href="https://www.operaliege.be/en/events/cidoo-3rd-edition/" class="btn-details">詳細</a>
-              </div>
-              <h4 class="fs-6 mb-1">第3回国際オペラ指揮者コンクール</h4>
-              <div><span class="fw-bold">会場:</span> ベルギーワロン劇場</div>
-              <div><span class="fw-bold">出演:</span> 指揮</div>
-            </div>
-          </div>
-          
-
-          <div class="col-md-6">
-            <div class="concert-card p-3 rounded shadow-sm">
-              <div class="d-flex justify-content-between align-items-center mb-2">
-                <span class="fw-bold text-primary">2025/03/23</span>
-                <a href="https://casa-classica.jp/2025/03/23/3月23日（日）昼の部-variorchetra-室内楽演奏会-vol-5-佐藤瑛吾（/" class="btn-details">詳細</a>
-              </div>
-              <h4 class="fs-6 mb-1">佐藤瑛吾×永井晶人デュオリサイタル</h4>
-              <div><span class="fw-bold">会場:</span> カーザクラシカ</div>
-              <div><span class="fw-bold">出演:</span> Vn</div>
+              <h4 class="concert-name">大手コンサルティングファームイベント</h4>
+              <div class="concert-info"><i class="fas fa-map-marker-alt"></i> パレスホテル</div>
+              <div class="concert-info"><i class="fas fa-music"></i> Vn.</div>
             </div>
           </div>
 
-          <div class="col-md-6">
-            <div class="concert-card p-3 rounded shadow-sm">
-              <div class="d-flex justify-content-between align-items-center mb-2">
-                <span class="fw-bold text-primary">2025/04/29</span>
-                <a href="" class="btn-details">詳細</a>
+          <div class="col-md-6 fade-up">
+            <div class="concert-card">
+              <div class="concert-card-header">
+                <span class="concert-date">2026/05/02</span>
               </div>
-              <h4 class="fs-6 mb-1">成蹊中高ストリングオーケストラOBOG合同演奏会</h4>
-              <div><span class="fw-bold">会場:</span> 成蹊学園大講堂</div>
-              <div><span class="fw-bold">出演:</span> 指揮</div>
+              <h4 class="concert-name">VariOrchestra定期演奏会 ベートーヴェン×ブラームスツィクルスVol.1</h4>
+              <div class="concert-info"><i class="fas fa-map-marker-alt"></i> 武蔵野市民文化会館大ホール</div>
+              <div class="concert-info"><i class="fas fa-music"></i> 指揮</div>
+              <div class="concert-info"><i class="fas fa-list-ul"></i> ベートーヴェン：交響曲第1番・第2番 / ブラームス：交響曲第1番</div>
             </div>
           </div>
 
-     <div class="col-md-6">
-            <div class="concert-card p-3 rounded shadow-sm">
-              <div class="d-flex justify-content-between align-items-center mb-2">
-                <span class="fw-bold text-primary">2025/05/06</span>
-                <a href="https://sites.google.com/view/saitama-univ-orch/演奏会情報?authuser=0" class="btn-details">詳細</a>
+          <div class="col-md-6 fade-up">
+            <div class="concert-card">
+              <div class="concert-card-header">
+                <span class="concert-date">2026/05/10</span>
               </div>
-              <h4 class="fs-6 mb-1">埼玉大学管弦楽団第107回定期演奏会</h4>
-              <div><span class="fw-bold">会場:</span> 埼玉会館</div>
-              <div><span class="fw-bold">出演:</span> 指揮</div>
+              <h4 class="concert-name">Legame String Orchestra 第三回演奏会</h4>
+              <div class="concert-info"><i class="fas fa-map-marker-alt"></i> 会場未定</div>
+              <div class="concert-info"><i class="fas fa-music"></i> 指揮</div>
             </div>
           </div>
 
-
-          <div class="col-md-6">
-            <div class="concert-card p-3 rounded shadow-sm">
-              <div class="d-flex justify-content-between align-items-center mb-2">
-                <span class="fw-bold text-primary">2025/08/11</span>
-                <a href="https://ticket.tsuku2.jp/events-detail/00457212727020" class="btn-details">詳細</a>
+          <div class="col-md-6 fade-up">
+            <div class="concert-card">
+              <div class="concert-card-header">
+                <span class="concert-date">2026/05/27</span>
               </div>
-              <h4 class="fs-6 mb-1">室内楽コンサート</h4>
-              <div><span class="fw-bold">会場:</span> カーザクラシカ</div>
-              <div><span class="fw-bold">出演:</span> Vn</div>
-            </div>
-          </div>
-          
-                    <div class="col-md-6">
-            <div class="concert-card p-3 rounded shadow-sm">
-              <div class="d-flex justify-content-between align-items-center mb-2">
-                <span class="fw-bold text-primary">2025/08/18</span>
-                <a href="https://www.biwako-hall.or.jp/performance/opera-seminar3" class="btn-details">詳細</a>
-              </div>
-              <h4 class="fs-6 mb-1">阪哲朗オペラセミナーⅢ</h4>
-              <div><span class="fw-bold">会場:</span> 滋賀県立芸術劇場びわ湖ホール</div>
-              <div><span class="fw-bold">出演:</span> 指揮</div>
-            </div>
-          </div>
-          
-          <div class="col-md-6">
-            <div class="concert-card p-3 rounded shadow-sm">
-              <div class="d-flex justify-content-between align-items-center mb-2">
-                <span class="fw-bold text-primary">2025/09/11</span>
-                <a href="https://ebravo.jp/archives/195973 "class="btn-details">詳細</a>
-              </div>
-              <h4 class="fs-6 mb-1">リッカルド・ムーティ　イタリア・オペラアカデミーvol.5</h4>
-              <div><span class="fw-bold">会場:</span> 東京音楽大学100周年記念ホール</div>
-              <div><span class="fw-bold">出演:</span> 指揮</div>
+              <h4 class="concert-name">ドン・ジョヴァンニ公演</h4>
+              <div class="concert-info"><i class="fas fa-map-marker-alt"></i> 渋谷伝承ホール</div>
+              <div class="concert-info"><i class="fas fa-music"></i> 副指揮</div>
             </div>
           </div>
 
-          
-
-          <div class="col-md-6">
-            <div class="concert-card p-3 rounded shadow-sm">
-              <div class="d-flex justify-content-between align-items-center mb-2">
-                <span class="fw-bold text-primary">2025/09/20</span>
-                <a href="https://teket.jp/10252/51754" class="btn-details">詳細</a>
+          <div class="col-md-6 fade-up">
+            <div class="concert-card">
+              <div class="concert-card-header">
+                <span class="concert-date">2026/10/04</span>
               </div>
-              <h4 class="fs-6 mb-1">Legame String Orchestra</h4>
-              <div><span class="fw-bold">会場:</span> 所沢ミューザ</div>
-              <div><span class="fw-bold">出演:</span> 指揮</div>
+              <h4 class="concert-name">VariOrchestra定期演奏会 ベートーヴェン×ブラームスツィクルスVol.2</h4>
+              <div class="concert-info"><i class="fas fa-map-marker-alt"></i> 武蔵野市民文化会館大ホール</div>
+              <div class="concert-info"><i class="fas fa-music"></i> 指揮</div>
+              <div class="concert-info"><i class="fas fa-list-ul"></i> ベートーヴェン：交響曲第6番「田園」 / ブラームス：交響曲第2番</div>
             </div>
           </div>
 
-          <div class="col-md-6">
-            <div class="concert-card p-3 rounded shadow-sm">
-              <div class="d-flex justify-content-between align-items-center mb-2">
-                <span class="fw-bold text-primary">2025/09/21</span>
-                <a href="#" class="btn-details">詳細</a>
+          <div class="col-md-6 fade-up">
+            <div class="concert-card">
+              <div class="concert-card-header">
+                <span class="concert-date">2026/12/18</span>
               </div>
-              <h4 class="fs-6 mb-1">クローズドコンサート</h4>
-              <div><span class="fw-bold">会場:</span> 帝国ホテル</div>
-              <div><span class="fw-bold">出演:</span> 指揮</div>
+              <h4 class="concert-name">VariOrchestra特別公演 オペラ企画</h4>
+              <div class="concert-info"><i class="fas fa-map-marker-alt"></i> 武蔵野市民文化会館小ホール</div>
+              <div class="concert-info"><i class="fas fa-music"></i> 指揮</div>
             </div>
           </div>
 
-          <div class="col-md-6">
-            <div class="concert-card p-3 rounded shadow-sm">
-              <div class="d-flex justify-content-between align-items-center mb-2">
-                <span class="fw-bold text-primary">2025/09/28</span>
-                <a href="https://teket.jp/768/53004" class="btn-details">詳細</a>
+          <div class="col-md-6 fade-up">
+            <div class="concert-card">
+              <div class="concert-card-header">
+                <span class="concert-date">2027/03/13</span>
               </div>
-              <h4 class="fs-6 mb-1">トリオコンサート</h4>
-              <div><span class="fw-bold">会場:</span> 紀尾井町コンサートサロン</div>
-              <div><span class="fw-bold">出演:</span> Vn</div>
-            </div>
-          </div>
-
-          <div class="col-md-6">
-            <div class="concert-card p-3 rounded shadow-sm">
-              <div class="d-flex justify-content-between align-items-center mb-2">
-                <span class="fw-bold text-primary">2025/10/11</span>
-                <a href="https://preview.studio.site/live/v7qGyjRMWL/news/F-InHCRI" class="btn-details">詳細</a>
-              </div>
-              <h4 class="fs-6 mb-1">ととのいクラシックサウナ</h4>
-              <div><span class="fw-bold">会場:</span> The Sauna 長野県上水内郡</div>
-              <div><span class="fw-bold">出演:</span> Vn.</div>
-            </div>
-          </div>
-
-
-
-
-          <div class="col-md-6">
-            <div class="concert-card p-3 rounded shadow-sm">
-              <div class="d-flex justify-content-between align-items-center mb-2">
-                <span class="fw-bold text-primary">2025/11/01</span>
-                <a href="#" class="btn-details">詳細</a>
-              </div>
-              <h4 class="fs-6 mb-1">VariOrchestra × 東京外国語大学</h4>
-              <div><span class="fw-bold">会場:</span> 東京外国語大学</div>
-              <div><span class="fw-bold">出演:</span> 指揮</div>
-            </div>
-          </div>
-
-          <div class="col-md-6">
-            <div class="concert-card p-3 rounded shadow-sm">
-              <div class="d-flex justify-content-between align-items-center mb-2">
-                <span class="fw-bold text-primary">2025/12/20</span>
-                <a href="#" class="btn-details">詳細</a>
-              </div>
-              <h4 class="fs-6 mb-1">VariOrchestra 演奏会</h4>
-              <div><span class="fw-bold">会場:</span> 五反田文化センター</div>
-              <div><span class="fw-bold">出演:</span> Vn</div>
-            </div>
-          </div>
-          
-         <div class="col-md-6">
-            <div class="concert-card p-3 rounded shadow-sm">
-              <div class="d-flex justify-content-between align-items-center mb-2">
-                <span class="fw-bold text-primary">2026/02/05</span>
-                <a href="#" class="btn-details">詳細</a>
-              </div>
-              <h4 class="fs-6 mb-1">クローズドコンサート</h4>
-              <div><span class="fw-bold">会場:</span> パレスホテル</div>
-              <div><span class="fw-bold">出演:</span> Vn.</div>
-            </div>
-          </div>
-
-          <div class="col-md-6">
-            <div class="concert-card p-3 rounded shadow-sm">
-              <div class="d-flex justify-content-between align-items-center mb-2">
-                <span class="fw-bold text-primary">2026/03/31</span>
-                <a href="#" class="btn-details">詳細</a>
-              </div>
-              <h4 class="fs-6 mb-1">詳細未定</h4>
-              <div><span class="fw-bold">会場:</span> 武蔵野市民文化会館</div>
-              <div><span class="fw-bold">出演:</span> Vn.</div>
+              <h4 class="concert-name">VariOrchestra定期演奏会 ベートーヴェン×ブラームスツィクルスVol.3</h4>
+              <div class="concert-info"><i class="fas fa-map-marker-alt"></i> 武蔵野市民文化会館大ホール</div>
+              <div class="concert-info"><i class="fas fa-music"></i> 指揮</div>
+              <div class="concert-info"><i class="fas fa-list-ul"></i> エグモント序曲 / ブラームス：ヴァイオリン協奏曲 / ベートーヴェン：交響曲第3番「英雄」</div>
             </div>
           </div>
 
         </div>
+      </div>
+    </section>
+
+    <!-- お問い合わせ -->
+    <section id="contact" class="section-block section-alt">
+      <div class="container" style="max-width:700px;">
+        <h2 class="section-title fade-up">お問い合わせ</h2>
+        <p class="text-center mb-4 fade-up" style="color:#666;font-size:0.95rem;">
+          演奏・指揮のご依頼、メディア出演、その他お問い合わせはこちらからお気軽にどうぞ。
+        </p>
+        <form class="contact-form fade-up" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+          <div class="form-group">
+            <label for="name">お名前 <span class="required">*</span></label>
+            <input type="text" id="name" name="name" required placeholder="山田 太郎">
+          </div>
+          <div class="form-group">
+            <label for="email">メールアドレス <span class="required">*</span></label>
+            <input type="email" id="email" name="email" required placeholder="example@email.com">
+          </div>
+          <div class="form-group">
+            <label for="category">ご依頼種別</label>
+            <select id="category" name="category">
+              <option value="">選択してください</option>
+              <option value="演奏依頼">演奏依頼</option>
+              <option value="指揮依頼">指揮依頼</option>
+              <option value="メディア出演">メディア出演</option>
+              <option value="コンサルティング">コンサルティング</option>
+              <option value="その他">その他</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="message">メッセージ <span class="required">*</span></label>
+            <textarea id="message" name="message" rows="6" required placeholder="ご依頼内容やご質問をお書きください"></textarea>
+          </div>
+          <input type="hidden" name="_subject" value="公式サイトからのお問い合わせ">
+          <button type="submit" class="btn-submit">
+            <i class="fas fa-paper-plane"></i> 送信する
+          </button>
+        </form>
       </div>
     </section>
   </main>
 
   <!-- フッター -->
-  <footer class="footer mt-5">
+  <footer class="footer">
     <div class="container">
-      <div class="footer-content d-flex flex-wrap justify-content-between align-items-end">
+      <div class="footer-top">
         <div class="footer-brand">
           <h3>佐藤 瑛吾</h3>
           <p>Violinist & Conductor</p>
         </div>
-        <div class="footer-contact">
-          <p>Contact: <a href="mailto:shostako315@gmail.com">shostako315@gmail.com</a></p>
+        <div class="footer-nav">
+          <a href="#profile">プロフィール</a>
+          <a href="#schedule">公演予定</a>
+          <a href="gallery.html">ギャラリー</a>
+          <a href="past-concerts.html">アーカイブ</a>
+        </div>
+        <div class="footer-social">
+          <a href="https://www.youtube.com/@eigosato315" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+          <a href="https://x.com/shostako315" target="_blank" aria-label="X"><i class="fab fa-x-twitter"></i></a>
+          <a href="https://www.instagram.com/eigosato_315/" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
         </div>
       </div>
-      <div class="footer-copyright text-center mt-3">
+      <div class="footer-bottom">
+        <p>Contact: <a href="mailto:shostako315@gmail.com">shostako315@gmail.com</a></p>
         <small>&copy; 2025 Eigo Sato. All rights reserved.</small>
       </div>
     </div>
   </footer>
+
+  <!-- スクロールトップボタン -->
+  <button class="scroll-top" id="scrollTopBtn" aria-label="トップに戻る">
+    <i class="fas fa-chevron-up"></i>
+  </button>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   <script src="js/script.js"></script>

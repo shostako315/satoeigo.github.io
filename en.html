@@ -1,188 +1,212 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <link rel="stylesheet" href="style.css">
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Eigo Sato Official Site</title>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Eigo Sato | Official Site</title>
+  <meta name="description" content="Violinist & Conductor Eigo Sato Official Website.">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;700&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
   <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body {
-      font-family: 'Noto Serif JP', serif;
-      line-height: 1.6;
-      color: #333;
-      background-color: #fff;
-    }
-
-    header {
-      position: relative;
-      text-align: center;
-      color: white;
-    }
-    header img {
-      width: 100%;
-      height: 100vh;
-      object-fit: cover;
-    }
-    header .text {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      color: white;
-      text-shadow: 2px 2px 6px rgba(0,0,0,0.7);
-      padding: 0 1rem;
-      white-space: nowrap;
-    }
-    header .text h1 {
-      font-size: 3rem;
-    }
-    header .text p {
-      font-size: 1.2rem;
-      white-space: nowrap;
-    }
-
-    nav {
-      text-align: right;
-      margin: 1rem 1.5rem 0 0;
-    }
-
-    nav a {
-      color: #333;
-      text-decoration: none;
-      font-size: 0.9rem;
-    }
-
-    section {
-      padding: 2rem 1rem;
-      max-width: 1000px;
-      margin: auto;
-    }
-
-    .profile {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 2rem;
-      align-items: center;
-      justify-content: center;
-    }
-    .profile img {
-      max-width: 300px;
-      width: 100%;
-      border-radius: 8px;
-    }
-    .profile p {
-      flex: 1;
-      font-size: 1rem;
-      min-width: 280px;
-    }
-
-    .gallery {
+    .en-gallery {
       overflow-x: auto;
       white-space: nowrap;
       padding: 1rem 0;
     }
-    .gallery img {
+    .en-gallery img {
       height: 200px;
       margin-right: 1rem;
       border-radius: 10px;
       display: inline-block;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
     }
-
-    .videos {
-      overflow-x: auto;
-      white-space: nowrap;
-      padding: 1rem 0;
+    .en-videos {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+      max-width: 960px;
+      margin: 0 auto;
     }
-
-    .videos iframe {
+    .en-videos iframe {
       width: 100%;
-      max-width: 800px;
-      height: 450px;
+      aspect-ratio: 16/9;
       border-radius: 10px;
-      display: inline-block;
-      margin-right: 1rem;
+      border: none;
     }
-
-    .contact {
-      text-align: center;
-      margin-top: 2rem;
-      padding: 2rem 1rem 1rem;
-      border-top: 1px solid #ccc;
-      font-size: 0.95rem;
-    }
-
     @media (max-width: 768px) {
-      header .text h1 {
-        font-size: 2rem;
-      }
-      header .text p {
-        font-size: 1rem;
-      }
-      .profile {
-        flex-direction: column;
-      }
-      .gallery img {
-        height: 150px;
-      }
-      .videos iframe {
-        height: 250px;
-      }
-      header .text {
-        white-space: normal;
-      }
+      .en-gallery img { height: 150px; }
+      .en-videos { grid-template-columns: 1fr; }
     }
   </style>
 </head>
 <body>
-  <nav><a href="index.html">日本語</a></nav>
 
-  <header>
-    <img src="img/top_orchestra.jpg" alt="Hero">
-    <div class="text">
-      <h1>Eigo Sato</h1>
-      <p>Conductor, Violinist, Consultant</p>
+  <!-- Navigation Bar -->
+  <nav class="navbar-fixed" id="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="nav-logo">Eigo Sato</a>
+      <ul class="nav-links">
+        <li><a href="#profile">Profile</a></li>
+        <li><a href="#photos">Photos</a></li>
+        <li><a href="#videos">Videos</a></li>
+        <li><a href="index.html" class="nav-lang">JP</a></li>
+        <li class="nav-sns">
+          <a href="https://www.youtube.com/@eigosato315" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+          <a href="https://x.com/shostako315" target="_blank" aria-label="X"><i class="fab fa-x-twitter"></i></a>
+          <a href="https://www.instagram.com/eigosato_315/" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+        </li>
+      </ul>
+      <div class="hamburger-btn" id="hamburgerBtn" aria-label="Open menu" tabindex="0">
+        <span></span><span></span><span></span>
+      </div>
     </div>
-  </header>
+  </nav>
 
-  <section class="profile">
-    <img src="img/profile.jpg" alt="Eigo Sato">
-    <p>
-      Eigo Sato graduated from Tokyo University of Foreign Studies, majoring in International Japanese Studies, and completed a conducting program at Tokyo College of Music. He began playing the violin at age four and has served as concertmaster for various ensembles, including Seikei String Orchestra, TUFS Orchestra, and VariOrchestra. During his teenage years, he also began conducting choirs and string ensembles.
-      <br><br>
-      While still a university student, he began formal conducting studies as a conducting trainee at Tokyo College of Music. He has received top honors in international competitions, including 1st Prize at the Bach International Music Competition UK 2024, Platinum Prize at the Max Bruch International Competition 2024, and 1st Prize at WBMC 2024.
-      <br><br>
-      In 2020, he founded VariOrchestra with fellow musicians from top conservatories, leading performances and planning concerts. He has conducted major symphonies by Beethoven, Brahms, Mozart, and Schubert, integrating historically informed performance (HIP) approaches that have been praised for their freshness and insight.
-      <br><br>
-      Beyond the concert stage, Sato coaches youth and amateur orchestras and served as performance and movement advisor for actress Suzu Hirose in the film adaptation of Kazuo Ishiguro’s "A Pale View of Hills." His violin performances include appearances in public recitals such as the 15th Higashikurume Classic Concert.
-      <br><br>
-      He studied violin under Ryotaro Ito, Kazumi Udo, Anna Otsuka, and Yuri Shirase, and studied conducting under Nobutaka Masui. Outside of music, he works as a business consultant supporting large-scale transformation projects and also leads the online English learning platform "TUFLINGUAL."
-    </p>
-  </section>
-
-  <section>
-    <h2>Photos</h2>
-    <div class="gallery">
-      <img src="img/profile.jpg" alt="Profile">
-      <img src="img/concert.jpg" alt="Concert">
-      <img src="img/event.jpg" alt="Event">
-      <img src="img/reading.jpg" alt="Reading">
-      <img src="img/stainedglass.jpg" alt="Stained Glass">
+  <nav class="slide-menu" id="slideMenu">
+    <div class="menu-header">
+      <h3>Menu</h3>
+      <button class="close-btn" id="closeBtn" aria-label="Close menu">&times;</button>
     </div>
-  </section>
+    <ul class="menu-items">
+      <li><a href="#profile">Profile</a></li>
+      <li><a href="#photos">Photos</a></li>
+      <li><a href="#videos">Videos</a></li>
+      <li><a href="index.html">&#127471;&#127477; Japanese</a></li>
+    </ul>
+    <div class="menu-sns">
+      <a href="https://www.youtube.com/@eigosato315" target="_blank"><i class="fab fa-youtube"></i></a>
+      <a href="https://x.com/shostako315" target="_blank"><i class="fab fa-x-twitter"></i></a>
+      <a href="https://www.instagram.com/eigosato_315/" target="_blank"><i class="fab fa-instagram"></i></a>
+    </div>
+  </nav>
+  <div class="menu-overlay" id="menuOverlay"></div>
 
-  <section class="videos">
-    <h2>Videos</h2>
-    <iframe src="https://www.youtube.com/embed/tssEzKuBm8w" title="Mozart" allowfullscreen></iframe>
-    <iframe src="https://www.youtube.com/embed/7GpPmL6eCuM" title="Brahms" allowfullscreen></iframe>
-    <iframe src="https://www.youtube.com/embed/1cV0FeP0r-I" title="Mahler" allowfullscreen></iframe>
-    <iframe src="https://www.youtube.com/embed/iFwB8kfx0XU" title="Schumann" allowfullscreen></iframe>
-  </section>
+  <main>
+    <!-- Hero -->
+    <section class="hero-section">
+      <div class="hero-image">
+        <img src="img/top_orchestra.jpg" alt="Hero">
+      </div>
+      <div class="hero-overlay"></div>
+      <div class="hero-content">
+        <p class="hero-label fade-in">Conductor, Violinist</p>
+        <h1 class="hero-title fade-in">Eigo Sato</h1>
+      </div>
+      <div class="scroll-indicator">
+        <span>Scroll</span>
+        <div class="scroll-arrow"></div>
+      </div>
+    </section>
 
-  <footer class="contact">
-    <p>Contact: <a href="mailto:shostako315@gmail.com">shostako315@gmail.com</a></p>
-    <p>&copy; 2025 Eigo Sato. All Rights Reserved.</p>
+    <!-- Profile -->
+    <section id="profile" class="section-block">
+      <div class="container" style="max-width:960px;">
+        <h2 class="section-title fade-up">Profile</h2>
+        <div class="row align-items-start g-5">
+          <div class="col-md-4 text-center fade-up">
+            <img src="img/profile.jpg" alt="Eigo Sato" class="profile-photo">
+          </div>
+          <div class="col-md-8 fade-up">
+            <div class="profile-content">
+              <section class="profile-section">
+                <h3 class="profile-section-title">Education</h3>
+                <ul>
+                  <li>Tokyo College of Music | Conducting Trainee Program (2020-2023)</li>
+                  <li>Tokyo University of Foreign Studies | B.A. in International and Area Studies, Japan Studies (2019-2023)</li>
+                </ul>
+              </section>
+              <section class="profile-section">
+                <h3 class="profile-section-title">Conducting Experience</h3>
+                <p>
+                  Representative Director & Music Director of VariOrchestra. Selected Conducting Fellow at the Riccardo Muti Italian Opera Academy in Tokyo, Vol.5 (Verdi's Simon Boccanegra) and at the Biwako Hall Opera Seminar 2025 (Mozart's Le nozze di Figaro under Maestro Tetsuro Ban). Selected as one of the 24 final round participants at the 3rd International Opera Conducting Competition (Belgium, 2025). Orchestras conducted include the Osaka Symphony Orchestra, Tokyo Spring Festival Orchestra, and others.
+                </p>
+              </section>
+              <section class="profile-section">
+                <h3 class="profile-section-title">Awards</h3>
+                <ul>
+                  <li>1st Prize | Bach International Music Competition UK 2024</li>
+                  <li>1st Prize | Gabriel Faure Music World Competition</li>
+                  <li>Platinum Prize | Max Bruch International Competition 2024</li>
+                </ul>
+              </section>
+              <section class="profile-section">
+                <h3 class="profile-section-title">Professional Leadership</h3>
+                <p>
+                  Founded and leads VariOrchestra, a professional chamber orchestra based in Tokyo. The 2026-27 season presents complete symphony cycles of Beethoven and Brahms. Also works as a strategy consultant specializing in corporate strategy and organizational reform at a leading consulting firm.
+                </p>
+              </section>
+              <section class="profile-section">
+                <h3 class="profile-section-title">Teachers</h3>
+                <p>
+                  Conducting: Nobutaka Masui (Professor at Tokyo College of Music). Violin: Yuri Shirase, Ryotaro Ito (Former Concertmaster, NHK Symphony Orchestra).
+                </p>
+              </section>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Photos -->
+    <section id="photos" class="section-block section-alt">
+      <div class="container" style="max-width:960px;">
+        <h2 class="section-title fade-up">Photos</h2>
+        <div class="en-gallery fade-up">
+          <img src="img/profile.jpg" alt="Profile">
+          <img src="img/concert.jpg" alt="Concert">
+          <img src="img/event.jpg" alt="Event">
+          <img src="img/reading.jpg" alt="Reading">
+          <img src="img/stainedglass.jpg" alt="Stained Glass">
+        </div>
+      </div>
+    </section>
+
+    <!-- Videos -->
+    <section id="videos" class="section-block">
+      <div class="container" style="max-width:960px;">
+        <h2 class="section-title fade-up">Videos</h2>
+        <div class="en-videos fade-up">
+          <iframe src="https://www.youtube.com/embed/tssEzKuBm8w" title="Mozart" allowfullscreen></iframe>
+          <iframe src="https://www.youtube.com/embed/7GpPmL6eCuM" title="Brahms" allowfullscreen></iframe>
+          <iframe src="https://www.youtube.com/embed/1cV0FeP0r-I" title="Mahler" allowfullscreen></iframe>
+          <iframe src="https://www.youtube.com/embed/iFwB8kfx0XU" title="Schumann" allowfullscreen></iframe>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <h3>Eigo Sato</h3>
+          <p>Violinist & Conductor</p>
+        </div>
+        <div class="footer-nav">
+          <a href="#profile">Profile</a>
+          <a href="#photos">Photos</a>
+          <a href="#videos">Videos</a>
+          <a href="index.html">Japanese</a>
+        </div>
+        <div class="footer-social">
+          <a href="https://www.youtube.com/@eigosato315" target="_blank"><i class="fab fa-youtube"></i></a>
+          <a href="https://x.com/shostako315" target="_blank"><i class="fab fa-x-twitter"></i></a>
+          <a href="https://www.instagram.com/eigosato_315/" target="_blank"><i class="fab fa-instagram"></i></a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>Contact: <a href="mailto:shostako315@gmail.com">shostako315@gmail.com</a></p>
+        <small>&copy; 2025 Eigo Sato. All rights reserved.</small>
+      </div>
+    </div>
   </footer>
+
+  <button class="scroll-top" id="scrollTopBtn" aria-label="Back to top"><i class="fas fa-chevron-up"></i></button>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/script.js"></script>
 </body>
 </html>

@@ -4,162 +4,127 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Media Gallery | 佐藤瑛吾</title>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Noto+Serif+JP:wght@400;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css"><!-- 既存の全体CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Noto+Serif+JP:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
   <style>
-    body {
-      background: linear-gradient(180deg, #f6f7fa 0%, #e8e9ee 100%);
-      color: #222;
-      font-family: 'Noto Serif JP', serif;
-      margin: 0;
-      padding: 0;
-    }
-    .media-hero {
-      padding: 54px 0 24px 0;
-      text-align: center;
-    }
-    .media-hero-title {
-      font-family: 'Montserrat', 'Noto Serif JP', serif;
-      font-size: 2.2rem;
-      font-weight: 700;
-      color: #232046;
-      margin-bottom: 0.2rem;
-      letter-spacing: 1px;
-    }
-    .media-hero-sub {
-      font-size: 1.08rem;
-      color: #7d7d8a;
-      margin-bottom: 0;
-      letter-spacing: 0.5px;
-    }
     .media-gallery-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 32px;
       max-width: 1200px;
-      margin: 0 auto 60px auto;
+      margin: 0 auto;
       padding: 0 20px;
     }
     .media-card {
-      background: none;
-      box-shadow: none;
-      border-radius: 0;
-      overflow: visible;
       display: flex;
       flex-direction: column;
-      align-items: stretch;
-      position: relative;
       transition: transform 0.15s;
     }
     .media-card:hover {
-      transform: translateY(-2px) scale(1.012);
-    }
-    .media-thumb, .media-card img {
-      width: 100%;
-      aspect-ratio: 16/9;
-      object-fit: cover;
-      border-radius: 12px;
-      background: #e7e8ee;
-      min-height: 180px;
-      max-height: 320px;
-      box-shadow: 0 2px 18px #0001;
-      margin-bottom: 14px;
-      transition: box-shadow 0.15s;
-      cursor: pointer;
+      transform: translateY(-2px);
     }
     .media-thumb {
       position: relative;
+      width: 100%;
       height: 0;
       padding-bottom: 56.25%;
       background: #e7e8ee;
+      border-radius: 10px;
+      overflow: hidden;
+      margin-bottom: 12px;
+      box-shadow: 0 2px 18px rgba(0,0,0,0.06);
     }
     .media-thumb iframe {
       position: absolute;
       top: 0; left: 0; width: 100%; height: 100%;
       border: none;
-      background: #000;
-      border-radius: 12px;
+    }
+    .media-card img {
+      width: 100%;
+      aspect-ratio: 16/9;
+      object-fit: cover;
+      border-radius: 10px;
+      margin-bottom: 12px;
+      box-shadow: 0 2px 18px rgba(0,0,0,0.06);
+      cursor: pointer;
+      transition: transform 0.3s;
+    }
+    .media-card img:hover {
+      transform: scale(1.02);
     }
     .media-caption {
-      font-size: 1.08rem;
+      font-size: 1rem;
       font-family: 'Montserrat', 'Noto Serif JP', serif;
       font-weight: 600;
-      color: #232046;
-      margin: 0 0 0.2em 0;
-      text-align: left;
-      letter-spacing: 0.5px;
-      line-height: 1.3;
+      color: #333;
+      margin: 0 0 4px;
+      line-height: 1.4;
     }
     .media-desc {
-      font-size: 0.93rem;
-      color: #7d7d8a;
-      text-align: left;
-      margin-bottom: 0.6em;
-      opacity: 0.8;
+      font-size: 0.85rem;
+      color: #888;
+      margin-bottom: 0;
     }
     @media (max-width: 1024px) {
-      .media-gallery-grid { grid-template-columns: 1fr 1fr; gap: 18px; }
-      .media-thumb, .media-card img { min-height: 120px; max-height: 200px;}
+      .media-gallery-grid { grid-template-columns: 1fr 1fr; gap: 20px; }
     }
     @media (max-width: 600px) {
-      .media-hero-title { font-size: 1.25rem; }
-      .media-gallery-grid { grid-template-columns: 1fr; gap: 14px;}
-      .media-thumb, .media-card img { min-height: 80px; max-height: 120px;}
-      .media-caption, .media-desc { font-size: 0.9rem; }
-      .media-hero { padding-top: 40px; }
+      .media-gallery-grid { grid-template-columns: 1fr; gap: 16px; }
     }
-    /* 画像拡大モーダル（Lightbox） */
     .img-modal {
       display: none;
       position: fixed;
-      z-index: 2000;
+      z-index: 9999;
       left: 0; top: 0;
       width: 100vw; height: 100vh;
-      background: rgba(20,20,30,0.96);
+      background: rgba(0,0,0,0.92);
       align-items: center;
       justify-content: center;
-      animation: fadeIn 0.2s;
     }
-    .img-modal.active {
-      display: flex;
-    }
+    .img-modal.active { display: flex; }
     .img-modal-content {
-      max-width: 94vw;
+      max-width: 90vw;
       max-height: 85vh;
-      margin: auto;
-      border-radius: 16px;
+      border-radius: 10px;
       box-shadow: 0 0 32px rgba(0,0,0,0.3);
-      background: #181a21;
-      display: block;
     }
     .img-modal-close {
       position: absolute;
-      top: 24px;
-      right: 38px;
+      top: 24px; right: 38px;
       color: #fff;
       font-size: 40px;
-      font-weight: bold;
       cursor: pointer;
-      z-index: 2001;
-      transition: color 0.2s;
-      line-height: 1;
+      z-index: 10000;
     }
-    .img-modal-close:hover {
-      color: #232046;
-    }
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to   { opacity: 1; }
-    }
+    .img-modal-close:hover { color: #ccc; }
   </style>
 </head>
 <body>
-  <!-- ハンバーガーメニュー（既存のものをそのまま） -->
-  <div class="hamburger-btn" id="hamburgerBtn" aria-label="メニューを開く" tabindex="0">
-    <span></span>
-    <span></span>
-    <span></span>
-  </div>
+
+  <!-- ナビゲーションバー -->
+  <nav class="navbar-fixed page-navbar" id="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="nav-logo">佐藤 瑛吾</a>
+      <ul class="nav-links">
+        <li><a href="index.html#profile">プロフィール</a></li>
+        <li><a href="index.html#schedule">公演予定</a></li>
+        <li><a href="gallery.html">ギャラリー</a></li>
+        <li><a href="past-concerts.html">アーカイブ</a></li>
+        <li><a href="en.html" class="nav-lang">EN</a></li>
+        <li class="nav-sns">
+          <a href="https://www.youtube.com/@eigosato315" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+          <a href="https://x.com/shostako315" target="_blank" aria-label="X"><i class="fab fa-x-twitter"></i></a>
+          <a href="https://www.instagram.com/eigosato_315/" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+        </li>
+      </ul>
+      <div class="hamburger-btn" id="hamburgerBtn" aria-label="メニューを開く" tabindex="0">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+  </nav>
+
   <nav class="slide-menu" id="slideMenu">
     <div class="menu-header">
       <h3>Menu</h3>
@@ -168,133 +133,146 @@
     <ul class="menu-items">
       <li><a href="index.html#profile">プロフィール</a></li>
       <li><a href="index.html#schedule">公演予定</a></li>
-      <li><a href="past-concerts.html">過去の演奏会</a></li>
       <li><a href="gallery.html">ポスターギャラリー</a></li>
       <li><a href="gallery-media.html">メディアギャラリー</a></li>
+      <li><a href="past-concerts.html">過去の演奏会</a></li>
       <li><a href="en.html" class="english-link">&#127468;&#127463; English</a></li>
     </ul>
+    <div class="menu-sns">
+      <a href="https://www.youtube.com/@eigosato315" target="_blank"><i class="fab fa-youtube"></i></a>
+      <a href="https://x.com/shostako315" target="_blank"><i class="fab fa-x-twitter"></i></a>
+      <a href="https://www.instagram.com/eigosato_315/" target="_blank"><i class="fab fa-instagram"></i></a>
+    </div>
   </nav>
   <div class="menu-overlay" id="menuOverlay"></div>
 
-  <section class="media-hero">
-    <h1 class="media-hero-title">Media Gallery</h1>
-    <div class="media-hero-sub">動画 & 写真ギャラリー</div>
-  </section>
+  <main class="page-content">
+    <section class="section-block">
+      <div class="container" style="max-width:1200px;">
+        <h2 class="section-title fade-up">メディアギャラリー</h2>
 
-  <div class="media-gallery-grid">
-    <!-- 動画 -->
-    <div class="media-card">
-      <div class="media-thumb">
-        <iframe src="https://www.youtube.com/embed/1cV0FeP0r-I" allowfullscreen title="ベートーヴェン第九"></iframe>
-      </div>
-      <div class="media-caption">ベートーヴェン：交響曲第9番「合唱付き」</div>
-      <div class="media-desc">学芸×第九特別演奏会（2024年3月17日）</div>
-    </div>
-    <div class="media-card">
-      <div class="media-thumb">
-        <iframe src="https://www.youtube.com/embed/xGMxRVoQ4_A" allowfullscreen title="バッハダブル"></iframe>
-      </div>
-      <div class="media-caption">J.S.バッハ：2つのヴァイオリンのための協奏曲</div>
-      <div class="media-desc">VariOrchestra 第3回定期演奏会（2022年11月13日）</div>
-    </div>
-    <div class="media-card">
-      <div class="media-thumb">
-        <iframe src="https://www.youtube.com/embed/d5s7aulgFFc" allowfullscreen title="動画3"></iframe>
-      </div>
-      <div class="media-caption">モーツァルト：セレナータノットゥルナ</div>
-      <div class="media-desc">VariOrchestra　第五回定期演奏会</div>
-    </div>
-    <div class="media-card">
-      <div class="media-thumb">
-        <iframe src="https://www.youtube.com/embed/J2gWR5UTg-s" allowfullscreen title="動画4"></iframe>
-      </div>
-      <div class="media-caption">ブラームス：交響曲第1番</div>
-      <div class="media-desc">VariOrchestra特別公演vo.1</div>
-    </div>
-　　<div class="media-card">
-      <div class="media-thumb">
-        <iframe src="https://www.youtube.com/embed/iFwB8kfx0XU?si=HDnkTLK7hvyWD_Fm" allowfullscreen title="動画5"></iframe>
-      </div>
-      <div class="media-caption">バーバー：弦楽のためのアダージョ</div>
-      <div class="media-desc">VariOrchestra第四回定期演奏会</div>
-    </div>
-　　<div class="media-card">
-      <div class="media-thumb">
-        <iframe src="https://www.youtube.com/embed/BP9-HZPgVZ8?si=K5eRSJxbwnUforZg" allowfullscreen title="動画6"></iframe>
-      </div>
-      <div class="media-caption">J.フランセ 「宮廷の音楽」</div>
-      <div class="media-desc">東久留米市みんなのクラシックコンサート</div>
-    </div>
+        <div class="media-gallery-grid">
+          <div class="media-card fade-up">
+            <div class="media-thumb">
+              <iframe src="https://www.youtube.com/embed/1cV0FeP0r-I" allowfullscreen title="ベートーヴェン第九"></iframe>
+            </div>
+            <div class="media-caption">ベートーヴェン：交響曲第9番「合唱付き」</div>
+            <div class="media-desc">学芸×第九特別演奏会（2024年3月17日）</div>
+          </div>
+          <div class="media-card fade-up">
+            <div class="media-thumb">
+              <iframe src="https://www.youtube.com/embed/xGMxRVoQ4_A" allowfullscreen title="バッハダブル"></iframe>
+            </div>
+            <div class="media-caption">J.S.バッハ：2つのヴァイオリンのための協奏曲</div>
+            <div class="media-desc">VariOrchestra 第3回定期演奏会（2022年11月13日）</div>
+          </div>
+          <div class="media-card fade-up">
+            <div class="media-thumb">
+              <iframe src="https://www.youtube.com/embed/d5s7aulgFFc" allowfullscreen title="モーツァルト"></iframe>
+            </div>
+            <div class="media-caption">モーツァルト：セレナータノットゥルナ</div>
+            <div class="media-desc">VariOrchestra 第五回定期演奏会</div>
+          </div>
+          <div class="media-card fade-up">
+            <div class="media-thumb">
+              <iframe src="https://www.youtube.com/embed/J2gWR5UTg-s" allowfullscreen title="ブラームス"></iframe>
+            </div>
+            <div class="media-caption">ブラームス：交響曲第1番</div>
+            <div class="media-desc">VariOrchestra特別公演vo.1</div>
+          </div>
+          <div class="media-card fade-up">
+            <div class="media-thumb">
+              <iframe src="https://www.youtube.com/embed/iFwB8kfx0XU" allowfullscreen title="バーバー"></iframe>
+            </div>
+            <div class="media-caption">バーバー：弦楽のためのアダージョ</div>
+            <div class="media-desc">VariOrchestra第四回定期演奏会</div>
+          </div>
+          <div class="media-card fade-up">
+            <div class="media-thumb">
+              <iframe src="https://www.youtube.com/embed/BP9-HZPgVZ8" allowfullscreen title="フランセ"></iframe>
+            </div>
+            <div class="media-caption">J.フランセ「宮廷の音楽」</div>
+            <div class="media-desc">東久留米市みんなのクラシックコンサート</div>
+          </div>
 
-    
-    <!-- 写真（クリックで拡大） -->
-    <div class="media-card">
-      <img src="img/concert.jpg" alt="Concert" onclick="openModal(this)">
-    </div>
-    <div class="media-card">
-      <img src="img/hero-concert.jpg" alt="Hero Concert" onclick="openModal(this)">
-    </div>
-    <div class="media-card">
-      <img src="img/opera.jpg" alt="Opera" onclick="openModal(this)">
-    </div>
-    <div class="media-card">
-      <img src="img/profile.jpg" alt="Profile" onclick="openModal(this)">
-    </div>
-    <div class="media-card">
-      <img src="img/reading.jpg" alt="Reading" onclick="openModal(this)">
-    </div>
-    <div class="media-card">
-      <img src="img/stainedglass.jpg" alt="Stained Glass" onclick="openModal(this)">
-    </div>
-    <div class="media-card">
-      <img src="img/top_orchestra.jpg" alt="Top Orchestra" onclick="openModal(this)">
-    </div>
-    <div class="media-card">
-      <img src="img/tufs-orchestra.jpg" alt="TUFS Orchestra" onclick="openModal(this)">
-    </div>
-    <div class="media-card">
-      <img src="img/vari-orchestra-concert.jpg" alt="Vari Orchestra Concert" onclick="openModal(this)">
-    </div>
-  </div>
+          <div class="media-card fade-up">
+            <img src="img/concert.jpg" alt="Concert" onclick="openImgModal(this)">
+          </div>
+          <div class="media-card fade-up">
+            <img src="img/hero-concert.jpg" alt="Hero Concert" onclick="openImgModal(this)">
+          </div>
+          <div class="media-card fade-up">
+            <img src="img/opera.jpg" alt="Opera" onclick="openImgModal(this)">
+          </div>
+          <div class="media-card fade-up">
+            <img src="img/profile.jpg" alt="Profile" onclick="openImgModal(this)">
+          </div>
+          <div class="media-card fade-up">
+            <img src="img/reading.jpg" alt="Reading" onclick="openImgModal(this)">
+          </div>
+          <div class="media-card fade-up">
+            <img src="img/stainedglass.jpg" alt="Stained Glass" onclick="openImgModal(this)">
+          </div>
+          <div class="media-card fade-up">
+            <img src="img/top_orchestra.jpg" alt="Top Orchestra" onclick="openImgModal(this)">
+          </div>
+          <div class="media-card fade-up">
+            <img src="img/tufs-orchestra.jpg" alt="TUFS Orchestra" onclick="openImgModal(this)">
+          </div>
+          <div class="media-card fade-up">
+            <img src="img/vari-orchestra-concert.jpg" alt="Vari Orchestra Concert" onclick="openImgModal(this)">
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
 
-  <!-- 画像拡大モーダル -->
   <div id="imgModal" class="img-modal">
-    <span class="img-modal-close" onclick="closeModal()">&times;</span>
+    <span class="img-modal-close" onclick="closeImgModal()">&times;</span>
     <img class="img-modal-content" id="imgModalContent" alt="">
   </div>
 
-  <!-- JavaScript（bodyの一番下でOK） -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand"><h3>佐藤 瑛吾</h3><p>Violinist & Conductor</p></div>
+        <div class="footer-nav">
+          <a href="index.html#profile">プロフィール</a>
+          <a href="index.html#schedule">公演予定</a>
+          <a href="gallery.html">ギャラリー</a>
+          <a href="past-concerts.html">アーカイブ</a>
+        </div>
+        <div class="footer-social">
+          <a href="https://www.youtube.com/@eigosato315" target="_blank"><i class="fab fa-youtube"></i></a>
+          <a href="https://x.com/shostako315" target="_blank"><i class="fab fa-x-twitter"></i></a>
+          <a href="https://www.instagram.com/eigosato_315/" target="_blank"><i class="fab fa-instagram"></i></a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>Contact: <a href="mailto:shostako315@gmail.com">shostako315@gmail.com</a></p>
+        <small>&copy; 2025 Eigo Sato. All rights reserved.</small>
+      </div>
+    </div>
+  </footer>
+
+  <button class="scroll-top" id="scrollTopBtn" aria-label="トップに戻る"><i class="fas fa-chevron-up"></i></button>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/script.js"></script>
   <script>
-    // 画像拡大ポップアップ
-    function openModal(img) {
+    function openImgModal(img) {
       var modal = document.getElementById('imgModal');
       var modalImg = document.getElementById('imgModalContent');
       modal.classList.add('active');
       modalImg.src = img.src;
       document.body.style.overflow = 'hidden';
     }
-    function closeModal() {
-      var modal = document.getElementById('imgModal');
-      modal.classList.remove('active');
+    function closeImgModal() {
+      document.getElementById('imgModal').classList.remove('active');
       document.body.style.overflow = '';
     }
     document.addEventListener('keydown', function(e) {
-      if (e.key === 'Escape') closeModal();
-    });
-
-    // ハンバーガーメニュー（既存のものをそのまま）
-    document.addEventListener('DOMContentLoaded', function() {
-      const hamburgerBtn = document.getElementById('hamburgerBtn');
-      const slideMenu = document.getElementById('slideMenu');
-      const closeBtn = document.getElementById('closeBtn');
-      hamburgerBtn.addEventListener('click', function() {
-        slideMenu.classList.add('active');
-        hamburgerBtn.style.display = 'none';
-      });
-      closeBtn.addEventListener('click', function() {
-        slideMenu.classList.remove('active');
-        hamburgerBtn.style.display = 'flex';
-      });
+      if (e.key === 'Escape') closeImgModal();
     });
   </script>
 </body>
