@@ -245,18 +245,18 @@
         <p class="text-center mb-4 fade-up" style="color:#666;font-size:0.95rem;">
           演奏・指揮のご依頼、メディア出演、その他お問い合わせはこちらからお気軽にどうぞ。
         </p>
-        <form class="contact-form fade-up" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+        <div class="contact-form fade-up" id="contactForm">
           <div class="form-group">
-            <label for="name">お名前 <span class="required">*</span></label>
-            <input type="text" id="name" name="name" required placeholder="山田 太郎">
+            <label for="contactName">お名前</label>
+            <input type="text" id="contactName" placeholder="山田 太郎">
           </div>
           <div class="form-group">
-            <label for="email">メールアドレス <span class="required">*</span></label>
-            <input type="email" id="email" name="email" required placeholder="example@email.com">
+            <label for="contactEmail">メールアドレス</label>
+            <input type="email" id="contactEmail" placeholder="example@email.com">
           </div>
           <div class="form-group">
-            <label for="category">ご依頼種別</label>
-            <select id="category" name="category">
+            <label for="contactCategory">ご依頼種別</label>
+            <select id="contactCategory">
               <option value="">選択してください</option>
               <option value="演奏依頼">演奏依頼</option>
               <option value="指揮依頼">指揮依頼</option>
@@ -266,14 +266,13 @@
             </select>
           </div>
           <div class="form-group">
-            <label for="message">メッセージ <span class="required">*</span></label>
-            <textarea id="message" name="message" rows="6" required placeholder="ご依頼内容やご質問をお書きください"></textarea>
+            <label for="contactMessage">メッセージ</label>
+            <textarea id="contactMessage" rows="6" placeholder="ご依頼内容やご質問をお書きください"></textarea>
           </div>
-          <input type="hidden" name="_subject" value="公式サイトからのお問い合わせ">
-          <button type="submit" class="btn-submit">
-            <i class="fas fa-paper-plane"></i> 送信する
+          <button type="button" class="btn-submit" onclick="sendContactEmail()">
+            <i class="fas fa-envelope"></i> メールで送信する
           </button>
-        </form>
+        </div>
       </div>
     </section>
   </main>

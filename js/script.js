@@ -181,3 +181,26 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
 });
+
+// ============================
+// お問い合わせメール送信
+// ============================
+function sendContactEmail() {
+  var name = document.getElementById('contactName').value.trim();
+  var email = document.getElementById('contactEmail').value.trim();
+  var category = document.getElementById('contactCategory').value;
+  var message = document.getElementById('contactMessage').value.trim();
+
+  var subject = '【公式サイトお問い合わせ】' + (category || 'ご連絡');
+  var body = '';
+  if (name) body += 'お名前: ' + name + '\n';
+  if (email) body += 'メールアドレス: ' + email + '\n';
+  if (category) body += '依頼種別: ' + category + '\n';
+  body += '\n' + message;
+
+  var mailtoUrl = 'mailto:shostako315@gmail.com'
+    + '?subject=' + encodeURIComponent(subject)
+    + '&body=' + encodeURIComponent(body);
+
+  window.location.href = mailtoUrl;
+}
