@@ -1,5 +1,8 @@
 document.addEventListener('DOMContentLoaded', function() {
 
+  // JS読み込み成功フラグ（CSSアニメーション有効化）
+  document.body.classList.add('js-loaded');
+
   // ============================
   // ナビバーのスクロール変化
   // ============================

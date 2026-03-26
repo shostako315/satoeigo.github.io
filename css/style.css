@@ -770,12 +770,17 @@ a:hover {
    Scroll Animations
    ============================ */
 .fade-up {
-  opacity: 0;
-  transform: translateY(30px);
+  opacity: 1;
+  transform: translateY(0);
   transition: opacity 0.8s ease, transform 0.8s ease;
 }
 
-.fade-up.visible {
+.js-loaded .fade-up {
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.js-loaded .fade-up.visible {
   opacity: 1;
   transform: translateY(0);
 }
