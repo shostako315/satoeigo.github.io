@@ -123,8 +123,21 @@ document.addEventListener('DOMContentLoaded', function() {
     fadeElements.forEach(function(el) {
       observer.observe(el);
     });
+
+    // 初期表示 + スクロール時フォールバック
+    function checkFadeElements() {
+      fadeElements.forEach(function(el) {
+        if (!el.classList.contains('visible')) {
+          var rect = el.getBoundingClientRect();
+          if (rect.top < window.innerHeight + 50 && rect.bottom > 0) {
+            el.classList.add('visible');
+          }
+        }
+      });
+    }
+    setTimeout(checkFadeElements, 100);
+    window.addEventListener('scroll', checkFadeElements);
   } else {
-    // Fallback for older browsers
     fadeElements.forEach(function(el) {
       el.classList.add('visible');
     });
