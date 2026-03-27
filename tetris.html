@@ -214,6 +214,9 @@
   // Particles
   var particles=[];
 
+  // Init board so drawBoard doesn't crash before game start
+  createBoard();
+
   // Show best
   document.getElementById('startBest').textContent=bestScore>0?'Best: '+bestScore:'';
 
@@ -337,11 +340,12 @@
     }
 
     // Placed blocks
-    for(var r=0;r<ROWS;r++)for(var c=0;c<COLS;c++){
-      if(!board[r][c])continue;
+    if(board.length===0)return;
+    for(var r=0;r<ROWS;r++){if(!board[r])continue;for(var c=0;c<COLS;c++){
+      if(!board[r]||!board[r][c])continue;
       var flash=clearingRows.indexOf(r)!==-1;
       drawCell(c,r,board[r][c].color,board[r][c].symbol, flash?clearAnim/15:0);
-    }
+    }}
 
     // Ghost
     if(current&&STATE==='playing'){
