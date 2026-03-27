@@ -29,21 +29,30 @@
     canvas#nextCanvas{display:block;margin:0 auto}
 
     /* Controls */
-    .controls{display:none;position:fixed;bottom:10px;left:0;width:100%;padding:0 10px;z-index:10}
+    .controls{display:none;position:fixed;bottom:0;left:0;width:100%;padding:12px 14px 18px;z-index:10}
     .controls.active{display:flex;justify-content:space-between;align-items:end}
 
-    .ctrl-left{display:flex;gap:6px}
-    .ctrl-right{display:flex;gap:6px}
+    .ctrl-left{display:flex;gap:10px}
+    .ctrl-right{display:flex;gap:10px;align-items:end}
 
     .ctrl-btn{
-      width:56px;height:56px;border-radius:50%;border:2px solid rgba(142,68,173,0.4);
-      background:rgba(142,68,173,0.15);color:#c39bd3;font-size:1.4rem;
+      width:64px;height:64px;border-radius:50%;border:2.5px solid rgba(142,68,173,0.45);
+      background:rgba(142,68,173,0.2);color:#d2b4e8;font-size:1.6rem;
       display:flex;align-items:center;justify-content:center;cursor:pointer;
-      backdrop-filter:blur(5px);transition:transform 0.1s;
+      backdrop-filter:blur(8px);transition:transform 0.08s;
+      box-shadow:0 4px 15px rgba(0,0,0,0.2);
     }
-    .ctrl-btn:active{transform:scale(0.88);background:rgba(142,68,173,0.35)}
-    .ctrl-btn.wide{width:70px;border-radius:28px;font-size:0.7rem;font-weight:700;letter-spacing:1px}
-    .ctrl-btn.drop-btn{background:rgba(231,76,60,0.2);border-color:rgba(231,76,60,0.4);color:#e8a0a0}
+    .ctrl-btn:active{transform:scale(0.85);background:rgba(142,68,173,0.45)}
+    .ctrl-btn.wide{width:80px;border-radius:32px;font-size:0.75rem;font-weight:900;letter-spacing:1px}
+    .ctrl-btn.drop-btn{background:rgba(231,76,60,0.25);border-color:rgba(231,76,60,0.5);color:#f0b0a0}
+
+    /* Mobile HUD bar (shown when side panel hidden) */
+    .mobile-hud{display:none;position:fixed;top:0;left:0;width:100%;padding:8px 14px;z-index:9;
+      background:rgba(26,16,37,0.85);backdrop-filter:blur(8px);border-bottom:1px solid rgba(142,68,173,0.2)}
+    .mobile-hud.active{display:flex;justify-content:space-around;align-items:center}
+    .mhud-item{text-align:center}
+    .mhud-label{font-size:0.5rem;font-weight:700;color:#8e44ad;letter-spacing:1.5px;text-transform:uppercase}
+    .mhud-val{font-size:1.2rem;font-weight:900;color:#fff;line-height:1.1}
 
     /* Overlays */
     .overlay{position:fixed;top:0;left:0;width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:20;transition:opacity 0.4s}
@@ -102,7 +111,7 @@
     }
     @media(max-width:420px){
       .side{display:none}
-      .game-wrap{justify-content:center}
+      .game-wrap{justify-content:center;padding-top:48px}
     }
   </style>
 </head>
@@ -118,15 +127,22 @@
   </div>
 </div>
 
+<!-- Mobile HUD -->
+<div class="mobile-hud" id="mobileHud">
+  <div class="mhud-item"><div class="mhud-label">Score</div><div class="mhud-val" id="mScore">0</div></div>
+  <div class="mhud-item"><div class="mhud-label">Level</div><div class="mhud-val" id="mLevel">1</div></div>
+  <div class="mhud-item"><div class="mhud-label">Lines</div><div class="mhud-val" id="mLines">0</div></div>
+</div>
+
 <!-- Mobile Controls -->
 <div class="controls" id="controls">
   <div class="ctrl-left">
-    <div class="ctrl-btn" id="btnLeft">&#9664;</div>
-    <div class="ctrl-btn" id="btnDown">&#9660;</div>
-    <div class="ctrl-btn" id="btnRight">&#9654;</div>
+    <div class="ctrl-btn" id="btnLeft">◀</div>
+    <div class="ctrl-btn" id="btnDown">▼</div>
+    <div class="ctrl-btn" id="btnRight">▶</div>
   </div>
   <div class="ctrl-right">
-    <div class="ctrl-btn" id="btnRotate">&#8635;</div>
+    <div class="ctrl-btn" id="btnRotate">↻</div>
     <div class="ctrl-btn drop-btn wide" id="btnDrop">DROP</div>
   </div>
 </div>
@@ -230,9 +246,16 @@
   // Show best
   document.getElementById('startBest').textContent=bestScore>0?'Best: '+bestScore:'';
 
-  // Mobile detect
+  // Mobile detect & resize board to fit screen
   var isMobile='ontouchstart' in window && window.innerWidth<700;
-  if(isMobile) document.getElementById('controls').classList.add('active');
+  if(isMobile){
+    // Resize cells to fit screen width with padding
+    var maxW=window.innerWidth-20;
+    var maxH=window.innerHeight-220; // room for controls + mobile hud
+    CELL=Math.min(Math.floor(maxW/COLS),Math.floor(maxH/ROWS),32);
+    canvas.width=COLS*CELL;canvas.height=ROWS*CELL;
+    document.getElementById('controls').classList.add('active');
+  }
 
   // ---- Board ----
   function createBoard(){board=[];for(var r=0;r<ROWS;r++){board[r]=[];for(var c=0;c<COLS;c++)board[r][c]=0}}
@@ -450,6 +473,12 @@
     document.getElementById('sideScore').textContent=score;
     document.getElementById('sideLevel').textContent=level;
     document.getElementById('sideLines').textContent=lines;
+    // Mobile HUD
+    if(isMobile){
+      document.getElementById('mScore').textContent=score;
+      document.getElementById('mLevel').textContent=level;
+      document.getElementById('mLines').textContent=lines;
+    }
   }
 
   // ---- Game flow ----
@@ -464,12 +493,16 @@
     document.getElementById('startScreen').classList.add('hidden');
     document.getElementById('goScreen').classList.add('hidden');
     document.getElementById('pauseInd').classList.remove('active');
-    if(isMobile)document.getElementById('controls').classList.add('active');
+    if(isMobile){
+      document.getElementById('controls').classList.add('active');
+      document.getElementById('mobileHud').classList.add('active');
+    }
   }
 
   function gameOver(){
     STATE='dead';
     document.getElementById('controls').classList.remove('active');
+    document.getElementById('mobileHud').classList.remove('active');
     var isNew=score>bestScore;
     if(isNew){bestScore=score;localStorage.setItem('musicTetrisBest',bestScore)}
     document.getElementById('goScore').textContent=score;
@@ -521,17 +554,46 @@
     }
   });
 
-  // Mobile buttons
-  function addTouch(id,fn){
+  // Mobile buttons with repeat on hold
+  function addTouch(id,fn,repeatable){
     var el=document.getElementById(id);
-    el.addEventListener('touchstart',function(e){e.preventDefault();fn()});
-    el.addEventListener('mousedown',function(e){e.preventDefault();fn()});
+    var timer=null;
+    function start(e){
+      e.preventDefault();fn();
+      if(repeatable){timer=setInterval(fn,100)}
+    }
+    function stop(){if(timer){clearInterval(timer);timer=null}}
+    el.addEventListener('touchstart',start,{passive:false});
+    el.addEventListener('touchend',stop);
+    el.addEventListener('touchcancel',stop);
+    el.addEventListener('mousedown',start);
+    el.addEventListener('mouseup',stop);
+    el.addEventListener('mouseleave',stop);
   }
-  addTouch('btnLeft',moveLeft);
-  addTouch('btnRight',moveRight);
-  addTouch('btnDown',moveDown);
-  addTouch('btnRotate',rotatePiece);
-  addTouch('btnDrop',hardDrop);
+  addTouch('btnLeft',moveLeft,true);
+  addTouch('btnRight',moveRight,true);
+  addTouch('btnDown',moveDown,true);
+  addTouch('btnRotate',rotatePiece,false);
+  addTouch('btnDrop',hardDrop,false);
+
+  // Swipe on canvas for mobile
+  (function(){
+    var sx=0,sy=0;
+    canvas.addEventListener('touchstart',function(e){
+      var t=e.touches[0];sx=t.clientX;sy=t.clientY;
+    },{passive:true});
+    canvas.addEventListener('touchend',function(e){
+      var t=e.changedTouches[0];
+      var dx=t.clientX-sx,dy=t.clientY-sy;
+      var abx=Math.abs(dx),aby=Math.abs(dy);
+      if(abx<20&&aby<20){rotatePiece();return} // tap = rotate
+      if(abx>aby){
+        if(dx>30)moveRight();else if(dx<-30)moveLeft();
+      } else {
+        if(dy>30)hardDrop();else if(dy<-30)rotatePiece();
+      }
+    },{passive:true});
+  })();
 
   // Repeat for held keys
   var heldKeys={};

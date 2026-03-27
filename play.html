@@ -207,7 +207,7 @@
     var t=candidates[Math.floor(Math.random()*candidates.length)];
     // Random y position in playable area
     var y=staffTop+Math.random()*(staffBottom-staffTop);
-    tempoItems.push({x:W+40,y:y,tempo:t,size:18,collected:false,life:1});
+    tempoItems.push({x:W+40,y:y,tempo:t,size:24,collected:false,life:1});
   }
 
   // ---- Particles & popups ----
@@ -276,15 +276,21 @@
 
   function drawObstacle(obs){
     var cx=obs.x+obs.width/2;
-    // Barrier fill
-    ctx.fillStyle='rgba(142,68,173,0.06)';
+    // Barrier fill (more visible)
+    ctx.fillStyle='rgba(142,68,173,0.1)';
     ctx.fillRect(obs.x,0,obs.width,obs.gapTop);
     ctx.fillRect(obs.x,obs.gapBottom,obs.width,H-obs.gapBottom);
+    // Barrier edge lines
+    ctx.strokeStyle='rgba(142,68,173,0.2)';ctx.lineWidth=2;
+    ctx.beginPath();
+    ctx.moveTo(obs.x,obs.gapTop);ctx.lineTo(obs.x+obs.width,obs.gapTop);
+    ctx.moveTo(obs.x,obs.gapBottom);ctx.lineTo(obs.x+obs.width,obs.gapBottom);
+    ctx.stroke();
     // Notes
     drawNote(cx,obs.gapTop-12,true,obs.noteType,obs.width);
     drawNote(cx,obs.gapBottom+12,false,obs.noteType,obs.width);
-    // Gap glow
-    ctx.fillStyle='rgba(142,68,173,0.04)';
+    // Gap glow (green safe zone)
+    ctx.fillStyle='rgba(39,174,96,0.04)';
     ctx.fillRect(obs.x-2,obs.gapTop,obs.width+4,obs.gapBottom-obs.gapTop);
     // Guide lines
     ctx.strokeStyle='rgba(142,68,173,0.12)';ctx.lineWidth=1.5;ctx.setLineDash([4,4]);
@@ -336,31 +342,67 @@
   }
 
   function drawTempoItem(item){
-    var pulse=1+Math.sin(frameCount*0.1)*0.08;
+    var pulse=1+Math.sin(frameCount*0.08)*0.1;
+    var sz=item.size;
     ctx.save();
     ctx.translate(item.x,item.y);
     ctx.scale(pulse,pulse);
-    // Glow
-    ctx.shadowColor=item.tempo.color;ctx.shadowBlur=15;
-    // Circle bg
-    ctx.fillStyle=item.tempo.color;
-    ctx.beginPath();ctx.arc(0,0,item.size,0,Math.PI*2);ctx.fill();
+
+    // Outer glow ring
+    ctx.shadowColor=item.tempo.color;ctx.shadowBlur=25;
+    ctx.strokeStyle=item.tempo.color;ctx.lineWidth=3;
+    ctx.beginPath();ctx.arc(0,0,sz+6,0,Math.PI*2);ctx.stroke();
     ctx.shadowBlur=0;
+
+    // Background pill shape
+    var tw=ctx.measureText(item.tempo.name).width||50;
+    var pillW=Math.max(tw+28,sz*3.2);
+    var pillH=sz*2.2;
+    var rx=pillW/2, ry=pillH/2;
+
+    // Pill bg
+    ctx.fillStyle=item.tempo.color;
+    ctx.beginPath();
+    ctx.moveTo(-rx+ry,  -ry);
+    ctx.lineTo(rx-ry,   -ry);
+    ctx.arc(rx-ry,  0, ry, -Math.PI/2, Math.PI/2);
+    ctx.lineTo(-rx+ry,  ry);
+    ctx.arc(-rx+ry, 0, ry, Math.PI/2, -Math.PI/2);
+    ctx.closePath();
+    ctx.fill();
+
+    // Inner highlight
+    ctx.fillStyle='rgba(255,255,255,0.15)';
+    ctx.beginPath();
+    ctx.moveTo(-rx+ry, -ry);
+    ctx.lineTo(rx-ry,  -ry);
+    ctx.arc(rx-ry, 0, ry, -Math.PI/2, 0);
+    ctx.lineTo(rx-ry, -ry*0.2);
+    ctx.lineTo(-rx+ry, -ry*0.2);
+    ctx.arc(-rx+ry, 0, ry, -Math.PI/2 -0.2, -Math.PI/2);
+    ctx.closePath();
+    ctx.fill();
+
     // Border
     ctx.strokeStyle='rgba(255,255,255,0.5)';ctx.lineWidth=2;
-    ctx.beginPath();ctx.arc(0,0,item.size,0,Math.PI*2);ctx.stroke();
-    // Text
-    ctx.fillStyle='#fff';ctx.font='bold 7px Montserrat';ctx.textAlign='center';ctx.textBaseline='middle';
-    var short=item.tempo.name.length>7?item.tempo.name.substring(0,6)+'.':item.tempo.name;
-    ctx.fillText(short,0,0);
-    // Arrow indicator
-    if(item.tempo.type==='fast'){
-      ctx.fillStyle='rgba(255,255,255,0.7)';ctx.font='bold 10px Montserrat';
-      ctx.fillText('>>',0,item.size+10);
-    } else if(item.tempo.type==='slow'){
-      ctx.fillStyle='rgba(255,255,255,0.7)';ctx.font='bold 10px Montserrat';
-      ctx.fillText('<<',0,item.size+10);
-    }
+    ctx.beginPath();
+    ctx.moveTo(-rx+ry,-ry);ctx.lineTo(rx-ry,-ry);
+    ctx.arc(rx-ry,0,ry,-Math.PI/2,Math.PI/2);
+    ctx.lineTo(-rx+ry,ry);ctx.arc(-rx+ry,0,ry,Math.PI/2,-Math.PI/2);
+    ctx.closePath();ctx.stroke();
+
+    // Icon (speed arrows)
+    var iconX=-rx+ry+4;
+    ctx.fillStyle='rgba(255,255,255,0.85)';ctx.font='bold 14px Montserrat';ctx.textAlign='center';ctx.textBaseline='middle';
+    if(item.tempo.type==='fast') ctx.fillText('⚡',iconX,0);
+    else if(item.tempo.type==='slow') ctx.fillText('🐌',iconX,0);
+    else ctx.fillText('♪',iconX,0);
+
+    // Name text (large & readable)
+    ctx.fillStyle='#fff';
+    ctx.font='bold 13px Montserrat';ctx.textAlign='center';ctx.textBaseline='middle';
+    ctx.fillText(item.tempo.name, 8, 0);
+
     ctx.restore();
   }
 
@@ -395,7 +437,7 @@
 
   function collidesTempoItem(item){
     var dx=player.x-item.x, dy=player.y-item.y;
-    return Math.sqrt(dx*dx+dy*dy)<player.size+item.size;
+    return Math.sqrt(dx*dx+dy*dy)<player.size+item.size+12; // generous hitbox
   }
 
   // ---- Game logic ----
