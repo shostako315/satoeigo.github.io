@@ -184,6 +184,16 @@
   var nextCanvas=document.getElementById('nextCanvas');
   var nctx=nextCanvas.getContext('2d');
 
+  // roundRect polyfill (must be before any drawing)
+  if(!CanvasRenderingContext2D.prototype.roundRect){
+    CanvasRenderingContext2D.prototype.roundRect=function(x,y,w,h,r){
+      this.moveTo(x+r,y);this.lineTo(x+w-r,y);this.quadraticCurveTo(x+w,y,x+w,y+r);
+      this.lineTo(x+w,y+h-r);this.quadraticCurveTo(x+w,y+h,x+w-r,y+h);
+      this.lineTo(x+r,y+h);this.quadraticCurveTo(x,y+h,x,y+h-r);
+      this.lineTo(x,y+r);this.quadraticCurveTo(x,y,x+r,y);this.closePath();
+    }
+  }
+
   // ---- Pieces with musical colors ----
   var COLORS=['#8e44ad','#2980b9','#e67e22','#f1c40f','#1abc9c','#e74c3c','#3498db'];
   var SYMBOLS=['♩','♪','♫','♬','𝄞','♭','♯'];
@@ -321,6 +331,7 @@
   // ---- Drawing ----
   function drawBoard(){
     ctx.clearRect(0,0,canvas.width,canvas.height);
+    if(!board||board.length<ROWS)return;
 
     // Grid / staff lines
     ctx.strokeStyle='rgba(142,68,173,0.06)';
@@ -567,15 +578,6 @@
   }
   loop();
 
-  // roundRect polyfill
-  if(!CanvasRenderingContext2D.prototype.roundRect){
-    CanvasRenderingContext2D.prototype.roundRect=function(x,y,w,h,r){
-      this.moveTo(x+r,y);this.lineTo(x+w-r,y);this.quadraticCurveTo(x+w,y,x+w,y+r);
-      this.lineTo(x+w,y+h-r);this.quadraticCurveTo(x+w,y+h,x+w-r,y+h);
-      this.lineTo(x+r,y+h);this.quadraticCurveTo(x,y+h,x,y+h-r);
-      this.lineTo(x,y+r);this.quadraticCurveTo(x,y,x+r,y);this.closePath();
-    }
-  }
 })();
 </script>
 </body>
