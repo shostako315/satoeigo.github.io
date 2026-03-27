@@ -6,144 +6,79 @@
   <title>Flappy Maestro | 音符をよけろ!</title>
   <meta name="description" content="五線譜の上をジャンプ!音符をすり抜ける中毒性バツグンの音楽ゲーム。">
   <meta property="og:title" content="Flappy Maestro - 五線譜ジャンプゲーム">
-  <meta property="og:description" content="タップで跳んで音符をすり抜けろ!あなたは何小節生き残れる?">
+  <meta property="og:description" content="タップで跳んで音符をすり抜けろ!テンポ記号をキャッチして速度が変わる!">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; user-select: none; -webkit-tap-highlight-color: transparent; }
-    body { background: #fdf6e3; overflow: hidden; height: 100vh; font-family: 'Montserrat', sans-serif; }
-    canvas { display: block; }
+    *{margin:0;padding:0;box-sizing:border-box;user-select:none;-webkit-tap-highlight-color:transparent}
+    body{background:#fdf6e3;overflow:hidden;height:100vh;font-family:'Montserrat',sans-serif}
+    canvas{display:block}
+    .overlay{position:fixed;top:0;left:0;width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:10;transition:opacity 0.5s}
+    .overlay.hidden{opacity:0;pointer-events:none}
+    .start-overlay{background:rgba(253,246,227,0.97)}
+    .game-logo{width:80px;height:80px;border-radius:50%;background:linear-gradient(135deg,#8e44ad,#6c3483);display:flex;align-items:center;justify-content:center;font-size:2.2rem;margin-bottom:16px;box-shadow:0 6px 25px rgba(142,68,173,0.3)}
+    .game-title{font-size:2.8rem;font-weight:900;color:#2c3e50;letter-spacing:2px}
+    .game-sub{font-size:1rem;color:#8e44ad;margin:6px 0 20px;font-weight:700;letter-spacing:1px}
+    .how-card{background:#fff;border-radius:16px;padding:22px 28px;box-shadow:0 4px 20px rgba(0,0,0,0.06);margin-bottom:22px;max-width:420px;width:90%}
+    .how-title{font-size:0.7rem;font-weight:900;color:#8e44ad;letter-spacing:2px;margin-bottom:12px;text-transform:uppercase}
+    .how-row{display:flex;align-items:flex-start;gap:10px;margin-bottom:8px}
+    .how-row:last-child{margin-bottom:0}
+    .how-num{min-width:24px;height:24px;border-radius:50%;background:#8e44ad;color:#fff;font-size:0.7rem;font-weight:900;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+    .how-text{font-size:0.8rem;color:#555;line-height:1.4}
+    .play-btn{padding:15px 65px;font-size:1.15rem;font-weight:900;color:#fff;background:linear-gradient(135deg,#8e44ad,#6c3483);border:none;border-radius:50px;cursor:pointer;letter-spacing:3px;box-shadow:0 6px 30px rgba(142,68,173,0.35);transition:all 0.2s}
+    .play-btn:hover{transform:scale(1.05)}
+    .play-btn:active{transform:scale(0.97)}
+    .best-display{font-size:0.8rem;color:#999;margin-top:10px}
 
-    /* ---- Overlays ---- */
-    .overlay {
-      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-      display: flex; flex-direction: column; align-items: center; justify-content: center;
-      z-index: 10; transition: opacity 0.5s;
-    }
-    .overlay.hidden { opacity: 0; pointer-events: none; }
+    .hud{position:fixed;top:0;left:0;width:100%;padding:10px 18px;display:none;z-index:5;pointer-events:none}
+    .hud.active{display:flex;justify-content:space-between;align-items:flex-start}
+    .hud-left{}
+    .hud-score-label{font-size:0.55rem;font-weight:700;color:#8e44ad;letter-spacing:2px;text-transform:uppercase}
+    .hud-score{font-size:2.2rem;font-weight:900;color:#2c3e50;line-height:1;text-shadow:2px 2px 0 rgba(255,255,255,0.8)}
+    .hud-center{text-align:center}
+    .hud-tempo{font-size:1rem;font-weight:900;color:#2c3e50;letter-spacing:2px;text-shadow:1px 1px 0 rgba(255,255,255,0.8);transition:color 0.3s}
+    .hud-tempo.fast{color:#e74c3c}
+    .hud-tempo.slow{color:#2980b9}
+    .hud-right{text-align:right}
+    .hud-best-label{font-size:0.55rem;font-weight:700;color:#aaa;letter-spacing:1px}
+    .hud-best{font-size:1.1rem;font-weight:900;color:#bbb}
 
-    /* ---- Start Screen ---- */
-    .start-overlay { background: rgba(253,246,227,0.97); }
+    .jump-btn-wrap{position:fixed;bottom:28px;left:50%;transform:translateX(-50%);z-index:8;display:none}
+    .jump-btn-wrap.active{display:block}
+    .jump-btn{width:88px;height:88px;border-radius:50%;background:linear-gradient(135deg,#8e44ad,#6c3483);border:4px solid rgba(255,255,255,0.4);color:#fff;font-size:0.65rem;font-weight:900;letter-spacing:1px;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 6px 30px rgba(142,68,173,0.4);transition:transform 0.1s}
+    .jump-btn:active{transform:scale(0.9)}
+    .jump-btn-icon{font-size:1.6rem;margin-bottom:2px}
 
-    .game-logo {
-      width: 80px; height: 80px; border-radius: 50%;
-      background: linear-gradient(135deg, #8e44ad, #6c3483);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 2.2rem; margin-bottom: 16px;
-      box-shadow: 0 6px 25px rgba(142,68,173,0.3);
-    }
+    .gameover-overlay{background:rgba(44,62,80,0.93)}
+    .go-card{background:rgba(255,255,255,0.07);border-radius:20px;padding:28px 36px;text-align:center;backdrop-filter:blur(10px);max-width:360px;width:90%}
+    .go-title{font-size:1.2rem;font-weight:900;color:#e74c3c;margin-bottom:12px;letter-spacing:3px}
+    .go-score{font-size:4.2rem;font-weight:900;color:#fff;line-height:1}
+    .go-label{font-size:0.65rem;color:rgba(255,255,255,0.4);margin-bottom:4px;letter-spacing:2px;text-transform:uppercase}
+    .go-best{font-size:0.8rem;color:rgba(255,255,255,0.35);margin-bottom:18px}
+    .go-new{color:#f39c12;font-weight:700}
+    .go-divider{height:1px;background:rgba(255,255,255,0.1);margin:14px 0}
+    .go-credit{font-size:0.65rem;color:rgba(255,255,255,0.3);letter-spacing:1px}
+    .go-name{font-size:1.1rem;font-weight:700;color:#fff;letter-spacing:2px;margin:3px 0}
+    .go-role{font-size:0.7rem;color:rgba(255,255,255,0.4);font-style:italic;margin-bottom:16px}
+    .go-buttons{display:flex;gap:10px;justify-content:center}
+    .go-buttons button,.go-buttons a{padding:10px 26px;font-size:0.8rem;font-weight:700;border-radius:30px;cursor:pointer;letter-spacing:1px;transition:all 0.2s;text-decoration:none;border:none}
+    .btn-retry{background:#8e44ad;color:#fff}
+    .btn-site{background:transparent;border:2px solid rgba(142,68,173,0.6)!important;color:#c39bd3}
 
-    .game-title { font-size: 2.8rem; font-weight: 900; color: #2c3e50; letter-spacing: 2px; }
-    .game-sub { font-size: 1rem; color: #8e44ad; margin: 6px 0 25px; font-weight: 700; letter-spacing: 1px; }
-
-    .how-card {
-      background: #fff; border-radius: 16px; padding: 24px 30px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.06); margin-bottom: 25px;
-      max-width: 380px; width: 90%;
-    }
-    .how-title { font-size: 0.75rem; font-weight: 900; color: #8e44ad; letter-spacing: 2px; margin-bottom: 14px; text-transform: uppercase; }
-    .how-row { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
-    .how-row:last-child { margin-bottom: 0; }
-    .how-num {
-      min-width: 28px; height: 28px; border-radius: 50%;
-      background: #8e44ad; color: #fff; font-size: 0.75rem; font-weight: 900;
-      display: flex; align-items: center; justify-content: center;
-    }
-    .how-text { font-size: 0.85rem; color: #555; line-height: 1.4; }
-
-    .play-btn {
-      padding: 16px 70px; font-size: 1.2rem; font-weight: 900; color: #fff;
-      background: linear-gradient(135deg, #8e44ad, #6c3483);
-      border: none; border-radius: 50px; cursor: pointer;
-      letter-spacing: 3px; box-shadow: 0 6px 30px rgba(142,68,173,0.35);
-      transition: all 0.2s; position: relative; overflow: hidden;
-    }
-    .play-btn:hover { transform: scale(1.05); }
-    .play-btn:active { transform: scale(0.97); }
-
-    .best-display { font-size: 0.8rem; color: #999; margin-top: 12px; }
-
-    /* ---- HUD ---- */
-    .hud {
-      position: fixed; top: 0; left: 0; width: 100%;
-      padding: 12px 20px; display: none; z-index: 5;
-      pointer-events: none;
-    }
-    .hud.active { display: flex; justify-content: space-between; align-items: flex-start; }
-
-    .hud-left {}
-    .hud-score-label { font-size: 0.6rem; font-weight: 700; color: #8e44ad; letter-spacing: 2px; text-transform: uppercase; }
-    .hud-score { font-size: 2.5rem; font-weight: 900; color: #2c3e50; line-height: 1; text-shadow: 2px 2px 0 rgba(255,255,255,0.8); }
-
-    .hud-right { text-align: right; }
-    .hud-best-label { font-size: 0.6rem; font-weight: 700; color: #aaa; letter-spacing: 1px; }
-    .hud-best { font-size: 1.2rem; font-weight: 900; color: #bbb; }
-
-    /* ---- Jump Button ---- */
-    .jump-btn-wrap {
-      position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%);
-      z-index: 8; display: none;
-    }
-    .jump-btn-wrap.active { display: block; }
-
-    .jump-btn {
-      width: 90px; height: 90px; border-radius: 50%;
-      background: linear-gradient(135deg, #8e44ad, #6c3483);
-      border: 4px solid rgba(255,255,255,0.4);
-      color: #fff; font-size: 0.7rem; font-weight: 900; letter-spacing: 1px;
-      display: flex; flex-direction: column; align-items: center; justify-content: center;
-      cursor: pointer; box-shadow: 0 6px 30px rgba(142,68,173,0.4);
-      transition: transform 0.1s; -webkit-tap-highlight-color: transparent;
-    }
-    .jump-btn:active { transform: scale(0.9); }
-    .jump-btn-icon { font-size: 1.8rem; margin-bottom: 2px; }
-
-    /* ---- Game Over ---- */
-    .gameover-overlay { background: rgba(44,62,80,0.93); }
-
-    .go-card {
-      background: rgba(255,255,255,0.07); border-radius: 20px;
-      padding: 30px 40px; text-align: center; backdrop-filter: blur(10px);
-      max-width: 360px; width: 90%;
-    }
-
-    .go-title { font-size: 1.3rem; font-weight: 900; color: #e74c3c; margin-bottom: 15px; letter-spacing: 3px; }
-    .go-score { font-size: 4.5rem; font-weight: 900; color: #fff; line-height: 1; }
-    .go-label { font-size: 0.7rem; color: rgba(255,255,255,0.4); margin-bottom: 4px; letter-spacing: 2px; text-transform: uppercase; }
-    .go-best { font-size: 0.85rem; color: rgba(255,255,255,0.35); margin-bottom: 20px; }
-    .go-new { color: #f39c12; font-weight: 700; }
-
-    .go-divider { height: 1px; background: rgba(255,255,255,0.1); margin: 15px 0; }
-
-    .go-credit { font-size: 0.7rem; color: rgba(255,255,255,0.3); margin-bottom: 4px; letter-spacing: 1px; }
-    .go-name { font-size: 1.2rem; font-weight: 700; color: #fff; letter-spacing: 2px; margin-bottom: 3px; }
-    .go-role { font-size: 0.75rem; color: rgba(255,255,255,0.4); font-style: italic; margin-bottom: 18px; }
-
-    .go-buttons { display: flex; gap: 10px; justify-content: center; }
-    .go-buttons button, .go-buttons a {
-      padding: 11px 28px; font-size: 0.85rem; font-weight: 700; border-radius: 30px;
-      cursor: pointer; letter-spacing: 1px; transition: all 0.2s; text-decoration: none; border: none;
-    }
-    .btn-retry { background: #8e44ad; color: #fff; }
-    .btn-site { background: transparent; border: 2px solid rgba(142,68,173,0.6) !important; color: #c39bd3; }
-    .btn-retry:active, .btn-site:active { transform: scale(0.95); }
-
-    @media (max-width: 500px) {
-      .game-title { font-size: 2rem; }
-      .go-score { font-size: 3.5rem; }
-      .go-card { padding: 24px 25px; }
-      .jump-btn { width: 80px; height: 80px; }
-    }
+    /* Tempo flash overlay */
+    .tempo-flash{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);font-size:2.5rem;font-weight:900;pointer-events:none;z-index:6;opacity:0;transition:none;letter-spacing:3px;text-shadow:2px 2px 8px rgba(0,0,0,0.15)}
+    @media(max-width:500px){.game-title{font-size:2rem}.go-score{font-size:3.5rem}.go-card{padding:22px 22px}.jump-btn{width:76px;height:76px}}
   </style>
 </head>
 <body>
-
 <canvas id="game"></canvas>
 
-<!-- HUD -->
 <div class="hud" id="hud">
   <div class="hud-left">
     <div class="hud-score-label">Score</div>
     <div class="hud-score" id="hudScore">0</div>
+  </div>
+  <div class="hud-center">
+    <div class="hud-tempo" id="hudTempo">Moderato</div>
   </div>
   <div class="hud-right">
     <div class="hud-best-label">Best</div>
@@ -151,30 +86,27 @@
   </div>
 </div>
 
-<!-- Jump Button -->
 <div class="jump-btn-wrap" id="jumpBtnWrap">
-  <div class="jump-btn" id="jumpBtn">
-    <div class="jump-btn-icon">&#9650;</div>
-    JUMP
-  </div>
+  <div class="jump-btn" id="jumpBtn"><div class="jump-btn-icon">&#9650;</div>JUMP</div>
 </div>
 
-<!-- Start -->
+<div class="tempo-flash" id="tempoFlash"></div>
+
 <div class="overlay start-overlay" id="startScreen">
   <div class="game-logo">&#127925;</div>
   <div class="game-title">Flappy Maestro</div>
   <div class="game-sub">五線譜の音符をすり抜けろ!</div>
   <div class="how-card">
     <div class="how-title">How to Play</div>
-    <div class="how-row"><div class="how-num">1</div><div class="how-text">指揮者が五線譜の上を走ります</div></div>
-    <div class="how-row"><div class="how-num">2</div><div class="how-text"><b>タップ / クリック / スペース</b>でジャンプ</div></div>
-    <div class="how-row"><div class="how-num">3</div><div class="how-text">音符の<b>隙間</b>をすり抜けてスコアを稼ごう!</div></div>
+    <div class="how-row"><div class="how-num">1</div><div class="how-text"><b>タップ / クリック / スペース</b>でジャンプ</div></div>
+    <div class="how-row"><div class="how-num">2</div><div class="how-text">音符の<b>隙間</b>をすり抜けてスコアを稼ごう!</div></div>
+    <div class="how-row"><div class="how-num">3</div><div class="how-text"><b>テンポ記号</b>（Presto, Largo等）をキャッチすると速度が変化!</div></div>
+    <div class="how-row"><div class="how-num">4</div><div class="how-text">後半は<b>音価で横幅が変化</b>（全音符=太い、八分音符=細い）</div></div>
   </div>
   <button class="play-btn" id="playBtn">&#9654; PLAY</button>
   <div class="best-display" id="startBest"></div>
 </div>
 
-<!-- Game Over -->
 <div class="overlay hidden gameover-overlay" id="gameoverScreen">
   <div class="go-card">
     <div class="go-title">GAME OVER</div>
@@ -193,403 +125,436 @@
 </div>
 
 <script>
-(function() {
-  var canvas = document.getElementById('game');
-  var ctx = canvas.getContext('2d');
-  var W, H;
-
-  function resize() {
-    W = canvas.width = window.innerWidth;
-    H = canvas.height = window.innerHeight;
-    calcStaff();
-  }
+(function(){
+  var canvas=document.getElementById('game');
+  var ctx=canvas.getContext('2d');
+  var W,H;
+  function resize(){W=canvas.width=window.innerWidth;H=canvas.height=window.innerHeight;calcStaff()}
   resize();
-  window.addEventListener('resize', resize);
+  window.addEventListener('resize',resize);
 
-  var STATE = 'menu';
-  var score = 0;
-  var bestScore = parseInt(localStorage.getItem('flappyMaestroBest') || '0');
-  var frameCount = 0;
+  var STATE='menu', score=0, frameCount=0;
+  var bestScore=parseInt(localStorage.getItem('flappyMaestroBest')||'0');
+  document.getElementById('startBest').textContent=bestScore>0?'Best: '+bestScore:'';
+  document.getElementById('hudBest').textContent=bestScore;
 
-  // Show best on start
-  document.getElementById('startBest').textContent = bestScore > 0 ? 'Best: ' + bestScore : '';
-  document.getElementById('hudBest').textContent = bestScore;
+  // Staff
+  var staffTop,staffBottom,lineGap;
+  function calcStaff(){staffTop=H*0.22;staffBottom=H*0.72;lineGap=(staffBottom-staffTop)/4}
 
-  // ---- Staff ----
-  var staffTop, staffBottom, lineGap;
-  function calcStaff() {
-    staffTop = H * 0.22;
-    staffBottom = H * 0.72;
-    lineGap = (staffBottom - staffTop) / 4;
+  // Player
+  var player={x:0,y:0,vy:0,size:20,jumpPower:-7.5,gravity:0.32,rotation:0};
+  function resetPlayer(){player.x=W*0.15;player.y=H*0.45;player.vy=0;player.rotation=0}
+
+  // ---- Obstacles with note values ----
+  var obstacles=[];
+  var baseSpeed=2.8, currentSpeed=2.8;
+  var spawnTimer=0, spawnInterval=110;
+  var gapSize=2.8;
+
+  // Note value types: determines obstacle width
+  var NOTE_TYPES=[
+    {name:'eighth',  symbol:'♪', width:30, minScore:0},
+    {name:'quarter', symbol:'♩', width:45, minScore:0},
+    {name:'half',    symbol:'𝅗𝅥', width:70, minScore:8},
+    {name:'dotted',  symbol:'♩.', width:85, minScore:12},
+    {name:'whole',   symbol:'𝅝', width:110, minScore:18}
+  ];
+
+  function getNoteType(){
+    var available=NOTE_TYPES.filter(function(n){return score>=n.minScore});
+    // Weighted: later types appear more as score increases
+    if(score>=18 && Math.random()<0.25) return NOTE_TYPES[4]; // whole
+    if(score>=12 && Math.random()<0.3) return NOTE_TYPES[3]; // dotted
+    if(score>=8 && Math.random()<0.3) return NOTE_TYPES[2]; // half
+    return available[Math.floor(Math.random()*Math.min(available.length,3))];
   }
 
-  // ---- Player ----
-  var player = { x: 0, y: 0, vy: 0, size: 20, jumpPower: -7.5, gravity: 0.32, rotation: 0 };
-
-  function resetPlayer() {
-    player.x = W * 0.18; // further left = more preview ahead
-    player.y = H * 0.45;
-    player.vy = 0;
-    player.rotation = 0;
+  function spawnObstacle(){
+    var positions=[];
+    for(var i=0;i<=4;i+=0.5)positions.push(i);
+    var gc=positions[Math.floor(Math.random()*positions.length)];
+    var gt=staffTop+(gc-gapSize/2)*lineGap;
+    var gb=staffTop+(gc+gapSize/2)*lineGap;
+    if(gt<staffTop-lineGap)gt=staffTop-lineGap;
+    if(gb>staffBottom+lineGap)gb=staffBottom+lineGap;
+    if(gb-gt<lineGap*2){var m=(gt+gb)/2;gt=m-lineGap;gb=m+lineGap}
+    var nt=getNoteType();
+    obstacles.push({x:W+80,gapTop:gt,gapBottom:gb,width:nt.width,noteType:nt,passed:false});
   }
 
-  // ---- Obstacles ----
-  var obstacles = [];
-  var obstacleSpeed = 2.8;
-  var spawnTimer = 0;
-  var spawnInterval = 110;
-  var gapSize = 2.8; // generous gap
+  // ---- Tempo items ----
+  var TEMPOS=[
+    {name:'Largo',       speed:1.6, color:'#2980b9', type:'slow'},
+    {name:'Adagio',      speed:2.0, color:'#3498db', type:'slow'},
+    {name:'Andante',     speed:2.5, color:'#1abc9c', type:'slow'},
+    {name:'Moderato',    speed:2.8, color:'#27ae60', type:'normal'},
+    {name:'Allegro',     speed:3.8, color:'#e67e22', type:'fast'},
+    {name:'Vivace',      speed:4.5, color:'#e74c3c', type:'fast'},
+    {name:'Presto',      speed:5.2, color:'#c0392b', type:'fast'},
+    {name:'Prestissimo', speed:6.0, color:'#8e44ad', type:'fast'}
+  ];
 
-  function spawnObstacle() {
-    var positions = [];
-    for (var i = 0; i <= 4; i += 0.5) positions.push(i);
-    var gapCenter = positions[Math.floor(Math.random() * positions.length)];
-    var gapTop = staffTop + (gapCenter - gapSize / 2) * lineGap;
-    var gapBottom = staffTop + (gapCenter + gapSize / 2) * lineGap;
+  var tempoItems=[];
+  var tempoSpawnTimer=0;
+  var tempoSpawnInterval=320; // frames between tempo items
+  var currentTempo=TEMPOS[3]; // start at Moderato
+  var tempoEffectTimer=0; // frames remaining for tempo effect
 
-    if (gapTop < staffTop - lineGap) gapTop = staffTop - lineGap;
-    if (gapBottom > staffBottom + lineGap) gapBottom = staffBottom + lineGap;
-    if (gapBottom - gapTop < lineGap * 2) {
-      var mid = (gapTop + gapBottom) / 2;
-      gapTop = mid - lineGap;
-      gapBottom = mid + lineGap;
+  function spawnTempoItem(){
+    // Pick a tempo different from current
+    var candidates=TEMPOS.filter(function(t){return t.name!==currentTempo.name});
+    var t=candidates[Math.floor(Math.random()*candidates.length)];
+    // Random y position in playable area
+    var y=staffTop+Math.random()*(staffBottom-staffTop);
+    tempoItems.push({x:W+40,y:y,tempo:t,size:18,collected:false,life:1});
+  }
+
+  // ---- Particles & popups ----
+  var particles=[],popups=[];
+
+  function emit(x,y,color,count){
+    for(var i=0;i<(count||6);i++){
+      particles.push({x:x,y:y,vx:(Math.random()-0.5)*5,vy:(Math.random()-0.5)*5-2,life:1,size:2+Math.random()*4,color:color||'#8e44ad'});
     }
+  }
+  function addPopup(x,y,text,color){popups.push({x:x,y:y,life:1,text:text||'+1',color:color||'#8e44ad'})}
 
-    obstacles.push({ x: W + 60, gapTop: gapTop, gapBottom: gapBottom, width: 45, passed: false });
+  // Tempo flash
+  var flashEl=document.getElementById('tempoFlash');
+  function showTempoFlash(name,color){
+    flashEl.textContent=name;
+    flashEl.style.color=color;
+    flashEl.style.opacity='1';
+    flashEl.style.transform='translate(-50%,-50%) scale(1.2)';
+    setTimeout(function(){
+      flashEl.style.transition='opacity 0.8s, transform 0.8s';
+      flashEl.style.opacity='0';
+      flashEl.style.transform='translate(-50%,-50%) scale(0.8)';
+      setTimeout(function(){flashEl.style.transition='none'},900);
+    },50);
   }
 
   // ---- Drawing ----
-  function drawBg() {
-    var grad = ctx.createLinearGradient(0, 0, 0, H);
-    grad.addColorStop(0, '#fdf6e3');
-    grad.addColorStop(1, '#f0e4d0');
-    ctx.fillStyle = grad;
-    ctx.fillRect(0, 0, W, H);
+  function drawBg(){
+    var grad=ctx.createLinearGradient(0,0,0,H);
+    grad.addColorStop(0,'#fdf6e3');grad.addColorStop(1,'#f0e4d0');
+    ctx.fillStyle=grad;ctx.fillRect(0,0,W,H);
   }
 
-  function drawStaff() {
-    for (var i = 0; i < 5; i++) {
-      var y = staffTop + i * lineGap;
-      ctx.strokeStyle = 'rgba(44,62,80,0.12)';
-      ctx.lineWidth = 1.5;
-      ctx.beginPath();
-      ctx.moveTo(0, y);
-      ctx.lineTo(W, y);
-      ctx.stroke();
+  function drawStaff(){
+    for(var i=0;i<5;i++){
+      var y=staffTop+i*lineGap;
+      ctx.strokeStyle='rgba(44,62,80,0.12)';ctx.lineWidth=1.5;
+      ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(W,y);ctx.stroke();
     }
   }
 
-  function drawPlayer() {
+  function drawPlayer(){
     ctx.save();
-    ctx.translate(player.x, player.y);
+    ctx.translate(player.x,player.y);
     ctx.rotate(player.rotation);
-
     // Shadow
-    ctx.fillStyle = 'rgba(0,0,0,0.08)';
-    ctx.beginPath();
-    ctx.ellipse(3, player.size + 8, player.size * 0.8, 4, 0, 0, Math.PI * 2);
-    ctx.fill();
-
+    ctx.fillStyle='rgba(0,0,0,0.08)';
+    ctx.beginPath();ctx.ellipse(3,player.size+8,player.size*0.8,4,0,0,Math.PI*2);ctx.fill();
     // Body
-    ctx.fillStyle = '#2c3e50';
-    ctx.beginPath();
-    ctx.arc(0, 0, player.size, 0, Math.PI * 2);
-    ctx.fill();
-
+    ctx.fillStyle='#2c3e50';ctx.beginPath();ctx.arc(0,0,player.size,0,Math.PI*2);ctx.fill();
     // Face
-    ctx.fillStyle = '#faebd7';
-    ctx.beginPath();
-    ctx.arc(0, -2, player.size * 0.62, 0, Math.PI * 2);
-    ctx.fill();
-
+    ctx.fillStyle='#faebd7';ctx.beginPath();ctx.arc(0,-2,player.size*0.62,0,Math.PI*2);ctx.fill();
     // Eyes
-    ctx.fillStyle = '#2c3e50';
-    ctx.beginPath();
-    ctx.arc(-5, -5, 2.2, 0, Math.PI * 2);
-    ctx.arc(5, -5, 2.2, 0, Math.PI * 2);
-    ctx.fill();
-
+    ctx.fillStyle='#2c3e50';ctx.beginPath();ctx.arc(-5,-5,2.2,0,Math.PI*2);ctx.arc(5,-5,2.2,0,Math.PI*2);ctx.fill();
     // Mouth
-    ctx.strokeStyle = '#2c3e50';
-    ctx.lineWidth = 1.5;
-    ctx.beginPath();
-    ctx.arc(0, 0, 5, 0.1, Math.PI - 0.1);
-    ctx.stroke();
-
+    ctx.strokeStyle='#2c3e50';ctx.lineWidth=1.5;ctx.beginPath();ctx.arc(0,0,5,0.1,Math.PI-0.1);ctx.stroke();
     // Baton
-    ctx.strokeStyle = '#8e44ad';
-    ctx.lineWidth = 2.5;
-    ctx.lineCap = 'round';
-    var ba = Math.sin(frameCount * 0.15) * 0.5;
-    var bx = player.size * 0.7 + Math.cos(ba) * 22;
-    var by = -player.size * 0.3 - Math.sin(ba) * 22;
-    ctx.beginPath();
-    ctx.moveTo(player.size * 0.5, -player.size * 0.2);
-    ctx.lineTo(bx, by);
-    ctx.stroke();
-    ctx.fillStyle = '#fff';
-    ctx.beginPath();
-    ctx.arc(bx, by, 3, 0, Math.PI * 2);
-    ctx.fill();
-
+    ctx.strokeStyle='#8e44ad';ctx.lineWidth=2.5;ctx.lineCap='round';
+    var ba=Math.sin(frameCount*0.15*(currentSpeed/2.8))*0.5; // baton speed matches tempo
+    var bx=player.size*0.7+Math.cos(ba)*22,by=-player.size*0.3-Math.sin(ba)*22;
+    ctx.beginPath();ctx.moveTo(player.size*0.5,-player.size*0.2);ctx.lineTo(bx,by);ctx.stroke();
+    ctx.fillStyle='#fff';ctx.beginPath();ctx.arc(bx,by,3,0,Math.PI*2);ctx.fill();
     ctx.restore();
   }
 
-  function drawObstacle(obs) {
-    var cx = obs.x + obs.width / 2;
-
-    // Top barrier
-    ctx.fillStyle = 'rgba(142,68,173,0.06)';
-    ctx.fillRect(obs.x, 0, obs.width, obs.gapTop);
-
-    // Bottom barrier
-    ctx.fillRect(obs.x, obs.gapBottom, obs.width, H - obs.gapBottom);
-
-    // Top note
-    drawNoteCluster(cx, obs.gapTop - 12, true);
-    // Bottom note
-    drawNoteCluster(cx, obs.gapBottom + 12, false);
-
-    // Gap indicator (subtle glow)
-    ctx.fillStyle = 'rgba(142,68,173,0.04)';
-    ctx.fillRect(obs.x - 2, obs.gapTop, obs.width + 4, obs.gapBottom - obs.gapTop);
-
-    // Side lines
-    ctx.strokeStyle = 'rgba(142,68,173,0.15)';
-    ctx.lineWidth = 2;
-    ctx.setLineDash([4, 4]);
+  function drawObstacle(obs){
+    var cx=obs.x+obs.width/2;
+    // Barrier fill
+    ctx.fillStyle='rgba(142,68,173,0.06)';
+    ctx.fillRect(obs.x,0,obs.width,obs.gapTop);
+    ctx.fillRect(obs.x,obs.gapBottom,obs.width,H-obs.gapBottom);
+    // Notes
+    drawNote(cx,obs.gapTop-12,true,obs.noteType,obs.width);
+    drawNote(cx,obs.gapBottom+12,false,obs.noteType,obs.width);
+    // Gap glow
+    ctx.fillStyle='rgba(142,68,173,0.04)';
+    ctx.fillRect(obs.x-2,obs.gapTop,obs.width+4,obs.gapBottom-obs.gapTop);
+    // Guide lines
+    ctx.strokeStyle='rgba(142,68,173,0.12)';ctx.lineWidth=1.5;ctx.setLineDash([4,4]);
     ctx.beginPath();
-    ctx.moveTo(obs.x + obs.width / 2, 0);
-    ctx.lineTo(obs.x + obs.width / 2, obs.gapTop - 25);
-    ctx.moveTo(obs.x + obs.width / 2, obs.gapBottom + 25);
-    ctx.lineTo(obs.x + obs.width / 2, H);
-    ctx.stroke();
-    ctx.setLineDash([]);
+    ctx.moveTo(cx,0);ctx.lineTo(cx,obs.gapTop-30);
+    ctx.moveTo(cx,obs.gapBottom+30);ctx.lineTo(cx,H);
+    ctx.stroke();ctx.setLineDash([]);
+
+    // Note type label for wide notes
+    if(obs.width>=70){
+      ctx.fillStyle='rgba(142,68,173,0.2)';
+      ctx.font='bold 9px Montserrat';ctx.textAlign='center';
+      ctx.fillText(obs.noteType.symbol,cx,obs.gapTop-35);
+    }
   }
 
-  function drawNoteCluster(x, y, stemUp) {
-    ctx.save();
-    ctx.translate(x, y);
-
-    // Note head
-    ctx.fillStyle = 'rgba(44,62,80,0.65)';
-    ctx.beginPath();
-    ctx.ellipse(0, 0, 14, 10, -0.2, 0, Math.PI * 2);
-    ctx.fill();
-
-    // Stem
-    ctx.strokeStyle = 'rgba(44,62,80,0.5)';
-    ctx.lineWidth = 2.5;
-    ctx.beginPath();
-    if (stemUp) {
-      ctx.moveTo(12, -2);
-      ctx.lineTo(12, -45);
+  function drawNote(x,y,stemUp,noteType,obsWidth){
+    ctx.save();ctx.translate(x,y);
+    var headW=Math.min(14,obsWidth*0.2);
+    var headH=headW*0.72;
+    // Head
+    var filled=noteType.name!=='whole';
+    if(filled){
+      ctx.fillStyle='rgba(44,62,80,0.65)';
+      ctx.beginPath();ctx.ellipse(0,0,headW,headH,-0.2,0,Math.PI*2);ctx.fill();
     } else {
-      ctx.moveTo(-12, 2);
-      ctx.lineTo(-12, 45);
+      ctx.strokeStyle='rgba(44,62,80,0.65)';ctx.lineWidth=2.5;
+      ctx.beginPath();ctx.ellipse(0,0,headW,headH,-0.2,0,Math.PI*2);ctx.stroke();
     }
-    ctx.stroke();
-
-    // Flag
-    if (stemUp) {
-      ctx.beginPath();
-      ctx.moveTo(12, -45);
-      ctx.quadraticCurveTo(25, -35, 12, -25);
-      ctx.strokeStyle = 'rgba(44,62,80,0.4)';
-      ctx.lineWidth = 2;
+    // Stem (not for whole)
+    if(noteType.name!=='whole'){
+      ctx.strokeStyle='rgba(44,62,80,0.5)';ctx.lineWidth=2.2;ctx.beginPath();
+      if(stemUp){ctx.moveTo(headW-2,-2);ctx.lineTo(headW-2,-40)}
+      else{ctx.moveTo(-headW+2,2);ctx.lineTo(-headW+2,40)}
       ctx.stroke();
+      // Flags for eighth
+      if(noteType.name==='eighth'){
+        ctx.strokeStyle='rgba(44,62,80,0.4)';ctx.lineWidth=2;ctx.beginPath();
+        if(stemUp){ctx.moveTo(headW-2,-40);ctx.quadraticCurveTo(headW+12,-30,headW-2,-22)}
+        else{ctx.moveTo(-headW+2,40);ctx.quadraticCurveTo(-headW-12,30,-headW+2,22)}
+        ctx.stroke();
+      }
     }
-
+    // Dot for dotted
+    if(noteType.name==='dotted'){
+      ctx.fillStyle='rgba(44,62,80,0.6)';ctx.beginPath();ctx.arc(headW+6,0,3,0,Math.PI*2);ctx.fill();
+    }
     ctx.restore();
   }
 
-  // ---- Particles ----
-  var particles = [];
-
-  function emit(x, y, color, count) {
-    for (var i = 0; i < (count || 6); i++) {
-      particles.push({
-        x: x, y: y,
-        vx: (Math.random() - 0.5) * 5,
-        vy: (Math.random() - 0.5) * 5 - 2,
-        life: 1, size: 2 + Math.random() * 4,
-        color: color || '#8e44ad'
-      });
+  function drawTempoItem(item){
+    var pulse=1+Math.sin(frameCount*0.1)*0.08;
+    ctx.save();
+    ctx.translate(item.x,item.y);
+    ctx.scale(pulse,pulse);
+    // Glow
+    ctx.shadowColor=item.tempo.color;ctx.shadowBlur=15;
+    // Circle bg
+    ctx.fillStyle=item.tempo.color;
+    ctx.beginPath();ctx.arc(0,0,item.size,0,Math.PI*2);ctx.fill();
+    ctx.shadowBlur=0;
+    // Border
+    ctx.strokeStyle='rgba(255,255,255,0.5)';ctx.lineWidth=2;
+    ctx.beginPath();ctx.arc(0,0,item.size,0,Math.PI*2);ctx.stroke();
+    // Text
+    ctx.fillStyle='#fff';ctx.font='bold 7px Montserrat';ctx.textAlign='center';ctx.textBaseline='middle';
+    var short=item.tempo.name.length>7?item.tempo.name.substring(0,6)+'.':item.tempo.name;
+    ctx.fillText(short,0,0);
+    // Arrow indicator
+    if(item.tempo.type==='fast'){
+      ctx.fillStyle='rgba(255,255,255,0.7)';ctx.font='bold 10px Montserrat';
+      ctx.fillText('>>',0,item.size+10);
+    } else if(item.tempo.type==='slow'){
+      ctx.fillStyle='rgba(255,255,255,0.7)';ctx.font='bold 10px Montserrat';
+      ctx.fillText('<<',0,item.size+10);
     }
+    ctx.restore();
   }
 
-  function drawParticles() {
-    for (var i = particles.length - 1; i >= 0; i--) {
-      var p = particles[i];
-      p.x += p.vx; p.y += p.vy; p.vy += 0.1; p.life -= 0.03;
-      if (p.life <= 0) { particles.splice(i, 1); continue; }
-      ctx.globalAlpha = p.life;
-      ctx.fillStyle = p.color;
-      ctx.beginPath();
-      ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-      ctx.fill();
+  function drawParticles(){
+    for(var i=particles.length-1;i>=0;i--){
+      var p=particles[i];p.x+=p.vx;p.y+=p.vy;p.vy+=0.1;p.life-=0.03;
+      if(p.life<=0){particles.splice(i,1);continue}
+      ctx.globalAlpha=p.life;ctx.fillStyle=p.color;
+      ctx.beginPath();ctx.arc(p.x,p.y,p.size,0,Math.PI*2);ctx.fill();
     }
-    ctx.globalAlpha = 1;
+    ctx.globalAlpha=1;
   }
-
-  // ---- Score popup ----
-  var popups = [];
-  function addPopup(x, y) {
-    popups.push({ x: x, y: y, life: 1 });
-  }
-  function drawPopups() {
-    for (var i = popups.length - 1; i >= 0; i--) {
-      var p = popups[i];
-      p.y -= 1.2; p.life -= 0.025;
-      if (p.life <= 0) { popups.splice(i, 1); continue; }
-      ctx.globalAlpha = p.life;
-      ctx.fillStyle = '#8e44ad';
-      ctx.font = '900 22px Montserrat';
-      ctx.textAlign = 'center';
-      ctx.fillText('+1', p.x, p.y);
+  function drawPopups(){
+    for(var i=popups.length-1;i>=0;i--){
+      var p=popups[i];p.y-=1.2;p.life-=0.025;
+      if(p.life<=0){popups.splice(i,1);continue}
+      ctx.globalAlpha=p.life;ctx.fillStyle=p.color;
+      ctx.font='900 18px Montserrat';ctx.textAlign='center';
+      ctx.fillText(p.text,p.x,p.y);
     }
-    ctx.globalAlpha = 1;
+    ctx.globalAlpha=1;
   }
 
   // ---- Collision ----
-  function collides(obs) {
-    var r = player.size - 5;
-    if (player.x + r > obs.x && player.x - r < obs.x + obs.width) {
-      if (player.y - r < obs.gapTop || player.y + r > obs.gapBottom) return true;
+  function collides(obs){
+    var r=player.size-5;
+    if(player.x+r>obs.x&&player.x-r<obs.x+obs.width){
+      if(player.y-r<obs.gapTop||player.y+r>obs.gapBottom)return true;
     }
     return false;
   }
 
-  // ---- Game logic ----
-  function jump() {
-    if (STATE !== 'playing') return;
-    player.vy = player.jumpPower;
-    emit(player.x - 8, player.y + player.size, '#c39bd3', 4);
+  function collidesTempoItem(item){
+    var dx=player.x-item.x, dy=player.y-item.y;
+    return Math.sqrt(dx*dx+dy*dy)<player.size+item.size;
   }
 
-  function startGame() {
-    STATE = 'playing';
-    score = 0; frameCount = 0;
-    obstacles = []; particles = []; popups = [];
-    spawnTimer = 0;
-    obstacleSpeed = 2.8;
-    spawnInterval = 110;
-    gapSize = 2.8;
-    resetPlayer();
+  // ---- Game logic ----
+  function jump(){
+    if(STATE!=='playing')return;
+    player.vy=player.jumpPower;
+    emit(player.x-8,player.y+player.size,'#c39bd3',4);
+  }
 
+  function applyTempo(tempo){
+    currentTempo=tempo;
+    currentSpeed=tempo.speed;
+    tempoEffectTimer=300; // ~5 seconds at 60fps
+    showTempoFlash(tempo.name,tempo.color);
+    // Update HUD
+    var el=document.getElementById('hudTempo');
+    el.textContent=tempo.name;
+    el.className='hud-tempo'+(tempo.type==='fast'?' fast':tempo.type==='slow'?' slow':'');
+  }
+
+  function startGame(){
+    STATE='playing';score=0;frameCount=0;
+    obstacles=[];particles=[];popups=[];tempoItems=[];
+    spawnTimer=0;tempoSpawnTimer=0;
+    baseSpeed=2.8;currentSpeed=2.8;
+    spawnInterval=110;gapSize=2.8;
+    currentTempo=TEMPOS[3];tempoEffectTimer=0;
+    resetPlayer();
     document.getElementById('startScreen').classList.add('hidden');
     document.getElementById('gameoverScreen').classList.add('hidden');
     document.getElementById('hud').classList.add('active');
     document.getElementById('jumpBtnWrap').classList.add('active');
-    document.getElementById('hudScore').textContent = '0';
-    document.getElementById('hudBest').textContent = bestScore;
+    document.getElementById('hudScore').textContent='0';
+    document.getElementById('hudBest').textContent=bestScore;
+    var el=document.getElementById('hudTempo');
+    el.textContent='Moderato';el.className='hud-tempo';
   }
 
-  function die() {
-    STATE = 'dead';
+  function die(){
+    STATE='dead';
     document.getElementById('hud').classList.remove('active');
     document.getElementById('jumpBtnWrap').classList.remove('active');
-
-    emit(player.x, player.y, '#e74c3c', 15);
-
-    var isNew = score > bestScore;
-    if (isNew) {
-      bestScore = score;
-      localStorage.setItem('flappyMaestroBest', bestScore);
-    }
-
-    document.getElementById('goScore').textContent = score;
-    document.getElementById('goBest').innerHTML = isNew
-      ? '<span class="go-new">NEW BEST!</span>'
-      : 'Best: ' + bestScore;
-
-    setTimeout(function() {
-      document.getElementById('gameoverScreen').classList.remove('hidden');
-    }, 600);
+    emit(player.x,player.y,'#e74c3c',15);
+    var isNew=score>bestScore;
+    if(isNew){bestScore=score;localStorage.setItem('flappyMaestroBest',bestScore)}
+    document.getElementById('goScore').textContent=score;
+    document.getElementById('goBest').innerHTML=isNew?'<span class="go-new">NEW BEST!</span>':'Best: '+bestScore;
+    setTimeout(function(){document.getElementById('gameoverScreen').classList.remove('hidden')},600);
   }
 
   // ---- Main loop ----
-  function loop() {
+  function loop(){
     requestAnimationFrame(loop);
-    ctx.clearRect(0, 0, W, H);
-    drawBg();
-    drawStaff();
+    ctx.clearRect(0,0,W,H);
+    drawBg();drawStaff();
 
-    if (STATE === 'playing') {
+    if(STATE==='playing'){
       frameCount++;
-      player.vy += player.gravity;
-      player.y += player.vy;
-      player.rotation = Math.max(-0.3, Math.min(player.vy * 0.04, 0.5));
+      player.vy+=player.gravity;
+      player.y+=player.vy;
+      player.rotation=Math.max(-0.3,Math.min(player.vy*0.04,0.5));
+      if(player.y-player.size<0){player.y=player.size;player.vy=0}
+      if(player.y+player.size>H){die()}
 
-      if (player.y - player.size < 0) { player.y = player.size; player.vy = 0; }
-      if (player.y + player.size > H) { die(); }
+      // Tempo effect countdown
+      if(tempoEffectTimer>0){
+        tempoEffectTimer--;
+        if(tempoEffectTimer===0){
+          // Return to base speed
+          currentSpeed=baseSpeed;
+          currentTempo=TEMPOS[3];
+          var el=document.getElementById('hudTempo');
+          el.textContent='Moderato';el.className='hud-tempo';
+        }
+      }
 
-      // Spawn
+      // Spawn obstacles
       spawnTimer++;
-      if (spawnTimer >= spawnInterval) { spawnObstacle(); spawnTimer = 0; }
+      if(spawnTimer>=spawnInterval){spawnObstacle();spawnTimer=0}
 
-      // Difficulty
-      if (frameCount % 350 === 0 && frameCount > 0) {
-        obstacleSpeed = Math.min(obstacleSpeed + 0.2, 5.5);
-        spawnInterval = Math.max(spawnInterval - 4, 60);
-        if (gapSize > 2.0) gapSize -= 0.04;
+      // Spawn tempo items (start after score 3)
+      if(score>=3){
+        tempoSpawnTimer++;
+        if(tempoSpawnTimer>=tempoSpawnInterval){
+          spawnTempoItem();
+          tempoSpawnTimer=0;
+          tempoSpawnInterval=250+Math.floor(Math.random()*150); // randomize interval
+        }
+      }
+
+      // Difficulty progression
+      if(frameCount%400===0&&frameCount>0){
+        baseSpeed=Math.min(baseSpeed+0.15,4.5);
+        if(tempoEffectTimer===0)currentSpeed=baseSpeed;
+        spawnInterval=Math.max(spawnInterval-3,65);
+        if(gapSize>2.0)gapSize-=0.03;
       }
 
       // Update obstacles
-      for (var i = obstacles.length - 1; i >= 0; i--) {
-        var obs = obstacles[i];
-        obs.x -= obstacleSpeed;
+      for(var i=obstacles.length-1;i>=0;i--){
+        var obs=obstacles[i];
+        obs.x-=currentSpeed;
         drawObstacle(obs);
-
-        if (collides(obs)) { die(); break; }
-
-        if (!obs.passed && obs.x + obs.width < player.x) {
-          obs.passed = true;
-          score++;
-          document.getElementById('hudScore').textContent = score;
-          addPopup(player.x + 30, player.y - 25);
-          emit(player.x, player.y, '#c39bd3', 5);
+        if(collides(obs)){die();break}
+        if(!obs.passed&&obs.x+obs.width<player.x){
+          obs.passed=true;score++;
+          document.getElementById('hudScore').textContent=score;
+          addPopup(player.x+30,player.y-25);
+          emit(player.x,player.y,'#c39bd3',5);
         }
+        if(obs.x+obs.width<-120)obstacles.splice(i,1);
+      }
 
-        if (obs.x + obs.width < -80) obstacles.splice(i, 1);
+      // Update tempo items
+      for(var j=tempoItems.length-1;j>=0;j--){
+        var item=tempoItems[j];
+        item.x-=currentSpeed*0.8; // slightly slower than obstacles
+        drawTempoItem(item);
+        if(!item.collected&&collidesTempoItem(item)){
+          item.collected=true;
+          applyTempo(item.tempo);
+          emit(item.x,item.y,item.tempo.color,10);
+          addPopup(item.x,item.y-25,item.tempo.name,item.tempo.color);
+          score+=2; // bonus for catching
+          document.getElementById('hudScore').textContent=score;
+          tempoItems.splice(j,1);
+          continue;
+        }
+        if(item.x<-50)tempoItems.splice(j,1);
       }
     }
 
-    if (STATE === 'dead') {
-      for (var j = 0; j < obstacles.length; j++) drawObstacle(obstacles[j]);
+    if(STATE==='dead'){
+      for(var k=0;k<obstacles.length;k++)drawObstacle(obstacles[k]);
+      for(var l=0;l<tempoItems.length;l++)drawTempoItem(tempoItems[l]);
     }
 
-    if (STATE === 'menu') {
-      player.x = W * 0.18;
-      player.y = H * 0.45 + Math.sin(Date.now() * 0.003) * 15;
-      player.rotation = 0;
-      frameCount++;
+    if(STATE==='menu'){
+      player.x=W*0.15;
+      player.y=H*0.45+Math.sin(Date.now()*0.003)*15;
+      player.rotation=0;frameCount++;
     }
 
-    if (STATE !== 'menu') drawPlayer();
-    if (STATE === 'menu') drawPlayer();
-
-    drawParticles();
-    drawPopups();
+    drawPlayer();drawParticles();drawPopups();
   }
-
   loop();
 
   // ---- Input ----
-  function handleJump(e) { if (e) e.preventDefault(); jump(); }
-
-  document.addEventListener('keydown', function(e) {
-    if (e.code === 'Space' || e.code === 'ArrowUp') handleJump(e);
+  function handleJump(e){if(e)e.preventDefault();jump()}
+  document.addEventListener('keydown',function(e){
+    if(e.code==='Space'||e.code==='ArrowUp')handleJump(e);
   });
-  canvas.addEventListener('mousedown', handleJump);
-  canvas.addEventListener('touchstart', handleJump, { passive: false });
-
-  var jumpBtn = document.getElementById('jumpBtn');
-  jumpBtn.addEventListener('mousedown', function(e) { e.stopPropagation(); handleJump(e); });
-  jumpBtn.addEventListener('touchstart', function(e) { e.stopPropagation(); handleJump(e); }, { passive: false });
-
-  document.getElementById('playBtn').addEventListener('click', startGame);
-  document.getElementById('retryBtn').addEventListener('click', startGame);
+  canvas.addEventListener('mousedown',handleJump);
+  canvas.addEventListener('touchstart',handleJump,{passive:false});
+  var jb=document.getElementById('jumpBtn');
+  jb.addEventListener('mousedown',function(e){e.stopPropagation();handleJump(e)});
+  jb.addEventListener('touchstart',function(e){e.stopPropagation();handleJump(e)},{passive:false});
+  document.getElementById('playBtn').addEventListener('click',startGame);
+  document.getElementById('retryBtn').addEventListener('click',startGame);
 })();
 </script>
 </body>
