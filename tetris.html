@@ -564,12 +564,16 @@
       if(clearAnim>0){
         clearAnim--;
         if(clearAnim===0)finishClear();
-      } else {
-        dropTimer++;
-        if(dropTimer>=dropInterval){
-          dropTimer=0;
-          if(valid(current.shape,current.x,current.y+1)){current.y++;lockDelay=0}
-          else{lockDelay++;if(lockDelay>=lockMax){place();updateHUD()}}
+      } else if(current){
+        // Check if piece is grounded
+        var grounded=!valid(current.shape,current.x,current.y+1);
+        if(grounded){
+          lockDelay++;
+          if(lockDelay>=lockMax){place();updateHUD();dropTimer=0}
+        } else {
+          lockDelay=0;
+          dropTimer++;
+          if(dropTimer>=dropInterval){dropTimer=0;current.y++}
         }
       }
     }
